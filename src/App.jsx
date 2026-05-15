@@ -13,7 +13,7 @@ const products = [
   {
     name: "Sombé ya Léo",
     price: "8 500 FC / kg",
-    desc: "Feuilles de manioc déjà nettoyées, pilées et assaisonnées. Prêtes à cuisiner. Commande 24h à l’avance obligatoire pour garantir la fraîcheur.",
+    desc: "Feuilles de manioc déjà nettoyées, pilées et assaisonnées. Prêtes à cuisiner. Commande 24h à l’avance obligatoire.",
     emoji: "🌿",
     note: "Livraison à partir de 5 kg — frais : 5 000 FC",
   },
@@ -31,7 +31,21 @@ export default function App() {
   const [paiement, setPaiement] = useState("");
 
   const whatsappLink =
-    "https://wa.me/243970226689?text=Bonjour%20Saveurs%20de%20chez%20nous,%20je%20souhaite%20commander.%0AProduit%20:%0AQuantit%C3%A9%20:%0ADate%20souhait%C3%A9e%20:%0AAdresse%20:%0APaiement%20:%20Airtel%20Money%20/%20M-Pesa%0AJ%E2%80%99ai%20not%C3%A9%20que%20la%20commande%20se%20fait%2024h%20%C3%A0%20l%E2%80%99avance%20et%20qu%E2%80%99elle%20est%20confirm%C3%A9e%20apr%C3%A8s%20paiement%20total.";
+    `https://wa.me/243970226689?text=${encodeURIComponent(
+      `Bonjour Saveurs de chez nous 🌿
+
+Je souhaite passer une commande.
+
+Produit :
+Quantité :
+Date souhaitée :
+Adresse :
+Moyen de paiement choisi : ${paiement}
+
+Je vais effectuer le paiement et envoyer la preuve de transaction.
+
+Merci.`
+    )}`;
 
   const nav = [
     { id: "accueil", label: "Accueil", icon: Home },
@@ -58,8 +72,8 @@ export default function App() {
               <div className="card">
                 <h2>Bienvenue chez Saveurs de chez nous 🇨🇩🌿</h2>
                 <p>
-                  Des produits locaux congolais, frais, propres et préparés avec
-                  soin pour vous faire gagner du temps en cuisine.
+                  Des produits locaux congolais, frais, propres et préparés
+                  avec soin pour vous faire gagner du temps en cuisine.
                 </p>
                 <p>
                   Retrouvez le goût authentique de chez nous à travers le Sombé
@@ -79,43 +93,21 @@ export default function App() {
                   </button>
                 </a>
               </div>
-
-              <div className="grid">
-                <div className="miniCard">
-                  <div>✨</div>
-                  <strong>Qualité</strong>
-                  <p>Produits locaux préparés avec soin</p>
-                </div>
-                <div className="miniCard">
-                  <div>🧼</div>
-                  <strong>Hygiène</strong>
-                  <p>Fraîcheur et préparation propre</p>
-                </div>
-              </div>
             </section>
           )}
 
           {screen === "produits" && (
             <section className="space">
-              <div>
-                <h2>Nos produits</h2>
-                <p className="muted">
-                  Catalogue de départ. D’autres produits seront ajoutés
-                  progressivement.
-                </p>
-              </div>
+              <h2>Nos produits</h2>
 
-              {products.map((p) => (
-                <div className="productCard" key={p.name}>
-                  <div className="productEmoji">{p.emoji}</div>
+              {products.map((p, index) => (
+                <div className="productCard" key={index}>
+                  <div className="emoji">{p.emoji}</div>
                   <div>
                     <h3>{p.name}</h3>
+                    <strong>{p.price}</strong>
                     <p>{p.desc}</p>
-                    <div className="productBottom">
-                      <strong>{p.price}</strong>
-                      <span>24h à l’avance</span>
-                    </div>
-                    <p className="smallNote">{p.note}</p>
+                    <small>{p.note}</small>
                   </div>
                 </div>
               ))}
@@ -146,15 +138,36 @@ export default function App() {
               </select>
 
               <input placeholder="Quantité" />
-              <input placeholder="Date souhaitée" />
+              <input type="date" placeholder="Date souhaitée" />
 
-              <select>
-                <option>Mode de paiement</option>
-                <option>Airtel Money</option>
-                <option>M-Pesa</option>
+              <select
+                value={paiement}
+                onChange={(e) => setPaiement(e.target.value)}
+                required
+              >
+                <option value="">Mode de paiement</option>
+                <option value="Airtel Money">Airtel Money</option>
+                <option value="M-Pesa">M-Pesa</option>
               </select>
 
+              {paiement === "Airtel Money" && (
+                <p className="greenBox">
+                  Numéro Airtel Money : <strong>+243991787177</strong>
+                </p>
+              )}
+
+              {paiement === "M-Pesa" && (
+                <p className="payBox orange">
+                  Numéro M-Pesa : <strong>0824809200</strong>
+                </p>
+              )}
+
               <textarea placeholder="Adresse de livraison ou précision"></textarea>
+
+              <p className="smallText">
+                Votre commande sera confirmée uniquement après paiement et envoi
+                de la preuve sur WhatsApp.
+              </p>
 
               <a href={whatsappLink} target="_blank" rel="noreferrer">
                 <button className="mainBtn">Envoyer sur WhatsApp</button>
@@ -220,12 +233,8 @@ export default function App() {
                   <Info size={18} /> À propos de Saveurs de chez nous
                 </h3>
                 <p>
-                  Saveurs de chez nous est un projet agroalimentaire congolais
-                  qui valorise les produits locaux à travers une préparation
-                  propre, moderne et authentique. Notre mission est d’aider les
-                  familles et les personnes occupées à gagner du temps et de
-                  l’énergie en cuisine, tout en conservant le goût authentique
-                  des recettes de chez nous.
+                  Saveurs de chez nous valorise les produits locaux congolais à
+                  travers une transformation propre, moderne et authentique.
                 </p>
               </div>
             </section>
