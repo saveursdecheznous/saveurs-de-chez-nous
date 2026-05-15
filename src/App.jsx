@@ -28,6 +28,7 @@ const products = [
 
 export default function App() {
   const [screen, setScreen] = useState("accueil");
+  const [paiement, setPaiement] = useState("");
 
   const whatsappLink =
     "https://wa.me/243970226689?text=Bonjour%20Saveurs%20de%20chez%20nous,%20je%20souhaite%20commander.%0AProduit%20:%0AQuantit%C3%A9%20:%0ADate%20souhait%C3%A9e%20:%0AAdresse%20:%0APaiement%20:%20Airtel%20Money%20/%20M-Pesa%0AJ%E2%80%99ai%20not%C3%A9%20que%20la%20commande%20se%20fait%2024h%20%C3%A0%20l%E2%80%99avance%20et%20qu%E2%80%99elle%20est%20confirm%C3%A9e%20apr%C3%A8s%20paiement%20total.";
