@@ -30,9 +30,12 @@ export default function App() {
   const [screen, setScreen] = useState("accueil");
   const [paiement, setPaiement] = useState("");
 
-  const whatsappLink =
-    `https://wa.me/243970226689?text=${encodeURIComponent(
-      `Bonjour Saveurs de chez nous 🌿
+  const tomorrow = new Date(Date.now() + 86400000)
+    .toISOString()
+    .split("T")[0];
+
+  const whatsappLink = `https://wa.me/243970226689?text=${encodeURIComponent(
+    `Bonjour Saveurs de chez nous 🌿
 
 Je souhaite passer une commande.
 
@@ -45,7 +48,7 @@ Moyen de paiement choisi : ${paiement}
 Je vais effectuer le paiement et envoyer la preuve de transaction.
 
 Merci.`
-    )}`;
+  )}`;
 
   const nav = [
     { id: "accueil", label: "Accueil", icon: Home },
@@ -74,10 +77,6 @@ Merci.`
                 <p>
                   Des produits locaux congolais, frais, propres et préparés
                   avec soin pour vous faire gagner du temps en cuisine.
-                </p>
-                <p>
-                  Retrouvez le goût authentique de chez nous à travers le Sombé
-                  ya Léo et nos plats locaux faits maison.
                 </p>
 
                 <div className="notice">
@@ -138,7 +137,8 @@ Merci.`
               </select>
 
               <input placeholder="Quantité" />
-              <input type="date" placeholder="Date souhaitée" />
+
+              <input type="date" min={tomorrow} required />
 
               <select
                 value={paiement}
