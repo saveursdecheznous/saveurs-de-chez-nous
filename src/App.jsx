@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Home,
-  Leaf,
-  ShoppingBag,
-  CreditCard,
-  Phone,
-} from "lucide-react";
+import { Home, Leaf, ShoppingBag, CreditCard, Phone } from "lucide-react";
 
 export default function App() {
   const [page, setPage] = useState("commander");
@@ -19,11 +13,15 @@ export default function App() {
   const [paiement, setPaiement] = useState("");
 
   const numeroWhatsApp = "243970226689";
-
   const numeroAirtel = "+243991787177";
   const numeroMpesa = "0824809200";
 
-  const envoyerCommande = () => {
+  const GOOGLE_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbwFyjUpHDL4VnvW5CNH5oyXPwGGhE54zhLmllWuXaQzTs8HmwtINVZgxYtUzDfdAsA/exec";
+
+  const aujourdHui = new Date().toISOString().split("T")[0];
+
+  const envoyerCommande = async () => {
     if (
       !nom ||
       !telephone ||
@@ -35,6 +33,30 @@ export default function App() {
     ) {
       alert("Veuillez remplir tous les champs obligatoires avant de continuer.");
       return;
+    }
+
+    const commande = {
+      nom,
+      telephone,
+      adresse,
+      produit,
+      quantite,
+      dateCommande,
+      paiement,
+      observation: "",
+    };
+
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(commande),
+      });
+    } catch (error) {
+      console.log("Erreur Google Sheets :", error);
     }
 
     const message = `
@@ -60,8 +82,6 @@ Merci.
     window.open(url, "_blank");
   };
 
-  const aujourdHui = new Date().toISOString().split("T")[0];
-
   return (
     <div className="min-h-screen bg-[#fffaf0] text-[#3b2f22] pb-24">
       <header className="bg-[#0b4b2b] text-white text-center py-6 px-4 rounded-b-3xl shadow-md">
@@ -74,8 +94,8 @@ Merci.
           <section className="space-y-4">
             <h2 className="text-2xl font-bold text-[#0b4b2b]">Bienvenue</h2>
             <p>
-              Saveurs de chez nous valorise les produits locaux congolais à
-              travers des plats et produits frais, propres et pratiques.
+              Saveurs de chez nous valorise les produits locaux congolais avec
+              fraîcheur, hygiène et authenticité.
             </p>
           </section>
         )}
@@ -96,9 +116,7 @@ Merci.
 
             <div className="bg-white rounded-3xl p-5 shadow border border-[#ead8aa]">
               <h3 className="font-bold text-lg">Riz pilau</h3>
-              <p className="text-sm mt-2">
-                Riz pilau savoureux, fait maison.
-              </p>
+              <p className="text-sm mt-2">Riz pilau savoureux, fait maison.</p>
               <p className="text-sm mt-2 text-[#0b4b2b] font-semibold">
                 Vente par plat.
               </p>
@@ -121,7 +139,6 @@ Merci.
               value={nom}
               onChange={(e) => setNom(e.target.value)}
               className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b]"
-              required
             />
 
             <input
@@ -130,7 +147,6 @@ Merci.
               value={telephone}
               onChange={(e) => setTelephone(e.target.value)}
               className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b]"
-              required
             />
 
             <input
@@ -139,7 +155,6 @@ Merci.
               value={adresse}
               onChange={(e) => setAdresse(e.target.value)}
               className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b]"
-              required
             />
 
             <select
@@ -149,7 +164,6 @@ Merci.
                 setQuantite("");
               }}
               className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b] bg-white"
-              required
             >
               <option value="">Choisissez le produit *</option>
               <option value="Sombé ya Léo">Sombé ya Léo</option>
@@ -159,9 +173,8 @@ Merci.
             <select
               value={quantite}
               onChange={(e) => setQuantite(e.target.value)}
-              className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b] bg-white"
-              required
               disabled={!produit}
+              className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b] bg-white"
             >
               <option value="">Choisissez la quantité *</option>
 
@@ -192,14 +205,12 @@ Merci.
               value={dateCommande}
               onChange={(e) => setDateCommande(e.target.value)}
               className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b]"
-              required
             />
 
             <select
               value={paiement}
               onChange={(e) => setPaiement(e.target.value)}
               className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b] bg-white"
-              required
             >
               <option value="">Choisissez le paiement *</option>
               <option value="Airtel Money">Airtel Money</option>
@@ -232,10 +243,12 @@ Merci.
         {page === "paiement" && (
           <section className="space-y-4">
             <h2 className="text-2xl font-bold text-[#0b4b2b]">Paiement</h2>
+
             <div className="bg-white rounded-3xl p-5 shadow border border-[#ead8aa]">
               <p>Airtel Money :</p>
               <p className="font-bold text-xl">{numeroAirtel}</p>
             </div>
+
             <div className="bg-white rounded-3xl p-5 shadow border border-[#ead8aa]">
               <p>M-Pesa :</p>
               <p className="font-bold text-xl">{numeroMpesa}</p>
@@ -254,12 +267,18 @@ Merci.
       </main>
 
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#ead8aa] flex justify-around py-3">
-        <button onClick={() => setPage("accueil")} className="flex flex-col items-center text-xs">
+        <button
+          onClick={() => setPage("accueil")}
+          className="flex flex-col items-center text-xs"
+        >
           <Home size={24} />
           Accueil
         </button>
 
-        <button onClick={() => setPage("produits")} className="flex flex-col items-center text-xs">
+        <button
+          onClick={() => setPage("produits")}
+          className="flex flex-col items-center text-xs"
+        >
           <Leaf size={24} />
           Produits
         </button>
@@ -272,12 +291,18 @@ Merci.
           Commander
         </button>
 
-        <button onClick={() => setPage("paiement")} className="flex flex-col items-center text-xs">
+        <button
+          onClick={() => setPage("paiement")}
+          className="flex flex-col items-center text-xs"
+        >
           <CreditCard size={24} />
           Paiement
         </button>
 
-        <button onClick={() => setPage("contact")} className="flex flex-col items-center text-xs">
+        <button
+          onClick={() => setPage("contact")}
+          className="flex flex-col items-center text-xs"
+        >
           <Phone size={24} />
           Contact
         </button>
