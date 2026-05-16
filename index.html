@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Saveurs de chez nous - Commande</title>
+  <title>Saveurs de chez nous</title>
 
   <style>
     :root {
@@ -12,111 +12,174 @@
       --orange: #b96f2d;
       --cream: #fff8ec;
       --brown: #5b3b22;
-      --light: #ffffff;
-      --danger: #b00020;
-      --shadow: 0 10px 25px rgba(0,0,0,0.12);
+      --white: #ffffff;
+      --shadow: 0 12px 30px rgba(0,0,0,0.14);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(180deg, #fff8ec 0%, #f8eddc 100%);
-      color: #2b241c;
+      background: var(--cream);
+      color: #2d241b;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
     }
 
     .container {
       width: 100%;
-      max-width: 950px;
+      max-width: 1100px;
       margin: auto;
       padding: 18px;
     }
 
     .hero {
-      background: linear-gradient(135deg, var(--green), var(--green2));
+      min-height: 88vh;
+      background:
+        linear-gradient(rgba(23,63,42,0.82), rgba(23,63,42,0.82)),
+        url("/d755fcb6-0d87-4ce4-bc23-01f3565a4638.png");
+      background-size: cover;
+      background-position: center;
       color: white;
-      border-radius: 28px;
-      padding: 28px 20px;
-      box-shadow: var(--shadow);
-      text-align: center;
-      margin-bottom: 22px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 180px;
-      height: 180px;
-      background: rgba(255,255,255,0.08);
-      border-radius: 50%;
-      right: -60px;
-      top: -60px;
-    }
-
-    .logo-circle {
-      width: 92px;
-      height: 92px;
-      border-radius: 50%;
-      background: var(--cream);
-      margin: 0 auto 12px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      color: var(--green);
-      font-weight: bold;
-      font-size: 30px;
+      border-radius: 0 0 36px 36px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .hero-inner {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .logo {
+      width: 125px;
+      height: 125px;
+      object-fit: contain;
+      margin: 0 auto 14px;
+      background: #fff8ec;
+      border-radius: 50%;
+      padding: 10px;
       border: 4px solid var(--orange);
     }
 
     h1 {
-      margin: 8px 0;
-      font-size: 34px;
-      letter-spacing: 0.5px;
+      font-size: 38px;
+      margin: 10px 0;
     }
 
     .slogan {
-      font-size: 18px;
-      margin: 8px 0;
-      color: #fff3d8;
+      font-size: 21px;
+      color: #ffe4bc;
+      font-weight: bold;
+    }
+
+    .hero-text {
+      font-size: 17px;
+      line-height: 1.7;
+      max-width: 760px;
+      margin: 16px auto;
     }
 
     .faith {
-      margin-top: 12px;
+      color: #ffd59b;
       font-weight: bold;
-      color: #ffd9a6;
-      font-size: 17px;
+      font-size: 18px;
+      margin-top: 12px;
     }
 
-    .notice {
-      background: #fff;
-      border-left: 6px solid var(--orange);
-      padding: 14px;
-      border-radius: 14px;
-      margin-bottom: 18px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-      line-height: 1.5;
+    .btn-main {
+      display: inline-block;
+      background: var(--orange);
+      color: white;
+      text-decoration: none;
+      padding: 15px 24px;
+      border-radius: 18px;
+      font-weight: bold;
+      margin-top: 18px;
     }
 
-    .card {
+    .section {
       background: white;
-      border-radius: 24px;
-      padding: 20px;
-      margin-bottom: 20px;
+      border-radius: 28px;
+      padding: 24px;
+      margin: 24px 0;
       box-shadow: var(--shadow);
     }
 
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .section h2 {
+      color: var(--green);
+      font-size: 28px;
+      margin-top: 0;
+    }
+
+    .section p {
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    @media (min-width: 750px) {
+      .grid-2 { grid-template-columns: 1fr 1fr; }
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .card {
+      background: #fffaf1;
+      border-radius: 22px;
+      padding: 18px;
+      border: 1px solid #ecd6b3;
+    }
+
+    .card h3 {
       color: var(--green);
       margin-top: 0;
-      font-size: 24px;
+    }
+
+    .product-card {
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .product-card div {
+      padding: 16px;
+    }
+
+    .founder-img {
+      width: 100%;
+      border-radius: 24px;
+      object-fit: cover;
+      max-height: 520px;
+    }
+
+    .highlight {
+      color: var(--orange);
+      font-weight: bold;
+    }
+
+    .notice {
+      background: #173f2a;
+      color: white;
+      border-radius: 22px;
+      padding: 18px;
+      line-height: 1.6;
+      margin-bottom: 20px;
     }
 
     label {
@@ -129,31 +192,10 @@
     input, select, textarea {
       width: 100%;
       padding: 15px;
-      border: 1.8px solid #e4c995;
+      border: 1.8px solid #e2c48f;
       border-radius: 16px;
       font-size: 16px;
       background: #fffdf8;
-      outline: none;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--orange);
-      box-shadow: 0 0 0 3px rgba(185,111,45,0.15);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
-    @media (min-width: 700px) {
-      .grid-2 {
-        grid-template-columns: 1fr 1fr;
-      }
-      .grid-3 {
-        grid-template-columns: 1fr 1fr 1fr;
-      }
     }
 
     .product-row {
@@ -162,11 +204,6 @@
       padding: 15px;
       border-radius: 18px;
       margin-bottom: 14px;
-    }
-
-    .product-row h3 {
-      margin: 0 0 8px;
-      color: var(--green);
     }
 
     .small {
@@ -186,25 +223,10 @@
       margin-top: 12px;
     }
 
-    .btn-add {
-      background: var(--orange);
-      color: white;
-    }
-
-    .btn-submit {
-      background: var(--green);
-      color: white;
-    }
-
-    .btn-whatsapp {
-      background: #25D366;
-      color: white;
-    }
-
-    .btn-clear {
-      background: #f3e4ca;
-      color: var(--brown);
-    }
+    .btn-add { background: var(--orange); color: white; }
+    .btn-submit { background: var(--green); color: white; }
+    .btn-whatsapp { background: #25D366; color: white; }
+    .btn-clear { background: #f3e4ca; color: var(--brown); }
 
     .invoice {
       background: #173f2a;
@@ -232,201 +254,225 @@
       margin-top: 14px;
     }
 
-    .about {
-      line-height: 1.7;
-      color: #3b2b1d;
-    }
-
-    .highlight {
-      color: var(--orange);
-      font-weight: bold;
-    }
-
-    .error {
-      color: var(--danger);
-      font-weight: bold;
-      margin-top: 10px;
-    }
-
-    .success {
-      color: var(--green);
-      font-weight: bold;
-      margin-top: 10px;
-    }
+    .error { color: #b00020; font-weight: bold; }
+    .success { color: var(--green); font-weight: bold; }
 
     .footer {
       text-align: center;
-      padding: 20px 5px;
+      padding: 24px 8px;
       color: var(--brown);
       font-size: 14px;
-    }
-
-    .hidden {
-      display: none;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
 
-    <section class="hero">
-      <div class="logo-circle">SCN</div>
+  <section class="hero">
+    <div class="hero-inner">
+      <img class="logo" src="/file_00000000cd1871f6911cfa823e76bd48.png" alt="Logo Saveurs de chez nous">
       <h1>Saveurs de chez nous</h1>
       <p class="slogan">Le goût authentique de chez nous 🇨🇩🌿</p>
+      <p class="hero-text">
+        Nous valorisons les produits locaux congolais à travers une transformation alimentaire
+        propre, moderne, pratique et authentique. Nos produits aident les familles et les personnes
+        occupées à gagner du temps et de l’énergie en cuisine.
+      </p>
       <p class="faith">Avec Dieu, nous ferons des exploits !</p>
+      <a href="#commande" class="btn-main">Commander maintenant</a>
+    </div>
+  </section>
+
+  <main class="container">
+
+    <section class="section">
+      <h2>🌿 À propos de Saveurs de chez nous</h2>
+      <p>
+        <strong>Saveurs de chez nous</strong> est un projet agroalimentaire congolais né pour
+        valoriser les produits et saveurs locales. Nous proposons des produits naturels,
+        des légumes prêts à cuisiner, des feuilles de manioc préparées, des plats locaux,
+        des jus naturels et des produits faits maison inspirés de la cuisine congolaise.
+      </p>
     </section>
 
-    <div class="notice">
-      <strong>Commande 24h à l’avance obligatoire.</strong><br>
-      La commande est confirmée après paiement total.  
-      Le client doit envoyer la preuve de paiement sur WhatsApp.
-    </div>
+    <section class="section">
+      <h2>Pourquoi nous choisir ?</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>⏱️ Gain de temps</h3>
+          <p>Nos produits sont préparés pour faciliter la cuisine au quotidien.</p>
+        </div>
+        <div class="card">
+          <h3>🌱 Fraîcheur</h3>
+          <p>Nous mettons l’accent sur des produits frais, propres et bien préparés.</p>
+        </div>
+        <div class="card">
+          <h3>🇨🇩 Consommer local</h3>
+          <p>Nous soutenons les agriculteurs et producteurs locaux congolais.</p>
+        </div>
+        <div class="card">
+          <h3>🧼 Hygiène</h3>
+          <p>La propreté et la qualité sont au cœur de notre manière de travailler.</p>
+        </div>
+        <div class="card">
+          <h3>🍲 Goût authentique</h3>
+          <p>Nous conservons le goût réel des recettes de chez nous.</p>
+        </div>
+        <div class="card">
+          <h3>💪 Entrepreneuriat féminin</h3>
+          <p>Nous encourageons l’entrepreneuriat de la femme et de la jeune fille.</p>
+        </div>
+      </div>
+    </section>
 
-    <form id="orderForm">
+    <section class="section">
+      <h2>Nos produits</h2>
+      <div class="grid grid-2">
+        <div class="card product-card">
+          <img src="/a23e0b08-f211-4c09-9396-c97e91b2da82.png" alt="Sombé ya Léo">
+          <div>
+            <h3>Sombé ya Léo</h3>
+            <p>Feuilles de manioc préparées, fraîches et prêtes à cuisiner.</p>
+          </div>
+        </div>
 
-      <section class="card">
-        <h2 class="section-title">🏠 Informations du client</h2>
+        <div class="card product-card">
+          <img src="/3ed1de554cf72410c73e9abc26d35138.jpg" alt="Riz pilaü">
+          <div>
+            <h3>Riz pilaü</h3>
+            <p>Un plat local savoureux, préparé avec soin.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="grid grid-2">
+        <div>
+          <img class="founder-img" src="/IMG-20260514-WA0029(1).jpg" alt="Fondatrice Saveurs de chez nous">
+        </div>
+        <div>
+          <h2>À propos de la fondatrice</h2>
+          <p>
+            Mon souci est de <span class="highlight">valoriser les produits locaux</span>,
+            soutenir les agriculteurs et producteurs locaux, encourager l’entrepreneuriat
+            de la femme et de la jeune fille, et inciter les familles à consommer local.
+          </p>
+          <p>
+            À travers Saveurs de chez nous, je veux aider les familles à manger sainement,
+            gagner du temps, économiser leur énergie et retrouver le goût authentique
+            des recettes de chez nous.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="commande">
+      <h2>Passer une commande</h2>
+
+      <div class="notice">
+        <strong>Commande 24h à l’avance obligatoire.</strong><br>
+        La commande est confirmée après paiement total via Airtel Money ou M-Pesa.
+        Le client doit envoyer la preuve de paiement sur WhatsApp.
+      </div>
+
+      <form id="orderForm">
 
         <div class="grid grid-2">
           <div>
             <label>Nom du client *</label>
-            <input type="text" id="clientName" placeholder="Nom du client" required />
+            <input type="text" id="clientName" required>
           </div>
 
           <div>
-            <label>Téléphone RDC *</label>
-            <input type="tel" id="clientPhone" placeholder="Ex : 0970226689" required />
+            <label>Téléphone *</label>
+            <input type="tel" id="clientPhone" required>
           </div>
         </div>
 
         <label>Adresse de livraison *</label>
-        <input type="text" id="clientAddress" placeholder="Commune, quartier, avenue..." required />
+        <input type="text" id="clientAddress" required>
 
         <div class="grid grid-2">
           <div>
             <label>Date souhaitée *</label>
-            <input type="date" id="orderDate" required />
+            <input type="date" id="orderDate" required>
             <p class="small">La date autorisée commence à partir de demain.</p>
           </div>
 
           <div>
             <label>Mode de paiement *</label>
             <select id="paymentMethod" required>
-              <option value="">Choisir un moyen de paiement</option>
+              <option value="">Choisir</option>
               <option value="Airtel Money +243991787177">Airtel Money : +243991787177</option>
               <option value="M-Pesa 0824809200">M-Pesa : 0824809200</option>
             </select>
           </div>
         </div>
-      </section>
-
-      <section class="card">
-        <h2 class="section-title">🛍️ Produits</h2>
 
         <div class="product-row">
-          <h3>Feuilles de manioc préparées / Sombé ya Léo</h3>
-          <p class="small">
-            Frais du jour. Le client peut choisir 250g, 500g, 1kg ou combiner plusieurs quantités.
-          </p>
+          <h3>Feuilles de manioc / Sombé ya Léo</h3>
+          <p class="small">Le client peut choisir 250g, 500g, 1kg ou combiner plusieurs quantités.</p>
 
           <div class="grid grid-3">
             <div>
               <label>250g - 3000 FC</label>
-              <input type="number" id="sombe250" min="0" value="0" />
+              <input type="number" id="sombe250" min="0" value="0">
             </div>
-
             <div>
               <label>500g - 4500 FC</label>
-              <input type="number" id="sombe500" min="0" value="0" />
+              <input type="number" id="sombe500" min="0" value="0">
             </div>
-
             <div>
               <label>1kg - 8500 FC</label>
-              <input type="number" id="sombe1000" min="0" value="0" />
+              <input type="number" id="sombe1000" min="0" value="0">
             </div>
           </div>
         </div>
 
         <div class="product-row">
           <h3>Riz pilaü</h3>
-          <p class="small">
-            Plat local préparé avec soin.
-          </p>
-
           <label>Nombre de plats - 25 000 FC / plat</label>
-          <input type="number" id="rizPilau" min="0" value="0" />
+          <input type="number" id="rizPilau" min="0" value="0">
         </div>
 
         <div class="product-row">
-          <h3>Autre commande personnalisée</h3>
-          <p class="small">
-            Pour les commandes spéciales ou grandes quantités.
-          </p>
-
-          <label>Détail de la commande personnalisée</label>
-          <textarea id="customOrder" rows="3" placeholder="Ex : 5kg de sombé, 10 plats, jus naturel..."></textarea>
+          <h3>Commande personnalisée</h3>
+          <label>Détails</label>
+          <textarea id="customOrder" rows="3" placeholder="Ex : grande quantité, jus naturel, légumes..."></textarea>
 
           <label>Montant personnalisé en FC</label>
-          <input type="number" id="customAmount" min="0" value="0" />
+          <input type="number" id="customAmount" min="0" value="0">
         </div>
 
         <button type="button" class="btn btn-add" onclick="calculateInvoice()">Calculer la facture</button>
 
-        <div class="invoice" id="invoiceBox">
+        <div class="invoice">
           <h3>Facture</h3>
-          <div id="invoiceDetails">
-            Aucun produit sélectionné.
-          </div>
+          <div id="invoiceDetails">Aucun produit sélectionné.</div>
           <div class="total" id="totalAmount">Total : 0 FC</div>
         </div>
-      </section>
 
-      <section class="card">
-        <h2 class="section-title">📝 Notes</h2>
-
-        <label>Message ou précision</label>
-        <textarea id="clientNote" rows="3" placeholder="Ex : livraison à telle heure, sans piment, etc."></textarea>
+        <label>Note ou précision</label>
+        <textarea id="clientNote" rows="3"></textarea>
 
         <button type="submit" class="btn btn-submit">Enregistrer la commande</button>
         <button type="button" class="btn btn-whatsapp" onclick="sendWhatsApp()">Envoyer sur WhatsApp</button>
         <button type="button" class="btn btn-clear" onclick="clearForm()">Effacer</button>
 
         <p id="statusMessage"></p>
-      </section>
 
-    </form>
-
-    <section class="card about">
-      <h2 class="section-title">🌿 À propos de la fondatrice</h2>
-
-      <p>
-        <strong>Saveurs de chez nous</strong> est né d’un désir profond :
-        <span class="highlight">valoriser les produits locaux congolais</span>,
-        soutenir les agriculteurs et producteurs locaux, et encourager
-        l’entrepreneuriat de la femme et de la jeune fille.
-      </p>
-
-      <p>
-        Notre mission est d’aider les familles et les personnes occupées à
-        gagner du temps et de l’énergie en cuisine, tout en gardant le goût
-        authentique des recettes de chez nous.
-      </p>
-
-      <p>
-        Nous croyons qu’il est possible de manger sainement, de consommer local,
-        et de bâtir une marque congolaise forte, propre, pratique et authentique.
-      </p>
+      </form>
     </section>
 
     <div class="footer">
       Saveurs de chez nous — Qualité • Hygiène • Fraîcheur • Produits locaux 🇨🇩
     </div>
 
-  </div>
+  </main>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyOPEdPxI8Esmg79h4NpAU3KqIwRdNlxADpiWiAL_lywPWv2_l2Lm9LDWDM-qAxQCY_/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxYf5LdjQnbQ5oVwTdJh_r3Fiys0ZEbCnWryagyx6ml3UB1AbiGTyCoomewy6YSMAZn/exec";
     const WHATSAPP_NUMBER = "243970226689";
 
     const prices = {
@@ -505,10 +551,7 @@
 
       totalAmount.textContent = `Total : ${total.toLocaleString()} FC`;
 
-      return {
-        lines,
-        total
-      };
+      return { lines, total };
     }
 
     function buildOrderData() {
@@ -559,28 +602,24 @@
       }
 
       try {
-        const response = await fetch(SCRIPT_URL, {
+        await fetch(SCRIPT_URL, {
           method: "POST",
           mode: "no-cors",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data)
         });
 
         status.className = "success";
-        status.textContent = "Commande enregistrée. Envoyez maintenant la preuve de paiement sur WhatsApp.";
-
+        status.textContent = "Commande envoyée. Vérifiez Google Sheets, puis envoyez la preuve de paiement sur WhatsApp.";
       } catch (err) {
         status.className = "error";
-        status.textContent = "Erreur d’enregistrement. Vérifiez la connexion ou le lien Google Apps Script.";
+        status.textContent = "Erreur d’enregistrement. Vérifiez le lien Google Apps Script.";
       }
     });
 
     function sendWhatsApp() {
       const data = buildOrderData();
       const error = validateOrder(data);
-
       const status = document.getElementById("statusMessage");
 
       if (error) {
@@ -609,8 +648,7 @@ Note : ${data.note || "Aucune"}
 
 Je vais envoyer la preuve de paiement.`;
 
-      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-      window.open(url, "_blank");
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank");
     }
 
     function clearForm() {
@@ -632,5 +670,6 @@ Je vais envoyer la preuve de paiement.`;
 
     calculateInvoice();
   </script>
+
 </body>
 </html>
