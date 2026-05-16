@@ -3,57 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Saveurs de chez nous - Commande</title>
+  <title>Saveurs de chez nous</title>
 
   <style>
     :root {
       --vert: #123f27;
       --vert-fonce: #0b2d1b;
       --orange: #c7792f;
-      --orange-clair: #e7a35a;
       --creme: #fff8ec;
       --brun: #5a351d;
       --texte: #2d2117;
-      --blanc: #ffffff;
-      --ombre: rgba(0, 0, 0, 0.22);
     }
 
     * {
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Arial, sans-serif;
       color: var(--texte);
       background:
-        linear-gradient(rgba(11, 45, 27, 0.78), rgba(11, 45, 27, 0.85)),
+        linear-gradient(rgba(11,45,27,0.72), rgba(11,45,27,0.86)),
         url("fond.jpg");
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
     }
 
-    a {
-      text-decoration: none;
-    }
-
-    .page {
-      min-height: 100vh;
-    }
-
     .topbar {
-      position: sticky;
-      top: 0;
+      position: relative;
       z-index: 10;
-      background: rgba(11, 45, 27, 0.96);
+      background: rgba(11,45,27,0.96);
       color: white;
-      padding: 12px 18px;
+      padding: 10px 14px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.25);
     }
 
@@ -63,7 +46,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     .brand-mini {
@@ -71,163 +55,105 @@
       align-items: center;
       gap: 10px;
       font-weight: bold;
-      font-size: 15px;
+      font-size: 20px;
     }
 
     .brand-mini img {
-      width: 42px;
-      height: 42px;
+      width: 70px;
+      height: 70px;
       object-fit: contain;
       background: var(--creme);
       border-radius: 50%;
-      padding: 4px;
+      padding: 5px;
     }
 
     .nav-buttons {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
-      justify-content: flex-end;
     }
 
     .nav-buttons a {
       color: white;
-      font-size: 13px;
-      padding: 8px 10px;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 8px 12px;
       border-radius: 20px;
-      background: rgba(255,255,255,0.12);
-    }
-
-    .nav-buttons a:hover {
-      background: var(--orange);
+      background: rgba(255,255,255,0.14);
     }
 
     .hero {
-      min-height: 92vh;
+      min-height: 85vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 40px 18px;
+      padding: 35px 18px;
       text-align: center;
     }
 
-    .hero-card {
-      width: 100%;
-      max-width: 920px;
-      background: rgba(255, 248, 236, 0.96);
-      border-radius: 30px;
-      padding: 34px 22px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-      border: 1px solid rgba(199, 121, 47, 0.45);
+    .hero-card,
+    .card {
+      background: rgba(255,248,236,0.96);
+      border-radius: 26px;
+      padding: 26px;
+      box-shadow: 0 14px 36px rgba(0,0,0,0.25);
+      max-width: 1100px;
+      margin: auto;
     }
 
-    .logo {
-      width: 135px;
-      height: 135px;
-      object-fit: contain;
-      border-radius: 50%;
-      background: white;
-      padding: 10px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.18);
-      margin-bottom: 15px;
+    .hero-logo {
+      width: 145px;
+      max-width: 45%;
+      border-radius: 18px;
+      margin-bottom: 12px;
     }
 
-    .hero h1 {
+    h1, h2, h3 {
       color: var(--vert);
+    }
+
+    h1 {
       font-size: 38px;
-      margin: 10px 0 8px;
-      line-height: 1.1;
+      margin: 10px 0;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 30px;
+      margin-top: 0;
     }
 
     .slogan {
       color: var(--orange);
-      font-size: 21px;
       font-weight: bold;
-      margin-bottom: 16px;
+      font-size: 21px;
+      margin-bottom: 15px;
     }
 
-    .hero-text {
-      max-width: 760px;
-      margin: 0 auto 22px;
-      font-size: 17px;
+    p {
       line-height: 1.7;
+      font-size: 16px;
     }
 
-    .cta-row {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 20px;
+    .section {
+      padding: 24px 18px;
     }
 
     .btn {
       display: inline-block;
-      border: none;
-      cursor: pointer;
-      padding: 14px 22px;
-      border-radius: 30px;
-      font-weight: bold;
-      font-size: 15px;
-      transition: 0.2s ease;
-    }
-
-    .btn-primary {
       background: var(--orange);
       color: white;
-      box-shadow: 0 8px 18px rgba(199, 121, 47, 0.35);
+      padding: 14px 22px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 6px;
+      border: none;
+      cursor: pointer;
     }
 
-    .btn-primary:hover {
-      background: #a96122;
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
+    .btn-green {
       background: var(--vert);
-      color: white;
-    }
-
-    .btn-secondary:hover {
-      background: var(--vert-fonce);
-      transform: translateY(-2px);
-    }
-
-    .section {
-      max-width: 1100px;
-      margin: 26px auto;
-      padding: 0 18px;
-    }
-
-    .card {
-      background: rgba(255, 248, 236, 0.97);
-      border-radius: 26px;
-      padding: 26px;
-      box-shadow: 0 14px 36px rgba(0,0,0,0.22);
-      border: 1px solid rgba(199, 121, 47, 0.28);
-    }
-
-    .section-title {
-      color: var(--vert);
-      font-size: 28px;
-      margin: 0 0 12px;
-      text-align: center;
-    }
-
-    .section-subtitle {
-      text-align: center;
-      color: var(--brun);
-      margin: 0 auto 24px;
-      max-width: 760px;
-      line-height: 1.6;
-    }
-
-    .presentation-text {
-      font-size: 16px;
-      line-height: 1.8;
-      text-align: center;
-      max-width: 900px;
-      margin: auto;
     }
 
     .grid {
@@ -239,30 +165,16 @@
 
     .mini-card {
       background: white;
-      border-radius: 20px;
-      padding: 20px;
+      border-radius: 18px;
+      padding: 18px;
       box-shadow: 0 8px 22px rgba(0,0,0,0.10);
-      border: 1px solid rgba(18, 63, 39, 0.08);
-    }
-
-    .mini-card h3 {
-      color: var(--vert);
-      margin-top: 0;
-      margin-bottom: 8px;
-      font-size: 18px;
-    }
-
-    .mini-card p {
-      margin: 0;
-      line-height: 1.6;
-      font-size: 14.5px;
     }
 
     .products {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 18px;
-      margin-top: 22px;
+      margin-top: 20px;
     }
 
     .product-card {
@@ -270,90 +182,43 @@
       border-radius: 24px;
       overflow: hidden;
       box-shadow: 0 10px 26px rgba(0,0,0,0.14);
-      border: 1px solid rgba(199, 121, 47, 0.25);
     }
 
     .product-img {
       width: 100%;
-      height: 250px;
+      height: 230px;
       object-fit: cover;
-      background: linear-gradient(135deg, #123f27, #c7792f);
+      object-position: center;
+      display: block;
+      background: #eee;
     }
 
     .product-body {
       padding: 20px;
     }
 
-    .product-body h3 {
-      margin: 0 0 8px;
-      color: var(--vert);
-      font-size: 22px;
-    }
-
     .badge {
       display: inline-block;
-      background: rgba(199, 121, 47, 0.13);
+      background: #f3e5d4;
       color: var(--brun);
-      padding: 6px 10px;
+      padding: 7px 12px;
       border-radius: 20px;
-      font-size: 13px;
       font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .product-body p {
-      line-height: 1.6;
-      margin: 8px 0;
+      font-size: 14px;
     }
 
     .info-box {
-      background: #fff;
+      background: white;
       border-left: 6px solid var(--orange);
       border-radius: 18px;
       padding: 18px;
-      margin-top: 18px;
-      line-height: 1.7;
-    }
-
-    .info-box strong {
-      color: var(--vert);
+      margin-top: 15px;
     }
 
     form {
-      margin-top: 20px;
       display: grid;
       gap: 14px;
-    }
-
-    label {
-      font-weight: bold;
-      color: var(--vert);
-      margin-bottom: 5px;
-      display: block;
-    }
-
-    input,
-    select,
-    textarea {
-      width: 100%;
-      padding: 13px 14px;
-      border-radius: 14px;
-      border: 1px solid #d8c7b3;
-      font-size: 15px;
-      background: white;
-      color: var(--texte);
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      outline: 2px solid rgba(199, 121, 47, 0.35);
-      border-color: var(--orange);
-    }
-
-    textarea {
-      min-height: 95px;
-      resize: vertical;
+      margin-top: 20px;
     }
 
     .form-grid {
@@ -362,13 +227,23 @@
       gap: 14px;
     }
 
-    .form-note {
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--brun);
-      background: rgba(199, 121, 47, 0.12);
-      padding: 14px;
-      border-radius: 16px;
+    label {
+      font-weight: bold;
+      color: var(--vert);
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 13px;
+      border-radius: 14px;
+      border: 1px solid #d8c7b3;
+      font-size: 15px;
+    }
+
+    textarea {
+      min-height: 90px;
     }
 
     .whatsapp-button {
@@ -380,421 +255,289 @@
       border-radius: 18px;
       font-size: 17px;
       font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(31,168,85,0.28);
     }
 
-    .whatsapp-button:hover {
-      background: #168843;
-    }
-
-    .footer {
-      text-align: center;
+    footer {
       color: white;
-      padding: 30px 18px 45px;
-      line-height: 1.7;
+      text-align: center;
+      padding: 30px 18px;
     }
 
-    .footer strong {
-      color: var(--orange-clair);
-    }
-
-    @media (max-width: 850px) {
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .products {
-        grid-template-columns: 1fr;
-      }
-
-      .hero h1 {
-        font-size: 31px;
-      }
-
-      .topbar-content {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .nav-buttons {
-        justify-content: flex-start;
-      }
-    }
-
-    @media (max-width: 600px) {
-      body {
-        background-attachment: scroll;
-      }
-
-      .hero {
-        min-height: auto;
-        padding: 28px 14px;
-      }
-
-      .hero-card {
-        padding: 24px 16px;
-        border-radius: 24px;
-      }
-
-      .logo {
-        width: 105px;
-        height: 105px;
-      }
-
-      .hero h1 {
-        font-size: 28px;
-      }
-
-      .slogan {
-        font-size: 18px;
-      }
-
-      .hero-text {
-        font-size: 15.5px;
-      }
-
-      .card {
-        padding: 20px;
-        border-radius: 22px;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
+    @media (max-width: 800px) {
+      .grid,
+      .products,
       .form-grid {
         grid-template-columns: 1fr;
       }
 
+      .brand-mini {
+        width: 100%;
+        justify-content: center;
+        font-size: 18px;
+      }
+
+      .nav-buttons {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .nav-buttons a {
+        font-size: 13px;
+        padding: 8px 10px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      h2 {
+        font-size: 25px;
+      }
+
       .product-img {
-        height: 210px;
+        height: 195px;
+      }
+
+      body {
+        background-attachment: scroll;
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="page">
 
-    <header class="topbar">
-      <div class="topbar-content">
-        <div class="brand-mini">
-          <img src="logo.png" alt="Logo Saveurs de chez nous" onerror="this.style.display='none'">
-          <span>Saveurs de chez nous</span>
+  <header class="topbar">
+    <div class="topbar-content">
+      <div class="brand-mini">
+        <img src="logo.png" alt="Logo">
+        <span>Saveurs de chez nous</span>
+      </div>
+
+      <nav class="nav-buttons">
+        <a href="#presentation">Présentation</a>
+        <a href="#choisir">Pourquoi nous choisir</a>
+        <a href="#produits">Produits</a>
+        <a href="#commande">Commander</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-card">
+      <img class="hero-logo" src="logo.png" alt="Saveurs de chez nous">
+      <h1>Saveurs de chez nous</h1>
+      <div class="slogan">Le goût authentique de chez nous 🇨🇩🌿</div>
+
+      <p>
+        Des produits locaux congolais, propres, pratiques et authentiques,
+        préparés pour vous aider à gagner du temps en cuisine tout en gardant
+        le vrai goût de chez nous.
+      </p>
+
+      <a class="btn" href="#commande">Commander maintenant</a>
+      <a class="btn btn-green" href="https://wa.me/243970226689" target="_blank">WhatsApp direct</a>
+    </div>
+  </section>
+
+  <section id="presentation" class="section">
+    <div class="card">
+      <h2>Présentation</h2>
+      <p>
+        <strong>Saveurs de chez nous</strong> est un projet agroalimentaire congolais
+        spécialisé dans la valorisation des produits et saveurs locales à travers
+        une transformation alimentaire moderne, propre et authentique.
+      </p>
+      <p>
+        Nous proposons des produits naturels, des légumes prêts à cuisiner,
+        des feuilles de manioc préparées, des plats locaux, des jus naturels
+        et des produits faits maison inspirés de la cuisine congolaise.
+      </p>
+      <p>
+        Notre mission est d’aider les familles et les personnes occupées à gagner
+        du temps et de l’énergie en cuisine, sans perdre le goût authentique des recettes locales.
+      </p>
+    </div>
+  </section>
+
+  <section id="choisir" class="section">
+    <div class="card">
+      <h2>Pourquoi nous choisir ?</h2>
+
+      <div class="grid">
+        <div class="mini-card">
+          <h3>🌿 Produits locaux</h3>
+          <p>Nous valorisons les produits de chez nous et les saveurs congolaises.</p>
         </div>
 
-        <nav class="nav-buttons">
-          <a href="#presentation">Présentation</a>
-          <a href="#choisir">Pourquoi nous choisir</a>
-          <a href="#produits">Produits</a>
-          <a href="#commande">Commander</a>
-        </nav>
-      </div>
-    </header>
-
-    <section class="hero">
-      <div class="hero-card">
-        <img class="logo" src="logo.png" alt="Logo Saveurs de chez nous" onerror="this.style.display='none'">
-
-        <h1>Saveurs de chez nous</h1>
-
-        <div class="slogan">
-          Le goût authentique de chez nous 🇨🇩🌿
+        <div class="mini-card">
+          <h3>⏱️ Gain de temps</h3>
+          <p>Nos produits sont préparés pour réduire le temps passé en cuisine.</p>
         </div>
 
-        <p class="hero-text">
-          Des produits locaux congolais, propres, pratiques et authentiques,
-          préparés pour vous aider à gagner du temps en cuisine tout en gardant
-          le vrai goût de chez nous.
-        </p>
+        <div class="mini-card">
+          <h3>🧼 Hygiène</h3>
+          <p>Nous mettons l’accent sur la propreté, la fraîcheur et la qualité.</p>
+        </div>
 
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#commande">Commander maintenant</a>
-          <a class="btn btn-secondary" href="https://wa.me/243970226689" target="_blank">
-            WhatsApp direct
-          </a>
+        <div class="mini-card">
+          <h3>🍲 Goût authentique</h3>
+          <p>Nous conservons le goût de la cuisine congolaise, comme à la maison.</p>
+        </div>
+
+        <div class="mini-card">
+          <h3>💪 Moins de fatigue</h3>
+          <p>Vous cuisinez plus facilement, avec moins d’effort.</p>
+        </div>
+
+        <div class="mini-card">
+          <h3>📲 Commande simple</h3>
+          <p>Vous commandez rapidement via WhatsApp.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="presentation" class="section">
-      <div class="card">
-        <h2 class="section-title">Présentation</h2>
+  <section id="objectifs" class="section">
+    <div class="card">
+      <h2>Nos objectifs</h2>
 
-        <p class="presentation-text">
-          <strong>Saveurs de chez nous</strong> est un projet agroalimentaire congolais
-          spécialisé dans la valorisation des produits et saveurs locales à travers
-          une transformation alimentaire moderne, propre et authentique.
-          <br><br>
-          Nous proposons des produits naturels, des légumes prêts à cuisiner,
-          des feuilles de manioc préparées, des plats locaux, des jus naturels
-          et des produits faits maison inspirés de la cuisine congolaise.
-          <br><br>
-          Notre mission est simple : aider les familles, les mamans, les travailleurs,
-          les étudiants et toutes les personnes occupées à gagner du temps et de l’énergie
-          en cuisine, sans perdre le goût authentique des recettes locales.
-        </p>
-      </div>
-    </section>
+      <div class="grid">
+        <div class="mini-card">
+          <h3>Valoriser</h3>
+          <p>Mettre en avant les produits locaux congolais.</p>
+        </div>
 
-    <section id="choisir" class="section">
-      <div class="card">
-        <h2 class="section-title">Pourquoi nous choisir ?</h2>
+        <div class="mini-card">
+          <h3>Faciliter</h3>
+          <p>Aider les familles à mieux s’organiser en cuisine.</p>
+        </div>
 
-        <p class="section-subtitle">
-          Nous ne vendons pas seulement des produits. Nous apportons une solution pratique,
-          propre et locale pour faciliter votre quotidien.
-        </p>
-
-        <div class="grid">
-          <div class="mini-card">
-            <h3>🌿 Produits locaux</h3>
-            <p>
-              Nous valorisons les produits de chez nous et les saveurs congolaises.
-            </p>
-          </div>
-
-          <div class="mini-card">
-            <h3>⏱️ Gain de temps</h3>
-            <p>
-              Nos produits sont préparés pour réduire le temps passé en cuisine.
-            </p>
-          </div>
-
-          <div class="mini-card">
-            <h3>🧼 Hygiène</h3>
-            <p>
-              Nous mettons l’accent sur la propreté, la qualité et le soin dans la préparation.
-            </p>
-          </div>
-
-          <div class="mini-card">
-            <h3>🍲 Goût authentique</h3>
-            <p>
-              Nous conservons le goût de la cuisine congolaise, comme à la maison.
-            </p>
-          </div>
-
-          <div class="mini-card">
-            <h3>💪 Moins de fatigue</h3>
-            <p>
-              Vous cuisinez plus facilement, avec moins d’effort et plus de sérénité.
-            </p>
-          </div>
-
-          <div class="mini-card">
-            <h3>📲 Commande simple</h3>
-            <p>
-              Vous commandez rapidement via WhatsApp, avec des renseignements clairs.
-            </p>
-          </div>
+        <div class="mini-card">
+          <h3>Moderniser</h3>
+          <p>Présenter la cuisine locale de manière propre et professionnelle.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="objectifs" class="section">
-      <div class="card">
-        <h2 class="section-title">Nos objectifs</h2>
+  <section id="produits" class="section">
+    <div class="card">
+      <h2>Nos produits</h2>
+      <p style="text-align:center;">
+        Découvrez nos produits disponibles à la commande. Les commandes sont préparées avec soin
+        et doivent être passées à l’avance.
+      </p>
 
-        <div class="grid">
-          <div class="mini-card">
-            <h3>Valoriser</h3>
-            <p>
-              Mettre en avant les produits locaux congolais et leur donner plus de valeur.
-            </p>
-          </div>
-
-          <div class="mini-card">
-            <h3>Faciliter</h3>
-            <p>
-              Aider les familles et les personnes occupées à mieux s’organiser en cuisine.
-            </p>
-          </div>
-
-          <div class="mini-card">
-            <h3>Moderniser</h3>
-            <p>
-              Présenter la cuisine locale de manière propre, pratique et professionnelle.
-            </p>
+      <div class="products">
+        <div class="product-card">
+          <img class="product-img" src="sombe.jpg" alt="Sombé ya Léo">
+          <div class="product-body">
+            <span class="badge">Frais du jour</span>
+            <h3>Sombé ya Léo</h3>
+            <p>Feuilles de manioc préparées avec soin pour vous faire gagner du temps en cuisine.</p>
+            <p><strong>Unité :</strong> grammes ou kilogrammes.</p>
+            <p><strong>Commande :</strong> 24h à l’avance.</p>
           </div>
         </div>
-      </div>
-    </section>
 
-    <section id="produits" class="section">
-      <div class="card">
-        <h2 class="section-title">Nos produits</h2>
-
-        <p class="section-subtitle">
-          Découvrez nos produits disponibles à la commande. Les commandes sont préparées
-          avec soin et doivent être passées à l’avance.
-        </p>
-
-        <div class="products">
-          <div class="product-card">
-            <img class="product-img" src="sombe.jpg" alt="Sombé ya Léo">
-
-            <div class="product-body">
-              <span class="badge">Frais du jour</span>
-              <h3>Sombé ya Léo</h3>
-              <p>
-                Feuilles de manioc préparées avec soin pour vous faire gagner du temps
-                en cuisine. Disponible selon la quantité souhaitée.
-              </p>
-              <p>
-                <strong>Unité :</strong> grammes ou kilogrammes.
-              </p>
-              <p>
-                <strong>Commande :</strong> 24h à l’avance.
-              </p>
-            </div>
-          </div>
-
-          <div class="product-card">
-            <img class="product-img" src="riz-pilau.jpg" alt="Riz pilau">
-
-            <div class="product-body">
-              <span class="badge">Plat local</span>
-              <h3>Riz pilau</h3>
-              <p>
-                Un plat savoureux, préparé avec goût, idéal pour vos repas,
-                vos invités ou vos besoins personnalisés.
-              </p>
-              <p>
-                <strong>Unité :</strong> nombre de plats.
-              </p>
-              <p>
-                <strong>Option :</strong> commande personnalisée possible.
-              </p>
-            </div>
+        <div class="product-card">
+          <img class="product-img" src="riz-pilau.jpg" alt="Riz pilau">
+          <div class="product-body">
+            <span class="badge">Plat local</span>
+            <h3>Riz pilau</h3>
+            <p>Un plat savoureux, préparé avec goût, idéal pour vos repas et commandes personnalisées.</p>
+            <p><strong>Unité :</strong> nombre de plats.</p>
+            <p><strong>Option :</strong> commande personnalisée possible.</p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="renseignements" class="section">
-      <div class="card">
-        <h2 class="section-title">Renseignements importants</h2>
+  <section id="renseignements" class="section">
+    <div class="card">
+      <h2>Renseignements</h2>
 
-        <div class="info-box">
-          <p>
-            <strong>Commande :</strong> les commandes doivent être passées 24h à l’avance.
-          </p>
-
-          <p>
-            <strong>Paiement :</strong> le paiement total confirme la commande.
-            Cela nous permet de préparer les produits avec sérieux, fraîcheur et organisation.
-          </p>
-
-          <p>
-            <strong>Airtel Money :</strong> +243 991 787 177
-          </p>
-
-          <p>
-            <strong>M-Pesa :</strong> 082 480 9200
-          </p>
-
-          <p>
-            <strong>WhatsApp :</strong> +243 970 226 689
-          </p>
-        </div>
-
-        <div class="cta-row">
-          <a class="btn btn-primary" href="https://wa.me/243970226689" target="_blank">
-            Écrire sur WhatsApp
-          </a>
-        </div>
+      <div class="info-box">
+        <p><strong>Commande :</strong> 24h à l’avance.</p>
+        <p><strong>Paiement :</strong> paiement total pour confirmer la commande.</p>
+        <p><strong>Airtel Money :</strong> +243 991 787 177</p>
+        <p><strong>M-Pesa :</strong> 082 480 9200</p>
+        <p><strong>WhatsApp :</strong> +243 970 226 689</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="commande" class="section">
-      <div class="card">
-        <h2 class="section-title">Passer une commande</h2>
+  <section id="commande" class="section">
+    <div class="card">
+      <h2>Passer une commande</h2>
 
-        <p class="section-subtitle">
-          Remplissez les informations ci-dessous. Votre commande sera envoyée directement
-          sur WhatsApp.
-        </p>
-
-        <form id="commandeForm">
-          <div class="form-grid">
-            <div>
-              <label for="nom">Nom complet *</label>
-              <input type="text" id="nom" required placeholder="Votre nom">
-            </div>
-
-            <div>
-              <label for="telephone">Téléphone *</label>
-              <input type="tel" id="telephone" required placeholder="Ex : 0970 000 000">
-            </div>
+      <form id="commandeForm">
+        <div class="form-grid">
+          <div>
+            <label>Nom complet *</label>
+            <input type="text" id="nom" required>
           </div>
 
           <div>
-            <label for="adresse">Adresse de livraison *</label>
-            <input type="text" id="adresse" required placeholder="Votre adresse complète">
+            <label>Téléphone *</label>
+            <input type="tel" id="telephone" required>
           </div>
+        </div>
 
-          <div class="form-grid">
-            <div>
-              <label for="produit">Produit *</label>
-              <select id="produit" required onchange="adapterUnite()">
-                <option value="">Choisir un produit</option>
-                <option value="Sombé ya Léo">Sombé ya Léo</option>
-                <option value="Riz pilau">Riz pilau</option>
-              </select>
-            </div>
+        <div>
+          <label>Adresse *</label>
+          <input type="text" id="adresse" required>
+        </div>
 
-            <div>
-              <label for="quantite">Quantité *</label>
-              <input type="text" id="quantite" required placeholder="Ex : 1kg, 500g, 3 plats">
-            </div>
-          </div>
-
-          <div class="form-grid">
-            <div>
-              <label for="date">Date souhaitée *</label>
-              <input type="date" id="date" required>
-            </div>
-
-            <div>
-              <label for="paiement">Mode de paiement *</label>
-              <select id="paiement" required>
-                <option value="">Choisir</option>
-                <option value="Airtel Money">Airtel Money</option>
-                <option value="M-Pesa">M-Pesa</option>
-              </select>
-            </div>
+        <div class="form-grid">
+          <div>
+            <label>Produit *</label>
+            <select id="produit" required onchange="adapterUnite()">
+              <option value="">Choisir</option>
+              <option value="Sombé ya Léo">Sombé ya Léo</option>
+              <option value="Riz pilau">Riz pilau</option>
+            </select>
           </div>
 
           <div>
-            <label for="message">Message ou précision</label>
-            <textarea id="message" placeholder="Ex : livraison à telle heure, commande personnalisée, etc."></textarea>
+            <label>Quantité *</label>
+            <input type="text" id="quantite" required placeholder="Ex : 1kg, 500g, 3 plats">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div>
+            <label>Date souhaitée *</label>
+            <input type="date" id="date" required>
           </div>
 
-          <div class="form-note">
-            Pour confirmer la commande, le paiement total est demandé via Airtel Money ou M-Pesa.
-            Après envoi du message WhatsApp, nous vous confirmerons les détails.
+          <div>
+            <label>Paiement *</label>
+            <select id="paiement" required>
+              <option value="">Choisir</option>
+              <option value="Airtel Money">Airtel Money</option>
+              <option value="M-Pesa">M-Pesa</option>
+            </select>
           </div>
+        </div>
 
-          <button type="submit" class="whatsapp-button">
-            Envoyer la commande sur WhatsApp
-          </button>
-        </form>
-      </div>
-    </section>
+        <div>
+          <label>Précision</label>
+          <textarea id="message" placeholder="Ex : livraison, heure souhaitée, commande personnalisée..."></textarea>
+        </div>
 
-    <footer class="footer">
-      <p>
-        <strong>Saveurs de chez nous</strong><br>
-        Le goût authentique de chez nous 🇨🇩🌿
-      </p>
-      <p>
-        WhatsApp : +243 970 226 689
-      </p>
-    </footer>
+        <button class="whatsapp-button" type="submit">Envoyer la commande sur WhatsApp</button>
+      </form>
+    </div>
+  </section>
 
-  </div>
+  <footer>
+    <strong>Saveurs de chez nous</strong><br>
+    Le goût authentique de chez nous 🇨🇩🌿<br>
+    WhatsApp : +243 970 226 689
+  </footer>
 
   <script>
     const numeroWhatsApp = "243970226689";
@@ -812,19 +555,10 @@
       }
     }
 
-    function reglerDateMinimum() {
-      const dateInput = document.getElementById("date");
-      const demain = new Date();
-      demain.setDate(demain.getDate() + 1);
-
-      const annee = demain.getFullYear();
-      const mois = String(demain.getMonth() + 1).padStart(2, "0");
-      const jour = String(demain.getDate()).padStart(2, "0");
-
-      dateInput.min = `${annee}-${mois}-${jour}`;
-    }
-
-    reglerDateMinimum();
+    const dateInput = document.getElementById("date");
+    const demain = new Date();
+    demain.setDate(demain.getDate() + 1);
+    dateInput.min = demain.toISOString().split("T")[0];
 
     document.getElementById("commandeForm").addEventListener("submit", function(e) {
       e.preventDefault();
@@ -838,11 +572,6 @@
       const paiement = document.getElementById("paiement").value;
       const message = document.getElementById("message").value.trim();
 
-      if (!nom || !telephone || !adresse || !produit || !quantite || !date || !paiement) {
-        alert("Veuillez remplir tous les champs obligatoires.");
-        return;
-      }
-
       let texte = `Bonjour Saveurs de chez nous,%0A%0A`;
       texte += `Je souhaite passer une commande.%0A%0A`;
       texte += `Nom : ${nom}%0A`;
@@ -851,18 +580,17 @@
       texte += `Produit : ${produit}%0A`;
       texte += `Quantité : ${quantite}%0A`;
       texte += `Date souhaitée : ${date}%0A`;
-      texte += `Paiement choisi : ${paiement}%0A`;
+      texte += `Paiement : ${paiement}%0A`;
 
       if (message) {
         texte += `Précision : ${message}%0A`;
       }
 
-      texte += `%0AJe comprends que la commande est confirmée après paiement total.%0A`;
-      texte += `%0AMerci.`;
+      texte += `%0AJe comprends que la commande est confirmée après paiement total.`;
 
-      const lien = `https://wa.me/${numeroWhatsApp}?text=${texte}`;
-      window.open(lien, "_blank");
+      window.open(`https://wa.me/${numeroWhatsApp}?text=${texte}`, "_blank");
     });
   </script>
+
 </body>
 </html>
