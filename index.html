@@ -6,744 +6,831 @@
   <title>Saveurs de chez nous</title>
 
   <style>
-    :root {
-      --green: #173f2a;
-      --green2: #245c3a;
-      --orange: #b96f2d;
-      --cream: #fff8ec;
-      --brown: #5b3b22;
-      --shadow: 0 12px 30px rgba(0,0,0,0.14);
+    :root{
+      --green:#173f2a;
+      --green2:#245c3a;
+      --orange:#b96f2d;
+      --cream:#fff8ec;
+      --brown:#5b3b22;
+      --shadow:0 12px 30px rgba(0,0,0,.14);
     }
 
-    * { box-sizing: border-box; }
+    *{box-sizing:border-box}
 
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--cream);
-      color: #2d241b;
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      background:var(--cream);
+      color:#2d241b;
     }
 
-    img {
-      max-width: 100%;
-      display: block;
+    img{max-width:100%;display:block}
+
+    .container{
+      max-width:1100px;
+      margin:auto;
+      padding:18px;
     }
 
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 18px;
-    }
-
-    .hero {
-      min-height: 82vh;
+    .hero{
+      min-height:82vh;
       background:
-        linear-gradient(rgba(23,63,42,0.82), rgba(23,63,42,0.82)),
-        url("/d755fcb6-0d87-4ce4-bc23-01f3565a4638.png?v=7");
-      background-size: cover;
-      background-position: center;
-      color: white;
-      display: flex;
-      align-items: center;
-      border-radius: 0 0 36px 36px;
-      padding: 24px;
-      text-align: center;
+        linear-gradient(rgba(23,63,42,.82),rgba(23,63,42,.82)),
+        url("/d755fcb6-0d87-4ce4-bc23-01f3565a4638.png?v=9");
+      background-size:cover;
+      background-position:center;
+      color:white;
+      display:flex;
+      align-items:center;
+      border-radius:0 0 36px 36px;
+      padding:24px;
+      text-align:center;
     }
 
-    .hero-inner {
-      max-width: 900px;
-      margin: auto;
+    .hero-inner{
+      max-width:900px;
+      margin:auto;
+      animation:fadeUp .8s ease;
     }
 
-    .logo {
-      width: 125px;
-      height: 125px;
-      object-fit: contain;
-      margin: 0 auto 14px;
-      background: #fff8ec;
-      border-radius: 50%;
-      padding: 10px;
-      border: 4px solid var(--orange);
+    .logo{
+      width:125px;
+      height:125px;
+      object-fit:contain;
+      margin:0 auto 14px;
+      background:#fff8ec;
+      border-radius:50%;
+      padding:10px;
+      border:4px solid var(--orange);
+      animation:pulseLogo 2.5s infinite ease-in-out;
     }
 
-    h1 {
-      font-size: 38px;
-      margin: 10px 0;
+    h1{
+      font-size:38px;
+      margin:10px 0;
     }
 
-    .slogan {
-      font-size: 21px;
-      color: #ffe4bc;
-      font-weight: bold;
+    .slogan{
+      font-size:21px;
+      color:#ffe4bc;
+      font-weight:bold;
     }
 
-    .hero-text {
-      font-size: 17px;
-      line-height: 1.7;
-      max-width: 760px;
-      margin: 16px auto;
+    .hero-text{
+      font-size:17px;
+      line-height:1.7;
+      max-width:760px;
+      margin:16px auto;
     }
 
-    .faith {
-      color: #ffd59b;
-      font-weight: bold;
-      font-size: 18px;
+    .faith{
+      color:#ffd59b;
+      font-weight:bold;
+      font-size:18px;
     }
 
-    .btn-main {
-      display: inline-block;
-      background: var(--orange);
-      color: white;
-      text-decoration: none;
-      padding: 15px 24px;
-      border-radius: 18px;
-      font-weight: bold;
-      margin-top: 18px;
+    .btn-main{
+      display:inline-block;
+      background:var(--orange);
+      color:white;
+      text-decoration:none;
+      padding:15px 24px;
+      border-radius:18px;
+      font-weight:bold;
+      margin-top:18px;
+      box-shadow:var(--shadow);
+      transition:.25s;
     }
 
-    .menu-buttons {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-      margin: 24px 0;
+    .btn-main:hover{
+      transform:translateY(-2px);
+      background:#d08336;
     }
 
-    @media (min-width: 750px) {
-      .menu-buttons {
-        grid-template-columns: repeat(3, 1fr);
-      }
+    .menu-buttons{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+      margin:24px 0;
     }
 
-    .toggle-btn {
-      width: 100%;
-      background: var(--green);
-      color: white;
-      border: none;
-      border-radius: 18px;
-      padding: 16px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: var(--shadow);
+    @media(min-width:750px){
+      .menu-buttons{grid-template-columns:repeat(3,1fr)}
+      .grid-2{grid-template-columns:1fr 1fr}
+      .grid-3{grid-template-columns:repeat(3,1fr)}
     }
 
-    .toggle-btn:hover {
-      background: var(--green2);
+    .toggle-btn{
+      width:100%;
+      background:var(--green);
+      color:white;
+      border:none;
+      border-radius:18px;
+      padding:16px;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      box-shadow:var(--shadow);
+      transition:.25s;
     }
 
-    .section {
-      background: white;
-      border-radius: 28px;
-      padding: 24px;
-      margin: 18px 0;
-      box-shadow: var(--shadow);
-      display: none;
+    .toggle-btn:hover{
+      background:var(--green2);
+      transform:translateY(-2px);
     }
 
-    .section.active {
-      display: block;
+    .section{
+      background:white;
+      border-radius:28px;
+      padding:24px;
+      margin:18px 0;
+      box-shadow:var(--shadow);
+      display:none;
+      animation:fadeUp .35s ease;
     }
 
-    .section h2 {
-      color: var(--green);
-      font-size: 28px;
-      margin-top: 0;
-      text-transform: uppercase;
+    .section.active,.always-visible{display:block}
+
+    .section h2{
+      color:var(--green);
+      font-size:28px;
+      margin-top:0;
+      text-transform:uppercase;
     }
 
-    .section p {
-      line-height: 1.7;
-      font-size: 16px;
+    .section p{
+      line-height:1.7;
+      font-size:16px;
     }
 
-    .always-visible {
-      display: block;
+    .grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:18px;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
+    .card{
+      background:#fffaf1;
+      border-radius:22px;
+      padding:18px;
+      border:1px solid #ecd6b3;
+      transition:.25s;
     }
 
-    @media (min-width: 750px) {
-      .grid-2 { grid-template-columns: 1fr 1fr; }
-      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 8px 22px rgba(0,0,0,.12);
     }
 
-    .card {
-      background: #fffaf1;
-      border-radius: 22px;
-      padding: 18px;
-      border: 1px solid #ecd6b3;
+    .card h3{
+      color:var(--green);
+      margin-top:0;
+      text-transform:uppercase;
     }
 
-    .card h3 {
-      color: var(--green);
-      margin-top: 0;
-      text-transform: uppercase;
+    .product-card{
+      overflow:hidden;
+      padding:0;
     }
 
-    .product-card {
-      overflow: hidden;
-      padding: 0;
+    .product-card img{
+      width:100%;
+      height:230px;
+      object-fit:cover;
     }
 
-    .product-card img {
-      width: 100%;
-      height: 230px;
-      object-fit: cover;
+    .product-card div{padding:16px}
+
+    .founder-img{
+      width:100%;
+      border-radius:24px;
+      object-fit:cover;
+      max-height:520px;
     }
 
-    .product-card div {
-      padding: 16px;
+    .highlight{
+      color:var(--orange);
+      font-weight:bold;
     }
 
-    .founder-img {
-      width: 100%;
-      border-radius: 24px;
-      object-fit: cover;
-      max-height: 520px;
+    .notice{
+      background:var(--green);
+      color:white;
+      border-radius:22px;
+      padding:18px;
+      line-height:1.6;
+      margin:18px 0;
     }
 
-    .highlight {
-      color: var(--orange);
-      font-weight: bold;
+    .warning{
+      background:#fff3df;
+      color:#5b3b22;
+      border-left:6px solid var(--orange);
+      border-radius:18px;
+      padding:16px;
+      line-height:1.6;
+      margin:18px 0;
+      font-weight:bold;
     }
 
-    .notice {
-      background: var(--green);
-      color: white;
-      border-radius: 22px;
-      padding: 18px;
-      line-height: 1.6;
-      margin-bottom: 20px;
+    label{
+      display:block;
+      margin:14px 0 6px;
+      font-weight:bold;
+      color:var(--brown);
     }
 
-    label {
-      display: block;
-      margin: 14px 0 6px;
-      font-weight: bold;
-      color: var(--brown);
+    input,select,textarea{
+      width:100%;
+      padding:15px;
+      border:1.8px solid #e2c48f;
+      border-radius:16px;
+      font-size:16px;
+      background:#fffdf8;
+      outline:none;
     }
 
-    input, select, textarea {
-      width: 100%;
-      padding: 15px;
-      border: 1.8px solid #e2c48f;
-      border-radius: 16px;
-      font-size: 16px;
-      background: #fffdf8;
+    input:focus,select:focus,textarea:focus{
+      border-color:var(--orange);
+      box-shadow:0 0 0 3px rgba(185,111,45,.18);
     }
 
-    .product-row {
-      border: 1px solid #ead6b3;
-      background: #fffaf1;
-      padding: 15px;
-      border-radius: 18px;
-      margin-bottom: 14px;
+    .product-row{
+      border:1px solid #ead6b3;
+      background:#fffaf1;
+      padding:15px;
+      border-radius:18px;
+      margin-bottom:14px;
     }
 
-    .small {
-      font-size: 13px;
-      color: #6c5b48;
-      line-height: 1.4;
+    .small{
+      font-size:13px;
+      color:#6c5b48;
+      line-height:1.4;
     }
 
-    .btn {
-      width: 100%;
-      border: none;
-      padding: 16px;
-      border-radius: 18px;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 12px;
+    .btn{
+      width:100%;
+      border:none;
+      padding:16px;
+      border-radius:18px;
+      font-size:17px;
+      font-weight:bold;
+      cursor:pointer;
+      margin-top:12px;
+      transition:.25s;
     }
 
-    .btn-add { background: var(--orange); color: white; }
-    .btn-submit { background: var(--green); color: white; }
-    .btn-whatsapp { background: #25D366; color: white; }
-    .btn-clear { background: #f3e4ca; color: var(--brown); }
-
-    .invoice {
-      background: var(--green);
-      color: white;
-      border-radius: 22px;
-      padding: 18px;
-      margin-top: 16px;
+    .btn:hover{
+      transform:translateY(-2px);
     }
 
-    .invoice h3 {
-      margin-top: 0;
-      color: #ffd9a6;
+    .btn-add{background:var(--orange);color:white}
+    .btn-whatsapp{background:#25D366;color:white}
+    .btn-clear{background:#f3e4ca;color:var(--brown)}
+
+    .invoice{
+      background:var(--green);
+      color:white;
+      border-radius:22px;
+      padding:18px;
+      margin-top:16px;
     }
 
-    .invoice-line {
-      border-bottom: 1px solid rgba(255,255,255,0.25);
-      padding: 8px 0;
-      line-height: 1.4;
+    .invoice h3{
+      margin-top:0;
+      color:#ffd9a6;
     }
 
-    .total {
-      font-size: 24px;
-      font-weight: bold;
-      color: #ffd9a6;
-      margin-top: 14px;
+    .invoice-line{
+      border-bottom:1px solid rgba(255,255,255,.25);
+      padding:8px 0;
+      line-height:1.4;
     }
 
-    .testimonial-box {
-      background: #fffaf1;
-      border: 1px solid #ecd6b3;
-      border-radius: 18px;
-      padding: 14px;
-      margin-top: 12px;
+    .total{
+      font-size:24px;
+      font-weight:bold;
+      color:#ffd9a6;
+      margin-top:14px;
     }
 
-    .error { color: #b00020; font-weight: bold; }
-    .success { color: var(--green); font-weight: bold; }
+    .testimonial-box{
+      background:#fffaf1;
+      border:1px solid #ecd6b3;
+      border-radius:18px;
+      padding:14px;
+      margin-top:12px;
+    }
 
-    .footer {
-      text-align: center;
-      padding: 24px 8px;
-      color: var(--brown);
-      font-size: 14px;
+    .error{
+      color:#b00020;
+      font-weight:bold;
+      background:#ffe7e7;
+      padding:12px;
+      border-radius:14px;
+    }
+
+    .success{
+      color:var(--green);
+      font-weight:bold;
+      background:#e8f7ed;
+      padding:12px;
+      border-radius:14px;
+    }
+
+    .footer{
+      text-align:center;
+      padding:24px 8px;
+      color:var(--brown);
+      font-size:14px;
+    }
+
+    @keyframes fadeUp{
+      from{opacity:0;transform:translateY(18px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    @keyframes pulseLogo{
+      0%,100%{transform:scale(1)}
+      50%{transform:scale(1.04)}
     }
   </style>
 </head>
 
 <body>
 
-  <section class="hero">
-    <div class="hero-inner">
-      <img class="logo" src="/file_00000000cd1871f6911cfa823e76bd48.png?v=7" alt="Logo Saveurs de chez nous">
-      <h1>SAVEURS DE CHEZ NOUS</h1>
-      <p class="slogan">Le goût authentique de chez nous 🇨🇩🌿</p>
-      <p class="hero-text">
-        Des produits locaux congolais préparés avec soin pour vous faire gagner du temps,
-        de l’énergie et garder le goût authentique de chez nous.
-      </p>
-      <p class="faith">Avec Dieu, nous ferons des exploits !</p>
-      <a href="#commande" class="btn-main">COMMANDER MAINTENANT</a>
+<section class="hero">
+  <div class="hero-inner">
+    <img class="logo" src="/file_00000000cd1871f6911cfa823e76bd48.png?v=9" alt="Logo Saveurs de chez nous">
+    <h1>SAVEURS DE CHEZ NOUS</h1>
+    <p class="slogan">Le goût authentique de chez nous 🇨🇩🌿</p>
+    <p class="hero-text">
+      Des produits locaux congolais préparés avec soin pour vous faire gagner du temps,
+      de l’énergie et garder le goût authentique de chez nous.
+    </p>
+    <p class="faith">Avec Dieu, nous ferons des exploits !</p>
+    <a href="#commande" class="btn-main" onclick="playClick()">🛒 COMMANDER MAINTENANT</a>
+  </div>
+</section>
+
+<main class="container">
+
+  <div class="menu-buttons">
+    <button class="toggle-btn" onclick="toggleSection('presentation')">🌿 PRÉSENTATION</button>
+    <button class="toggle-btn" onclick="toggleSection('apropos')">🏡 À PROPOS DE NOUS</button>
+    <button class="toggle-btn" onclick="toggleSection('produits')">🍲 NOS PRODUITS</button>
+    <button class="toggle-btn" onclick="toggleSection('choisir')">✅ POURQUOI NOUS CHOISIR ?</button>
+    <button class="toggle-btn" onclick="toggleSection('fondatrice')">👩🏾‍🍳 À PROPOS DE LA FONDATRICE</button>
+    <button class="toggle-btn" onclick="toggleSection('temoignages')">💬 TÉMOIGNAGES CLIENTS</button>
+    <button class="toggle-btn" onclick="toggleSection('faq')">❓ FAQ</button>
+    <button class="toggle-btn" onclick="playClick();document.getElementById('commande').scrollIntoView({behavior:'smooth'})">🛒 PASSER UNE COMMANDE</button>
+  </div>
+
+  <section class="section" id="presentation">
+    <h2>🌿 PRÉSENTATION</h2>
+    <p><strong>Saveurs de chez nous</strong> est un projet agroalimentaire congolais spécialisé dans la valorisation des produits et saveurs locales.</p>
+    <p>Nous proposons des produits naturels, des légumes prêts à cuisiner, des feuilles de manioc préparées, des plats locaux, des jus naturels et des produits faits maison inspirés de la cuisine congolaise.</p>
+  </section>
+
+  <section class="section" id="apropos">
+    <h2>🏡 À PROPOS DE NOUS</h2>
+    <p>Notre mission est d’aider les familles et les personnes occupées à gagner du temps et de l’énergie en cuisine, tout en conservant le goût authentique des recettes locales.</p>
+    <p>Nos valeurs sont : qualité, hygiène, praticité, fraîcheur et valorisation des produits locaux congolais.</p>
+  </section>
+
+  <section class="section" id="produits">
+    <h2>🍲 NOS PRODUITS</h2>
+    <div class="grid grid-2">
+      <div class="card product-card">
+        <img src="/a23e0b08-f211-4c09-9396-c97e91b2da82.png?v=9" alt="Sombé ya Léo">
+        <div>
+          <h3>SOMBÉ YA LÉO</h3>
+          <p>Feuilles de manioc préparées, fraîches, propres et prêtes à cuisiner.</p>
+        </div>
+      </div>
+
+      <div class="card product-card">
+        <img src="/3ed1de554cf72410c73e9abc26d35138.jpg?v=9" alt="Riz pilaü">
+        <div>
+          <h3>RIZ PILAÜ</h3>
+          <p>Un plat local savoureux, préparé avec soin pour vos repas et commandes spéciales.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <main class="container">
+  <section class="section" id="choisir">
+    <h2>✅ POURQUOI NOUS CHOISIR ?</h2>
+    <div class="grid grid-3">
+      <div class="card"><h3>⏱️ GAIN DE TEMPS</h3><p>Nos produits sont préparés pour faciliter la cuisine au quotidien.</p></div>
+      <div class="card"><h3>🌱 FRAÎCHEUR</h3><p>Nous mettons l’accent sur des produits frais, propres et bien préparés.</p></div>
+      <div class="card"><h3>🇨🇩 CONSOMMER LOCAL</h3><p>Nous soutenons les agriculteurs et producteurs locaux congolais.</p></div>
+      <div class="card"><h3>🧼 HYGIÈNE</h3><p>La propreté et la qualité sont au cœur de notre travail.</p></div>
+      <div class="card"><h3>🍲 GOÛT AUTHENTIQUE</h3><p>Nous conservons le goût réel des recettes de chez nous.</p></div>
+      <div class="card"><h3>💪 ENTREPRENEURIAT FÉMININ</h3><p>Nous encourageons la femme et la jeune fille à entreprendre.</p></div>
+    </div>
+  </section>
 
-    <div class="menu-buttons">
-      <button class="toggle-btn" onclick="toggleSection('presentation')">PRÉSENTATION</button>
-      <button class="toggle-btn" onclick="toggleSection('apropos')">À PROPOS DE NOUS</button>
-      <button class="toggle-btn" onclick="toggleSection('produits')">NOS PRODUITS</button>
-      <button class="toggle-btn" onclick="toggleSection('choisir')">POURQUOI NOUS CHOISIR ?</button>
-      <button class="toggle-btn" onclick="toggleSection('fondatrice')">À PROPOS DE LA FONDATRICE</button>
-      <button class="toggle-btn" onclick="toggleSection('temoignages')">TÉMOIGNAGES CLIENTS</button>
-      <button class="toggle-btn" onclick="toggleSection('faq')">FAQ</button>
-      <button class="toggle-btn" onclick="document.getElementById('commande').scrollIntoView({behavior:'smooth'})">PASSER UNE COMMANDE</button>
+  <section class="section" id="fondatrice">
+    <div class="grid grid-2">
+      <div>
+        <img class="founder-img" src="/IMG-20260514-WA0029(1).jpg?v=9" alt="Fondatrice Saveurs de chez nous">
+      </div>
+      <div>
+        <h2>👩🏾‍🍳 À PROPOS DE LA FONDATRICE</h2>
+        <p>Mon souci est de <span class="highlight">valoriser les produits locaux</span>, soutenir les agriculteurs et producteurs locaux, encourager l’entrepreneuriat de la femme et de la jeune fille, et inciter les familles à consommer local.</p>
+        <p>À travers Saveurs de chez nous, je veux aider les familles à manger sainement, gagner du temps, économiser leur énergie et retrouver le goût authentique des recettes de chez nous.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="temoignages">
+    <h2>💬 TÉMOIGNAGES CLIENTS</h2>
+    <p>Vous avez déjà goûté nos produits ? Laissez votre témoignage ici.</p>
+
+    <label>Votre nom</label>
+    <input type="text" id="testimonialName" placeholder="Ex : Grâce">
+
+    <label>Votre témoignage</label>
+    <textarea id="testimonialText" rows="4" placeholder="Écrivez votre expérience avec Saveurs de chez nous..."></textarea>
+
+    <button type="button" class="btn btn-add" onclick="addTestimonial()">💬 PUBLIER MON TÉMOIGNAGE</button>
+    <div id="testimonialList"></div>
+  </section>
+
+  <section class="section" id="faq">
+    <h2>❓ FAQ</h2>
+
+    <div class="card">
+      <h3>COMMENT PASSER UNE COMMANDE ?</h3>
+      <p>Vous remplissez le formulaire, choisissez vos produits, calculez la facture, puis confirmez la commande sur WhatsApp.</p>
+    </div><br>
+
+    <div class="card">
+      <h3>COMBIEN DE TEMPS À L’AVANCE FAUT-IL COMMANDER ?</h3>
+      <p>Les commandes doivent être faites 24 heures à l’avance.</p>
+    </div><br>
+
+    <div class="card">
+      <h3>COMMENT CONFIRMER MA COMMANDE ?</h3>
+      <p>La commande est confirmée après paiement en franc congolais et après réception de la capture d’écran du paiement Airtel Money ou M-Pesa sur WhatsApp.</p>
+    </div><br>
+
+    <div class="card">
+      <h3>PUIS-JE COMMANDER PLUSIEURS QUANTITÉS ?</h3>
+      <p>Oui. Vous pouvez choisir 250g, 500g, 1kg ou combiner plusieurs quantités.</p>
+    </div>
+  </section>
+
+  <section class="section always-visible" id="commande">
+    <h2>🛒 PASSER UNE COMMANDE</h2>
+
+    <div class="notice">
+      <strong>Commande 24h à l’avance obligatoire.</strong><br>
+      Le paiement se fait uniquement en <strong>franc congolais (FC)</strong>.<br>
+      La commande est confirmée seulement après réception de la preuve de paiement sur WhatsApp.
     </div>
 
-    <section class="section" id="presentation">
-      <h2>PRÉSENTATION</h2>
-      <p>
-        <strong>Saveurs de chez nous</strong> est un projet agroalimentaire congolais spécialisé
-        dans la valorisation des produits et saveurs locales.
-      </p>
-      <p>
-        Nous proposons des produits naturels, des légumes prêts à cuisiner, des feuilles de manioc
-        préparées, des plats locaux, des jus naturels et des produits faits maison inspirés
-        de la cuisine congolaise.
-      </p>
-    </section>
-
-    <section class="section" id="apropos">
-      <h2>À PROPOS DE NOUS</h2>
-      <p>
-        Notre mission est d’aider les familles et les personnes occupées à gagner du temps
-        et de l’énergie en cuisine, tout en conservant le goût authentique des recettes locales.
-      </p>
-      <p>
-        Nos valeurs sont : qualité, hygiène, praticité, fraîcheur et valorisation des produits locaux congolais.
-      </p>
-    </section>
-
-    <section class="section" id="produits">
-      <h2>NOS PRODUITS</h2>
-      <div class="grid grid-2">
-        <div class="card product-card">
-          <img src="/a23e0b08-f211-4c09-9396-c97e91b2da82.png?v=7" alt="Sombé ya Léo">
-          <div>
-            <h3>SOMBÉ YA LÉO</h3>
-            <p>Feuilles de manioc préparées, fraîches, propres et prêtes à cuisiner.</p>
-          </div>
-        </div>
-
-        <div class="card product-card">
-          <img src="/3ed1de554cf72410c73e9abc26d35138.jpg?v=7" alt="Riz pilaü">
-          <div>
-            <h3>RIZ PILAÜ</h3>
-            <p>Un plat local savoureux, préparé avec soin pour vos repas et commandes spéciales.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="choisir">
-      <h2>POURQUOI NOUS CHOISIR ?</h2>
-      <div class="grid grid-3">
-        <div class="card"><h3>GAIN DE TEMPS</h3><p>Nos produits sont préparés pour faciliter la cuisine au quotidien.</p></div>
-        <div class="card"><h3>FRAÎCHEUR</h3><p>Nous mettons l’accent sur des produits frais, propres et bien préparés.</p></div>
-        <div class="card"><h3>CONSOMMER LOCAL</h3><p>Nous soutenons les agriculteurs et producteurs locaux congolais.</p></div>
-        <div class="card"><h3>HYGIÈNE</h3><p>La propreté et la qualité sont au cœur de notre travail.</p></div>
-        <div class="card"><h3>GOÛT AUTHENTIQUE</h3><p>Nous conservons le goût réel des recettes de chez nous.</p></div>
-        <div class="card"><h3>ENTREPRENEURIAT FÉMININ</h3><p>Nous encourageons la femme et la jeune fille à entreprendre.</p></div>
-      </div>
-    </section>
-
-    <section class="section" id="fondatrice">
+    <form id="orderForm" onsubmit="return false;">
       <div class="grid grid-2">
         <div>
-          <img class="founder-img" src="/IMG-20260514-WA0029(1).jpg?v=7" alt="Fondatrice Saveurs de chez nous">
+          <label>Nom complet du client *</label>
+          <input type="text" id="clientName" required placeholder="Nom complet du client">
         </div>
+
         <div>
-          <h2>À PROPOS DE LA FONDATRICE</h2>
-          <p>
-            Mon souci est de <span class="highlight">valoriser les produits locaux</span>,
-            soutenir les agriculteurs et producteurs locaux, encourager l’entrepreneuriat
-            de la femme et de la jeune fille, et inciter les familles à consommer local.
-          </p>
-          <p>
-            À travers Saveurs de chez nous, je veux aider les familles à manger sainement,
-            gagner du temps, économiser leur énergie et retrouver le goût authentique
-            des recettes de chez nous.
-          </p>
+          <label>Numéro de téléphone RDC *</label>
+          <input type="tel" id="clientPhone" required placeholder="Ex : 0970226689 ou +243970226689">
+          <p class="small">Numéro RDC obligatoire et valide.</p>
         </div>
       </div>
-    </section>
 
-    <section class="section" id="temoignages">
-      <h2>TÉMOIGNAGES CLIENTS</h2>
-      <p>
-        Vous avez déjà goûté nos produits ? Laissez votre témoignage ici.
-      </p>
+      <label>Adresse de livraison *</label>
+      <input type="text" id="clientAddress" required placeholder="Commune, quartier, avenue, référence">
 
-      <label>Votre nom</label>
-      <input type="text" id="testimonialName" placeholder="Ex : Grâce">
+      <div class="grid grid-2">
+        <div>
+          <label>Date souhaitée *</label>
+          <input type="date" id="orderDate" required>
+          <p class="small">La date autorisée commence à partir de demain.</p>
+        </div>
 
-      <label>Votre témoignage</label>
-      <textarea id="testimonialText" rows="4" placeholder="Écrivez votre expérience avec Saveurs de chez nous..."></textarea>
-
-      <button type="button" class="btn btn-add" onclick="addTestimonial()">PUBLIER MON TÉMOIGNAGE</button>
-
-      <div id="testimonialList"></div>
-    </section>
-
-    <section class="section" id="faq">
-      <h2>FAQ</h2>
-
-      <div class="card">
-        <h3>COMMENT PASSER UNE COMMANDE ?</h3>
-        <p>Vous remplissez le formulaire, choisissez vos produits, calculez la facture, puis envoyez la commande.</p>
-      </div>
-      <br>
-
-      <div class="card">
-        <h3>COMBIEN DE TEMPS À L’AVANCE FAUT-IL COMMANDER ?</h3>
-        <p>Les commandes doivent être faites 24 heures à l’avance.</p>
-      </div>
-      <br>
-
-      <div class="card">
-        <h3>COMMENT CONFIRMER MA COMMANDE ?</h3>
-        <p>La commande est confirmée après paiement via Airtel Money ou M-Pesa.</p>
-      </div>
-      <br>
-
-      <div class="card">
-        <h3>PUIS-JE COMMANDER PLUSIEURS QUANTITÉS ?</h3>
-        <p>Oui. Vous pouvez choisir 250g, 500g, 1kg ou combiner plusieurs quantités.</p>
-      </div>
-    </section>
-
-    <section class="section always-visible" id="commande">
-      <h2>PASSER UNE COMMANDE</h2>
-
-      <div class="notice">
-        <strong>Commande 24h à l’avance obligatoire.</strong><br>
-        La commande est confirmée après paiement total via Airtel Money ou M-Pesa.
-        Le client doit envoyer la preuve de paiement sur WhatsApp.
+        <div>
+          <label>Mode de paiement *</label>
+          <select id="paymentMethod" required>
+            <option value="">Choisir</option>
+            <option value="Airtel Money +243991787177">Airtel Money : +243991787177</option>
+            <option value="M-Pesa 0824809200">M-Pesa : 0824809200</option>
+          </select>
+          <p class="small">Paiement uniquement en franc congolais (FC).</p>
+        </div>
       </div>
 
-      <form id="orderForm">
+      <div class="product-row">
+        <h3>FEUILLES DE MANIOC / SOMBÉ YA LÉO</h3>
+        <p class="small">Le client peut choisir 250g, 500g, 1kg ou combiner plusieurs quantités.</p>
 
-        <div class="grid grid-2">
+        <div class="grid grid-3">
           <div>
-            <label>Nom du client *</label>
-            <input type="text" id="clientName" required>
+            <label>250g - 3000 FC</label>
+            <input type="number" id="sombe250" min="0" value="0">
           </div>
 
           <div>
-            <label>Téléphone *</label>
-            <input type="tel" id="clientPhone" required>
-          </div>
-        </div>
-
-        <label>Adresse de livraison *</label>
-        <input type="text" id="clientAddress" required>
-
-        <div class="grid grid-2">
-          <div>
-            <label>Date souhaitée *</label>
-            <input type="date" id="orderDate" required>
-            <p class="small">La date autorisée commence à partir de demain.</p>
+            <label>500g - 4500 FC</label>
+            <input type="number" id="sombe500" min="0" value="0">
           </div>
 
           <div>
-            <label>Mode de paiement *</label>
-            <select id="paymentMethod" required>
-              <option value="">Choisir</option>
-              <option value="Airtel Money +243991787177">Airtel Money : +243991787177</option>
-              <option value="M-Pesa 0824809200">M-Pesa : 0824809200</option>
-            </select>
+            <label>1kg - 8500 FC</label>
+            <input type="number" id="sombe1000" min="0" value="0">
           </div>
         </div>
+      </div>
 
-        <div class="product-row">
-          <h3>FEUILLES DE MANIOC / SOMBÉ YA LÉO</h3>
-          <p class="small">Le client peut choisir 250g, 500g, 1kg ou combiner plusieurs quantités.</p>
+      <div class="product-row">
+        <h3>RIZ PILAÜ</h3>
+        <label>Nombre de plats - 25 000 FC / plat</label>
+        <input type="number" id="rizPilau" min="0" value="0">
+      </div>
 
-          <div class="grid grid-3">
-            <div>
-              <label>250g - 3000 FC</label>
-              <input type="number" id="sombe250" min="0" value="0">
-            </div>
-            <div>
-              <label>500g - 4500 FC</label>
-              <input type="number" id="sombe500" min="0" value="0">
-            </div>
-            <div>
-              <label>1kg - 8500 FC</label>
-              <input type="number" id="sombe1000" min="0" value="0">
-            </div>
-          </div>
-        </div>
+      <div class="product-row">
+        <h3>COMMANDE PERSONNALISÉE</h3>
+        <label>Détails</label>
+        <textarea id="customOrder" rows="3" placeholder="Ex : grande quantité, jus naturel, légumes..."></textarea>
 
-        <div class="product-row">
-          <h3>RIZ PILAÜ</h3>
-          <label>Nombre de plats - 25 000 FC / plat</label>
-          <input type="number" id="rizPilau" min="0" value="0">
-        </div>
+        <label>Montant personnalisé en FC</label>
+        <input type="number" id="customAmount" min="0" value="0">
+      </div>
 
-        <div class="product-row">
-          <h3>COMMANDE PERSONNALISÉE</h3>
-          <label>Détails</label>
-          <textarea id="customOrder" rows="3" placeholder="Ex : grande quantité, jus naturel, légumes..."></textarea>
+      <button type="button" class="btn btn-add" onclick="calculateInvoice()">🧾 CALCULER LA FACTURE</button>
 
-          <label>Montant personnalisé en FC</label>
-          <input type="number" id="customAmount" min="0" value="0">
-        </div>
+      <div class="invoice">
+        <h3>🧾 FACTURE</h3>
+        <div id="invoiceDetails">Aucun produit sélectionné.</div>
+        <div class="total" id="totalAmount">Total : 0 FC</div>
+      </div>
 
-        <button type="button" class="btn btn-add" onclick="calculateInvoice()">CALCULER LA FACTURE</button>
+      <label>Note ou précision</label>
+      <textarea id="clientNote" rows="3" placeholder="Ex : heure souhaitée, précision sur la livraison..."></textarea>
 
-        <div class="invoice">
-          <h3>FACTURE</h3>
-          <div id="invoiceDetails">Aucun produit sélectionné.</div>
-          <div class="total" id="totalAmount">Total : 0 FC</div>
-        </div>
+      <div class="warning">
+        ⚠️ IMPORTANT : Le paiement se fait uniquement en franc congolais (FC).  
+        Pour confirmer votre commande, vous devez envoyer impérativement la capture d’écran de votre paiement Airtel Money ou M-Pesa sur WhatsApp.
+      </div>
 
-        <label>Note ou précision</label>
-        <textarea id="clientNote" rows="3"></textarea>
+      <button type="button" class="btn btn-whatsapp" onclick="sendWhatsApp()">✅ CONFIRMER MA COMMANDE SUR WHATSAPP</button>
+      <button type="button" class="btn btn-clear" onclick="clearForm()">🧹 EFFACER</button>
 
-        <button type="submit" class="btn btn-submit">ENREGISTRER LA COMMANDE</button>
-        <button type="button" class="btn btn-whatsapp" onclick="sendWhatsApp()">ENVOYER SUR WHATSAPP</button>
-        <button type="button" class="btn btn-clear" onclick="clearForm()">EFFACER</button>
+      <p id="statusMessage"></p>
+    </form>
+  </section>
 
-        <p id="statusMessage"></p>
+  <div class="footer">
+    Saveurs de chez nous — Qualité • Hygiène • Fraîcheur • Produits locaux 🇨🇩
+  </div>
 
-      </form>
-    </section>
+</main>
 
-    <div class="footer">
-      Saveurs de chez nous — Qualité • Hygiène • Fraîcheur • Produits locaux 🇨🇩
-    </div>
+<script>
+  const WHATSAPP_NUMBER = "243970226689";
 
-  </main>
+  const prices = {
+    sombe250: 3000,
+    sombe500: 4500,
+    sombe1000: 8500,
+    rizPilau: 25000
+  };
 
-  <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxYf5LdjQnbQ5oVwTdJh_r3Fiys0ZEbCnWryagyx6ml3UB1AbiGTyCoomewy6YSMAZn/exec";
-    const WHATSAPP_NUMBER = "243970226689";
+  function playTone(freq = 600, duration = 80) {
+    try {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      const ctx = new AudioContext();
+      const oscillator = ctx.createOscillator();
+      const gain = ctx.createGain();
 
-    const prices = {
-      sombe250: 3000,
-      sombe500: 4500,
-      sombe1000: 8500,
-      rizPilau: 25000
+      oscillator.connect(gain);
+      gain.connect(ctx.destination);
+
+      oscillator.frequency.value = freq;
+      oscillator.type = "sine";
+
+      gain.gain.setValueAtTime(0.05, ctx.currentTime);
+      oscillator.start();
+
+      setTimeout(() => {
+        oscillator.stop();
+        ctx.close();
+      }, duration);
+    } catch(e) {}
+  }
+
+  function playClick() {
+    playTone(520, 60);
+  }
+
+  function playSuccess() {
+    playTone(760, 90);
+  }
+
+  function playError() {
+    playTone(220, 130);
+  }
+
+  function toggleSection(id) {
+    playClick();
+    const section = document.getElementById(id);
+    section.classList.toggle("active");
+
+    if (section.classList.contains("active")) {
+      section.scrollIntoView({ behavior:"smooth", block:"start" });
+    }
+  }
+
+  function addTestimonial() {
+    playClick();
+
+    const name = document.getElementById("testimonialName").value.trim();
+    const text = document.getElementById("testimonialText").value.trim();
+    const list = document.getElementById("testimonialList");
+
+    if (!name || !text) {
+      playError();
+      alert("Veuillez écrire votre nom et votre témoignage.");
+      return;
+    }
+
+    const box = document.createElement("div");
+    box.className = "testimonial-box";
+    box.innerHTML = `<strong>${name}</strong><p>${text}</p>`;
+    list.prepend(box);
+
+    document.getElementById("testimonialName").value = "";
+    document.getElementById("testimonialText").value = "";
+    playSuccess();
+  }
+
+  function setMinimumDate() {
+    const dateInput = document.getElementById("orderDate");
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    const yyyy = tomorrow.getFullYear();
+    const mm = String(tomorrow.getMonth() + 1).padStart(2, "0");
+    const dd = String(tomorrow.getDate()).padStart(2, "0");
+
+    dateInput.min = `${yyyy}-${mm}-${dd}`;
+  }
+
+  setMinimumDate();
+
+  function getNumber(id) {
+    return Number(document.getElementById(id).value) || 0;
+  }
+
+  function isValidDRCPhone(phone) {
+    let cleaned = phone.replace(/\s+/g, "").replace(/-/g, "");
+
+    if (cleaned.startsWith("+243")) {
+      cleaned = cleaned.substring(4);
+    } else if (cleaned.startsWith("00243")) {
+      cleaned = cleaned.substring(5);
+    } else if (cleaned.startsWith("0")) {
+      cleaned = cleaned.substring(1);
+    }
+
+    const validPrefixes = ["81","82","83","84","85","89","90","91","97","98","99"];
+
+    if (!/^[0-9]{9}$/.test(cleaned)) {
+      return false;
+    }
+
+    return validPrefixes.includes(cleaned.substring(0,2));
+  }
+
+  function calculateInvoice() {
+    playClick();
+
+    const sombe250 = getNumber("sombe250");
+    const sombe500 = getNumber("sombe500");
+    const sombe1000 = getNumber("sombe1000");
+    const rizPilau = getNumber("rizPilau");
+    const customAmount = getNumber("customAmount");
+    const customOrder = document.getElementById("customOrder").value.trim();
+
+    let total = 0;
+    let lines = [];
+
+    if (sombe250 > 0) {
+      const amount = sombe250 * prices.sombe250;
+      total += amount;
+      lines.push(`${sombe250} sachet(s) de 250g feuilles de manioc = ${amount.toLocaleString()} FC`);
+    }
+
+    if (sombe500 > 0) {
+      const amount = sombe500 * prices.sombe500;
+      total += amount;
+      lines.push(`${sombe500} sachet(s) de 500g feuilles de manioc = ${amount.toLocaleString()} FC`);
+    }
+
+    if (sombe1000 > 0) {
+      const amount = sombe1000 * prices.sombe1000;
+      total += amount;
+      lines.push(`${sombe1000} sachet(s) de 1kg feuilles de manioc = ${amount.toLocaleString()} FC`);
+    }
+
+    if (rizPilau > 0) {
+      const amount = rizPilau * prices.rizPilau;
+      total += amount;
+      lines.push(`${rizPilau} plat(s) de riz pilaü = ${amount.toLocaleString()} FC`);
+    }
+
+    if (customAmount > 0 || customOrder !== "") {
+      total += customAmount;
+      lines.push(`Commande personnalisée : ${customOrder || "Non précisée"} = ${customAmount.toLocaleString()} FC`);
+    }
+
+    document.getElementById("invoiceDetails").innerHTML =
+      lines.length === 0 ? "Aucun produit sélectionné." :
+      lines.map(line => `<div class="invoice-line">${line}</div>`).join("");
+
+    document.getElementById("totalAmount").textContent = `Total : ${total.toLocaleString()} FC`;
+
+    if (total > 0) {
+      playSuccess();
+    }
+
+    return { lines, total };
+  }
+
+  function buildOrderData() {
+    const invoice = calculateInvoice();
+
+    return {
+      nom: document.getElementById("clientName").value.trim(),
+      telephone: document.getElementById("clientPhone").value.trim(),
+      adresse: document.getElementById("clientAddress").value.trim(),
+      date: document.getElementById("orderDate").value,
+      paiement: document.getElementById("paymentMethod").value,
+      details: invoice.lines.join(" | "),
+      total: invoice.total,
+      note: document.getElementById("clientNote").value.trim()
     };
+  }
 
-    function toggleSection(id) {
-      const section = document.getElementById(id);
-      section.classList.toggle("active");
-      if (section.classList.contains("active")) {
-        section.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+  function validateOrder(data) {
+    if (!data.nom || data.nom.length < 2) {
+      return "Le nom complet du client est obligatoire.";
     }
 
-    function addTestimonial() {
-      const name = document.getElementById("testimonialName").value.trim();
-      const text = document.getElementById("testimonialText").value.trim();
-      const list = document.getElementById("testimonialList");
-
-      if (!name || !text) {
-        alert("Veuillez écrire votre nom et votre témoignage.");
-        return;
-      }
-
-      const box = document.createElement("div");
-      box.className = "testimonial-box";
-      box.innerHTML = `<strong>${name}</strong><p>${text}</p>`;
-
-      list.prepend(box);
-
-      document.getElementById("testimonialName").value = "";
-      document.getElementById("testimonialText").value = "";
+    if (!data.telephone) {
+      return "Le numéro de téléphone du client est obligatoire.";
     }
 
-    function setMinimumDate() {
-      const dateInput = document.getElementById("orderDate");
-      const tomorrow = new Date();
-      tomorrow.setDate(tomorrow.getDate() + 1);
-
-      const yyyy = tomorrow.getFullYear();
-      const mm = String(tomorrow.getMonth() + 1).padStart(2, "0");
-      const dd = String(tomorrow.getDate()).padStart(2, "0");
-
-      dateInput.min = `${yyyy}-${mm}-${dd}`;
+    if (!isValidDRCPhone(data.telephone)) {
+      return "Veuillez entrer un numéro de téléphone valide de la RDC. Exemple : 0970226689 ou +243970226689.";
     }
 
-    setMinimumDate();
-
-    function getNumber(id) {
-      return Number(document.getElementById(id).value) || 0;
+    if (!data.adresse || data.adresse.length < 3) {
+      return "L’adresse de livraison du client est obligatoire.";
     }
 
-    function calculateInvoice() {
-      const sombe250 = getNumber("sombe250");
-      const sombe500 = getNumber("sombe500");
-      const sombe1000 = getNumber("sombe1000");
-      const rizPilau = getNumber("rizPilau");
-      const customAmount = getNumber("customAmount");
-      const customOrder = document.getElementById("customOrder").value.trim();
-
-      let total = 0;
-      let lines = [];
-
-      if (sombe250 > 0) {
-        const amount = sombe250 * prices.sombe250;
-        total += amount;
-        lines.push(`${sombe250} sachet(s) de 250g feuilles de manioc = ${amount.toLocaleString()} FC`);
-      }
-
-      if (sombe500 > 0) {
-        const amount = sombe500 * prices.sombe500;
-        total += amount;
-        lines.push(`${sombe500} sachet(s) de 500g feuilles de manioc = ${amount.toLocaleString()} FC`);
-      }
-
-      if (sombe1000 > 0) {
-        const amount = sombe1000 * prices.sombe1000;
-        total += amount;
-        lines.push(`${sombe1000} sachet(s) de 1kg feuilles de manioc = ${amount.toLocaleString()} FC`);
-      }
-
-      if (rizPilau > 0) {
-        const amount = rizPilau * prices.rizPilau;
-        total += amount;
-        lines.push(`${rizPilau} plat(s) de riz pilaü = ${amount.toLocaleString()} FC`);
-      }
-
-      if (customAmount > 0 || customOrder !== "") {
-        total += customAmount;
-        lines.push(`Commande personnalisée : ${customOrder || "Non précisée"} = ${customAmount.toLocaleString()} FC`);
-      }
-
-      document.getElementById("invoiceDetails").innerHTML =
-        lines.length === 0 ? "Aucun produit sélectionné." :
-        lines.map(line => `<div class="invoice-line">${line}</div>`).join("");
-
-      document.getElementById("totalAmount").textContent = `Total : ${total.toLocaleString()} FC`;
-
-      return { lines, total };
+    if (!data.date) {
+      return "La date de commande est obligatoire.";
     }
 
-    function buildOrderData() {
-      const invoice = calculateInvoice();
-
-      return {
-        nom: document.getElementById("clientName").value.trim(),
-        telephone: document.getElementById("clientPhone").value.trim(),
-        adresse: document.getElementById("clientAddress").value.trim(),
-        date: document.getElementById("orderDate").value,
-        paiement: document.getElementById("paymentMethod").value,
-        details: invoice.lines.join(" | "),
-        total: invoice.total,
-        note: document.getElementById("clientNote").value.trim()
-      };
+    if (!data.paiement) {
+      return "Veuillez choisir Airtel Money ou M-Pesa.";
     }
 
-    function validateOrder(data) {
-      if (!data.nom) return "Le nom du client est obligatoire.";
-      if (!data.telephone) return "Le téléphone est obligatoire.";
-      if (!data.adresse) return "L’adresse de livraison est obligatoire.";
-      if (!data.date) return "La date de commande est obligatoire.";
-      if (!data.paiement) return "Veuillez choisir Airtel Money ou M-Pesa.";
-      if (data.total <= 0) return "Veuillez choisir au moins un produit.";
-      return "";
+    if (data.total <= 0) {
+      return "Veuillez choisir au moins un produit.";
     }
 
-    document.getElementById("orderForm").addEventListener("submit", async function(e) {
-      e.preventDefault();
+    return "";
+  }
 
-      const status = document.getElementById("statusMessage");
-      status.className = "";
-      status.textContent = "Enregistrement en cours...";
+  function sendWhatsApp() {
+    const data = buildOrderData();
+    const error = validateOrder(data);
+    const status = document.getElementById("statusMessage");
 
-      const data = buildOrderData();
-      const error = validateOrder(data);
+    if (error) {
+      playError();
+      status.className = "error";
+      status.textContent = error;
+      return;
+    }
 
-      if (error) {
-        status.className = "error";
-        status.textContent = error;
-        return;
-      }
+    status.className = "success";
+    status.textContent = "Votre commande est prête. WhatsApp va s’ouvrir pour l’envoi.";
 
-      try {
-        const formData = new FormData();
-        Object.keys(data).forEach(key => formData.append(key, data[key]));
+    playSuccess();
 
-        await fetch(SCRIPT_URL, {
-          method: "POST",
-          mode: "no-cors",
-          body: formData
-        });
-
-        status.className = "success";
-        status.textContent = "Commande envoyée. Vérifiez Google Sheets.";
-      } catch (err) {
-        status.className = "error";
-        status.textContent = "Erreur d’enregistrement.";
-      }
-    });
-
-    function sendWhatsApp() {
-      const data = buildOrderData();
-      const error = validateOrder(data);
-      const status = document.getElementById("statusMessage");
-
-      if (error) {
-        status.className = "error";
-        status.textContent = error;
-        return;
-      }
-
-      const message =
+    const message =
 `Bonjour Saveurs de chez nous,
 
 Je souhaite passer une commande.
@@ -757,30 +844,40 @@ Commande :
 ${data.details}
 
 Total : ${Number(data.total).toLocaleString()} FC
+
 Paiement choisi : ${data.paiement}
+Devise : Franc congolais (FC)
 
 Note : ${data.note || "Aucune"}
 
-Je vais envoyer la preuve de paiement.`;
+Je confirme que le paiement se fait uniquement en franc congolais (FC).
+Je vais envoyer impérativement la capture d’écran de la preuve de paiement Airtel Money ou M-Pesa pour confirmer ma commande.`;
 
-      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank");
-    }
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank");
+  }
 
-    function clearForm() {
-      if (!confirm("Voulez-vous vraiment effacer le formulaire ?")) return;
-      document.getElementById("orderForm").reset();
-      document.getElementById("sombe250").value = 0;
-      document.getElementById("sombe500").value = 0;
-      document.getElementById("sombe1000").value = 0;
-      document.getElementById("rizPilau").value = 0;
-      document.getElementById("customAmount").value = 0;
-      calculateInvoice();
-      setMinimumDate();
-      document.getElementById("statusMessage").textContent = "";
-    }
+  function clearForm() {
+    playClick();
+
+    if (!confirm("Voulez-vous vraiment effacer le formulaire ?")) return;
+
+    document.getElementById("orderForm").reset();
+    document.getElementById("sombe250").value = 0;
+    document.getElementById("sombe500").value = 0;
+    document.getElementById("sombe1000").value = 0;
+    document.getElementById("rizPilau").value = 0;
+    document.getElementById("customAmount").value = 0;
 
     calculateInvoice();
-  </script>
+    setMinimumDate();
+
+    const status = document.getElementById("statusMessage");
+    status.textContent = "";
+    status.className = "";
+  }
+
+  calculateInvoice();
+</script>
 
 </body>
 </html>
