@@ -1,13 +1,636 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Saveurs de chez nous</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saveurs de chez nous - Commande</title>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+  <style>
+    :root {
+      --green: #173f2a;
+      --green2: #245c3a;
+      --orange: #b96f2d;
+      --cream: #fff8ec;
+      --brown: #5b3b22;
+      --light: #ffffff;
+      --danger: #b00020;
+      --shadow: 0 10px 25px rgba(0,0,0,0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #fff8ec 0%, #f8eddc 100%);
+      color: #2b241c;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 950px;
+      margin: auto;
+      padding: 18px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--green), var(--green2));
+      color: white;
+      border-radius: 28px;
+      padding: 28px 20px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      margin-bottom: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      right: -60px;
+      top: -60px;
+    }
+
+    .logo-circle {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background: var(--cream);
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green);
+      font-weight: bold;
+      font-size: 30px;
+      border: 4px solid var(--orange);
+    }
+
+    h1 {
+      margin: 8px 0;
+      font-size: 34px;
+      letter-spacing: 0.5px;
+    }
+
+    .slogan {
+      font-size: 18px;
+      margin: 8px 0;
+      color: #fff3d8;
+    }
+
+    .faith {
+      margin-top: 12px;
+      font-weight: bold;
+      color: #ffd9a6;
+      font-size: 17px;
+    }
+
+    .notice {
+      background: #fff;
+      border-left: 6px solid var(--orange);
+      padding: 14px;
+      border-radius: 14px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      line-height: 1.5;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--green);
+      margin-top: 0;
+      font-size: 24px;
+    }
+
+    label {
+      display: block;
+      margin: 14px 0 6px;
+      font-weight: bold;
+      color: var(--brown);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 15px;
+      border: 1.8px solid #e4c995;
+      border-radius: 16px;
+      font-size: 16px;
+      background: #fffdf8;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(185,111,45,0.15);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 700px) {
+      .grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+      .grid-3 {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    .product-row {
+      border: 1px solid #ead6b3;
+      background: #fffaf1;
+      padding: 15px;
+      border-radius: 18px;
+      margin-bottom: 14px;
+    }
+
+    .product-row h3 {
+      margin: 0 0 8px;
+      color: var(--green);
+    }
+
+    .small {
+      font-size: 13px;
+      color: #6c5b48;
+      line-height: 1.4;
+    }
+
+    .btn {
+      width: 100%;
+      border: none;
+      padding: 16px;
+      border-radius: 18px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+
+    .btn-add {
+      background: var(--orange);
+      color: white;
+    }
+
+    .btn-submit {
+      background: var(--green);
+      color: white;
+    }
+
+    .btn-whatsapp {
+      background: #25D366;
+      color: white;
+    }
+
+    .btn-clear {
+      background: #f3e4ca;
+      color: var(--brown);
+    }
+
+    .invoice {
+      background: #173f2a;
+      color: white;
+      border-radius: 22px;
+      padding: 18px;
+      margin-top: 16px;
+    }
+
+    .invoice h3 {
+      margin-top: 0;
+      color: #ffd9a6;
+    }
+
+    .invoice-line {
+      border-bottom: 1px solid rgba(255,255,255,0.25);
+      padding: 8px 0;
+      line-height: 1.4;
+    }
+
+    .total {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ffd9a6;
+      margin-top: 14px;
+    }
+
+    .about {
+      line-height: 1.7;
+      color: #3b2b1d;
+    }
+
+    .highlight {
+      color: var(--orange);
+      font-weight: bold;
+    }
+
+    .error {
+      color: var(--danger);
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .success {
+      color: var(--green);
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px 5px;
+      color: var(--brown);
+      font-size: 14px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <section class="hero">
+      <div class="logo-circle">SCN</div>
+      <h1>Saveurs de chez nous</h1>
+      <p class="slogan">Le goût authentique de chez nous 🇨🇩🌿</p>
+      <p class="faith">Avec Dieu, nous ferons des exploits !</p>
+    </section>
+
+    <div class="notice">
+      <strong>Commande 24h à l’avance obligatoire.</strong><br>
+      La commande est confirmée après paiement total.  
+      Le client doit envoyer la preuve de paiement sur WhatsApp.
+    </div>
+
+    <form id="orderForm">
+
+      <section class="card">
+        <h2 class="section-title">🏠 Informations du client</h2>
+
+        <div class="grid grid-2">
+          <div>
+            <label>Nom du client *</label>
+            <input type="text" id="clientName" placeholder="Nom du client" required />
+          </div>
+
+          <div>
+            <label>Téléphone RDC *</label>
+            <input type="tel" id="clientPhone" placeholder="Ex : 0970226689" required />
+          </div>
+        </div>
+
+        <label>Adresse de livraison *</label>
+        <input type="text" id="clientAddress" placeholder="Commune, quartier, avenue..." required />
+
+        <div class="grid grid-2">
+          <div>
+            <label>Date souhaitée *</label>
+            <input type="date" id="orderDate" required />
+            <p class="small">La date autorisée commence à partir de demain.</p>
+          </div>
+
+          <div>
+            <label>Mode de paiement *</label>
+            <select id="paymentMethod" required>
+              <option value="">Choisir un moyen de paiement</option>
+              <option value="Airtel Money +243991787177">Airtel Money : +243991787177</option>
+              <option value="M-Pesa 0824809200">M-Pesa : 0824809200</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">🛍️ Produits</h2>
+
+        <div class="product-row">
+          <h3>Feuilles de manioc préparées / Sombé ya Léo</h3>
+          <p class="small">
+            Frais du jour. Le client peut choisir 250g, 500g, 1kg ou combiner plusieurs quantités.
+          </p>
+
+          <div class="grid grid-3">
+            <div>
+              <label>250g - 3000 FC</label>
+              <input type="number" id="sombe250" min="0" value="0" />
+            </div>
+
+            <div>
+              <label>500g - 4500 FC</label>
+              <input type="number" id="sombe500" min="0" value="0" />
+            </div>
+
+            <div>
+              <label>1kg - 8500 FC</label>
+              <input type="number" id="sombe1000" min="0" value="0" />
+            </div>
+          </div>
+        </div>
+
+        <div class="product-row">
+          <h3>Riz pilaü</h3>
+          <p class="small">
+            Plat local préparé avec soin.
+          </p>
+
+          <label>Nombre de plats - 25 000 FC / plat</label>
+          <input type="number" id="rizPilau" min="0" value="0" />
+        </div>
+
+        <div class="product-row">
+          <h3>Autre commande personnalisée</h3>
+          <p class="small">
+            Pour les commandes spéciales ou grandes quantités.
+          </p>
+
+          <label>Détail de la commande personnalisée</label>
+          <textarea id="customOrder" rows="3" placeholder="Ex : 5kg de sombé, 10 plats, jus naturel..."></textarea>
+
+          <label>Montant personnalisé en FC</label>
+          <input type="number" id="customAmount" min="0" value="0" />
+        </div>
+
+        <button type="button" class="btn btn-add" onclick="calculateInvoice()">Calculer la facture</button>
+
+        <div class="invoice" id="invoiceBox">
+          <h3>Facture</h3>
+          <div id="invoiceDetails">
+            Aucun produit sélectionné.
+          </div>
+          <div class="total" id="totalAmount">Total : 0 FC</div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">📝 Notes</h2>
+
+        <label>Message ou précision</label>
+        <textarea id="clientNote" rows="3" placeholder="Ex : livraison à telle heure, sans piment, etc."></textarea>
+
+        <button type="submit" class="btn btn-submit">Enregistrer la commande</button>
+        <button type="button" class="btn btn-whatsapp" onclick="sendWhatsApp()">Envoyer sur WhatsApp</button>
+        <button type="button" class="btn btn-clear" onclick="clearForm()">Effacer</button>
+
+        <p id="statusMessage"></p>
+      </section>
+
+    </form>
+
+    <section class="card about">
+      <h2 class="section-title">🌿 À propos de la fondatrice</h2>
+
+      <p>
+        <strong>Saveurs de chez nous</strong> est né d’un désir profond :
+        <span class="highlight">valoriser les produits locaux congolais</span>,
+        soutenir les agriculteurs et producteurs locaux, et encourager
+        l’entrepreneuriat de la femme et de la jeune fille.
+      </p>
+
+      <p>
+        Notre mission est d’aider les familles et les personnes occupées à
+        gagner du temps et de l’énergie en cuisine, tout en gardant le goût
+        authentique des recettes de chez nous.
+      </p>
+
+      <p>
+        Nous croyons qu’il est possible de manger sainement, de consommer local,
+        et de bâtir une marque congolaise forte, propre, pratique et authentique.
+      </p>
+    </section>
+
+    <div class="footer">
+      Saveurs de chez nous — Qualité • Hygiène • Fraîcheur • Produits locaux 🇨🇩
+    </div>
+
+  </div>
+
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyOPEdPxI8Esmg79h4NpAU3KqIwRdNlxADpiWiAL_lywPWv2_l2Lm9LDWDM-qAxQCY_/exec";
+    const WHATSAPP_NUMBER = "243970226689";
+
+    const prices = {
+      sombe250: 3000,
+      sombe500: 4500,
+      sombe1000: 8500,
+      rizPilau: 25000
+    };
+
+    function setMinimumDate() {
+      const dateInput = document.getElementById("orderDate");
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+
+      const yyyy = tomorrow.getFullYear();
+      const mm = String(tomorrow.getMonth() + 1).padStart(2, "0");
+      const dd = String(tomorrow.getDate()).padStart(2, "0");
+
+      dateInput.min = `${yyyy}-${mm}-${dd}`;
+    }
+
+    setMinimumDate();
+
+    function getNumber(id) {
+      return Number(document.getElementById(id).value) || 0;
+    }
+
+    function calculateInvoice() {
+      const sombe250 = getNumber("sombe250");
+      const sombe500 = getNumber("sombe500");
+      const sombe1000 = getNumber("sombe1000");
+      const rizPilau = getNumber("rizPilau");
+      const customAmount = getNumber("customAmount");
+      const customOrder = document.getElementById("customOrder").value.trim();
+
+      let total = 0;
+      let lines = [];
+
+      if (sombe250 > 0) {
+        const amount = sombe250 * prices.sombe250;
+        total += amount;
+        lines.push(`${sombe250} sachet(s) de 250g feuilles de manioc = ${amount.toLocaleString()} FC`);
+      }
+
+      if (sombe500 > 0) {
+        const amount = sombe500 * prices.sombe500;
+        total += amount;
+        lines.push(`${sombe500} sachet(s) de 500g feuilles de manioc = ${amount.toLocaleString()} FC`);
+      }
+
+      if (sombe1000 > 0) {
+        const amount = sombe1000 * prices.sombe1000;
+        total += amount;
+        lines.push(`${sombe1000} sachet(s) de 1kg feuilles de manioc = ${amount.toLocaleString()} FC`);
+      }
+
+      if (rizPilau > 0) {
+        const amount = rizPilau * prices.rizPilau;
+        total += amount;
+        lines.push(`${rizPilau} plat(s) de riz pilaü = ${amount.toLocaleString()} FC`);
+      }
+
+      if (customAmount > 0 || customOrder !== "") {
+        total += customAmount;
+        lines.push(`Commande personnalisée : ${customOrder || "Non précisée"} = ${customAmount.toLocaleString()} FC`);
+      }
+
+      const invoiceDetails = document.getElementById("invoiceDetails");
+      const totalAmount = document.getElementById("totalAmount");
+
+      if (lines.length === 0) {
+        invoiceDetails.innerHTML = "Aucun produit sélectionné.";
+      } else {
+        invoiceDetails.innerHTML = lines.map(line => `<div class="invoice-line">${line}</div>`).join("");
+      }
+
+      totalAmount.textContent = `Total : ${total.toLocaleString()} FC`;
+
+      return {
+        lines,
+        total
+      };
+    }
+
+    function buildOrderData() {
+      const invoice = calculateInvoice();
+
+      return {
+        nom: document.getElementById("clientName").value.trim(),
+        telephone: document.getElementById("clientPhone").value.trim(),
+        adresse: document.getElementById("clientAddress").value.trim(),
+        date: document.getElementById("orderDate").value,
+        paiement: document.getElementById("paymentMethod").value,
+        sombe250: getNumber("sombe250"),
+        sombe500: getNumber("sombe500"),
+        sombe1000: getNumber("sombe1000"),
+        rizPilau: getNumber("rizPilau"),
+        commandePersonnalisee: document.getElementById("customOrder").value.trim(),
+        montantPersonnalise: getNumber("customAmount"),
+        note: document.getElementById("clientNote").value.trim(),
+        details: invoice.lines.join(" | "),
+        total: invoice.total
+      };
+    }
+
+    function validateOrder(data) {
+      if (!data.nom) return "Le nom du client est obligatoire.";
+      if (!data.telephone) return "Le téléphone est obligatoire.";
+      if (!data.adresse) return "L’adresse de livraison est obligatoire.";
+      if (!data.date) return "La date de commande est obligatoire.";
+      if (!data.paiement) return "Veuillez choisir Airtel Money ou M-Pesa.";
+      if (data.total <= 0) return "Veuillez choisir au moins un produit.";
+      return "";
+    }
+
+    document.getElementById("orderForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const status = document.getElementById("statusMessage");
+      status.className = "";
+      status.textContent = "Enregistrement en cours...";
+
+      const data = buildOrderData();
+      const error = validateOrder(data);
+
+      if (error) {
+        status.className = "error";
+        status.textContent = error;
+        return;
+      }
+
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+
+        status.className = "success";
+        status.textContent = "Commande enregistrée. Envoyez maintenant la preuve de paiement sur WhatsApp.";
+
+      } catch (err) {
+        status.className = "error";
+        status.textContent = "Erreur d’enregistrement. Vérifiez la connexion ou le lien Google Apps Script.";
+      }
+    });
+
+    function sendWhatsApp() {
+      const data = buildOrderData();
+      const error = validateOrder(data);
+
+      const status = document.getElementById("statusMessage");
+
+      if (error) {
+        status.className = "error";
+        status.textContent = error;
+        return;
+      }
+
+      const message =
+`Bonjour Saveurs de chez nous,
+
+Je souhaite passer une commande.
+
+Nom : ${data.nom}
+Téléphone : ${data.telephone}
+Adresse : ${data.adresse}
+Date souhaitée : ${data.date}
+
+Commande :
+${data.details}
+
+Total : ${data.total.toLocaleString()} FC
+Paiement choisi : ${data.paiement}
+
+Note : ${data.note || "Aucune"}
+
+Je vais envoyer la preuve de paiement.`;
+
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank");
+    }
+
+    function clearForm() {
+      if (!confirm("Voulez-vous vraiment effacer le formulaire ?")) return;
+
+      document.getElementById("orderForm").reset();
+      document.getElementById("sombe250").value = 0;
+      document.getElementById("sombe500").value = 0;
+      document.getElementById("sombe1000").value = 0;
+      document.getElementById("rizPilau").value = 0;
+      document.getElementById("customAmount").value = 0;
+      calculateInvoice();
+      setMinimumDate();
+
+      const status = document.getElementById("statusMessage");
+      status.textContent = "";
+      status.className = "";
+    }
+
+    calculateInvoice();
+  </script>
+</body>
 </html>
