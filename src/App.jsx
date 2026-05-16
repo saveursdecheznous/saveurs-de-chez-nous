@@ -1,139 +1,287 @@
-import { useState } from "react";
-import "./App.css";
+import React, { useState } from "react";
+import {
+  Home,
+  Leaf,
+  ShoppingBag,
+  CreditCard,
+  Phone,
+} from "lucide-react";
 
-function App() {
+export default function App() {
+  const [page, setPage] = useState("commander");
+
   const [nom, setNom] = useState("");
   const [telephone, setTelephone] = useState("");
+  const [adresse, setAdresse] = useState("");
   const [produit, setProduit] = useState("");
   const [quantite, setQuantite] = useState("");
-  const [unite, setUnite] = useState("");
   const [dateCommande, setDateCommande] = useState("");
   const [paiement, setPaiement] = useState("");
 
   const numeroWhatsApp = "243970226689";
 
-  const aujourdHui = new Date().toISOString().split("T")[0];
+  const numeroAirtel = "+243991787177";
+  const numeroMpesa = "0824809200";
 
-  const changerProduit = (e) => {
-    const choix = e.target.value;
-    setProduit(choix);
-    setUnite("");
-
-    if (choix === "Riz") {
-      setUnite("plats");
-    }
-  };
-
-  const envoyerWhatsApp = () => {
-    if (!nom || !telephone || !produit || !quantite || !unite || !dateCommande || !paiement) {
-      alert("Veuillez remplir tous les champs avant d’envoyer la commande.");
+  const envoyerCommande = () => {
+    if (
+      !nom ||
+      !telephone ||
+      !adresse ||
+      !produit ||
+      !quantite ||
+      !dateCommande ||
+      !paiement
+    ) {
+      alert("Veuillez remplir tous les champs obligatoires avant de continuer.");
       return;
     }
 
-    const message = `Bonjour Saveurs de chez nous 🌿
+    const message = `
+Bonjour Saveurs de chez nous,
 
-Je souhaite passer une commande.
+Je souhaite passer une commande :
 
 Nom : ${nom}
 Téléphone : ${telephone}
+Adresse de livraison : ${adresse}
 Produit : ${produit}
-Quantité : ${quantite} ${unite}
-Date de commande : ${dateCommande}
-Mode de paiement choisi : ${paiement}
+Quantité : ${quantite}
+Date souhaitée : ${dateCommande}
+Mode de paiement : ${paiement}
 
-Je comprends que ma commande sera confirmée après paiement à l’avance.
+Merci.
+`;
 
-Merci.`;
+    const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(
+      message
+    )}`;
 
-    const lien = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(message)}`;
-    window.open(lien, "_blank");
+    window.open(url, "_blank");
   };
 
+  const aujourdHui = new Date().toISOString().split("T")[0];
+
   return (
-    <div className="app">
-      <div className="card">
-        <h1>Saveurs de chez nous</h1>
-        <p className="slogan">Le goût authentique de chez nous 🇨🇩🌿</p>
+    <div className="min-h-screen bg-[#fffaf0] text-[#3b2f22] pb-24">
+      <header className="bg-[#0b4b2b] text-white text-center py-6 px-4 rounded-b-3xl shadow-md">
+        <h1 className="text-2xl font-bold">Saveurs de chez nous</h1>
+        <p className="text-sm mt-1">Le goût authentique de chez nous 🇨🇩🌿</p>
+      </header>
 
-        <label>Nom du client</label>
-        <input
-          type="text"
-          placeholder="Ex : Elsa"
-          value={nom}
-          onChange={(e) => setNom(e.target.value)}
-        />
+      <main className="px-5 py-6">
+        {page === "accueil" && (
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold text-[#0b4b2b]">Bienvenue</h2>
+            <p>
+              Saveurs de chez nous valorise les produits locaux congolais à
+              travers des plats et produits frais, propres et pratiques.
+            </p>
+          </section>
+        )}
 
-        <label>Téléphone</label>
-        <input
-          type="tel"
-          placeholder="Ex : 0970000000"
-          value={telephone}
-          onChange={(e) => setTelephone(e.target.value)}
-        />
+        {page === "produits" && (
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold text-[#0b4b2b]">Nos produits</h2>
 
-        <label>Produit commandé</label>
-        <select value={produit} onChange={changerProduit}>
-          <option value="">Choisir un produit</option>
-          <option value="Sombé">Sombé</option>
-          <option value="Riz">Riz</option>
-        </select>
+            <div className="bg-white rounded-3xl p-5 shadow border border-[#ead8aa]">
+              <h3 className="font-bold text-lg">Sombé ya Léo</h3>
+              <p className="text-sm mt-2">
+                Sombé frais du jour, préparé avec soin.
+              </p>
+              <p className="text-sm mt-2 text-[#0b4b2b] font-semibold">
+                Vente en grammes et kilogrammes.
+              </p>
+            </div>
 
-        <label>Quantité</label>
-        <input
-          type="number"
-          min="1"
-          placeholder="Ex : 500, 1, 2"
-          value={quantite}
-          onChange={(e) => setQuantite(e.target.value)}
-        />
+            <div className="bg-white rounded-3xl p-5 shadow border border-[#ead8aa]">
+              <h3 className="font-bold text-lg">Riz pilau</h3>
+              <p className="text-sm mt-2">
+                Riz pilau savoureux, fait maison.
+              </p>
+              <p className="text-sm mt-2 text-[#0b4b2b] font-semibold">
+                Vente par plat.
+              </p>
+            </div>
+          </section>
+        )}
 
-        <label>Unité</label>
-        <select
-          value={unite}
-          onChange={(e) => setUnite(e.target.value)}
-          disabled={!produit || produit === "Riz"}
-        >
-          <option value="">Choisir l’unité</option>
+        {page === "commander" && (
+          <section className="space-y-5">
+            <div className="bg-[#fff3dc] rounded-3xl p-5 text-sm">
+              <p>Commande 24h à l’avance obligatoire.</p>
+              <p className="font-semibold mt-2">
+                La commande est confirmée après paiement total.
+              </p>
+            </div>
 
-          {produit === "Sombé" && (
-            <>
-              <option value="grammes">Grammes</option>
-              <option value="kilo">Kilo</option>
-            </>
-          )}
+            <input
+              type="text"
+              placeholder="Votre nom *"
+              value={nom}
+              onChange={(e) => setNom(e.target.value)}
+              className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b]"
+              required
+            />
 
-          {produit === "Riz" && <option value="plats">Plats</option>}
-        </select>
+            <input
+              type="tel"
+              placeholder="Votre téléphone *"
+              value={telephone}
+              onChange={(e) => setTelephone(e.target.value)}
+              className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b]"
+              required
+            />
 
-        <label>Date de commande</label>
-        <input
-          type="date"
-          min={aujourdHui}
-          value={dateCommande}
-          onChange={(e) => setDateCommande(e.target.value)}
-        />
+            <input
+              type="text"
+              placeholder="Adresse de livraison *"
+              value={adresse}
+              onChange={(e) => setAdresse(e.target.value)}
+              className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b]"
+              required
+            />
 
-        <label>Mode de paiement</label>
-        <select value={paiement} onChange={(e) => setPaiement(e.target.value)}>
-          <option value="">Choisir le mode de paiement</option>
-          <option value="Airtel Money : +243991787177">
-            Airtel Money : +243991787177
-          </option>
-          <option value="M-Pesa : 0824809200">
-            M-Pesa : 0824809200
-          </option>
-        </select>
+            <select
+              value={produit}
+              onChange={(e) => {
+                setProduit(e.target.value);
+                setQuantite("");
+              }}
+              className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b] bg-white"
+              required
+            >
+              <option value="">Choisissez le produit *</option>
+              <option value="Sombé ya Léo">Sombé ya Léo</option>
+              <option value="Riz pilau">Riz pilau</option>
+            </select>
 
-        <button onClick={envoyerWhatsApp}>
-          Commander sur WhatsApp
+            <select
+              value={quantite}
+              onChange={(e) => setQuantite(e.target.value)}
+              className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b] bg-white"
+              required
+              disabled={!produit}
+            >
+              <option value="">Choisissez la quantité *</option>
+
+              {produit === "Sombé ya Léo" && (
+                <>
+                  <option value="500 g">500 g</option>
+                  <option value="1 kg">1 kg</option>
+                  <option value="1,5 kg">1,5 kg</option>
+                  <option value="2 kg">2 kg</option>
+                  <option value="3 kg">3 kg</option>
+                </>
+              )}
+
+              {produit === "Riz pilau" && (
+                <>
+                  <option value="1 plat">1 plat</option>
+                  <option value="2 plats">2 plats</option>
+                  <option value="3 plats">3 plats</option>
+                  <option value="4 plats">4 plats</option>
+                  <option value="5 plats">5 plats</option>
+                </>
+              )}
+            </select>
+
+            <input
+              type="date"
+              min={aujourdHui}
+              value={dateCommande}
+              onChange={(e) => setDateCommande(e.target.value)}
+              className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b]"
+              required
+            />
+
+            <select
+              value={paiement}
+              onChange={(e) => setPaiement(e.target.value)}
+              className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b] bg-white"
+              required
+            >
+              <option value="">Choisissez le paiement *</option>
+              <option value="Airtel Money">Airtel Money</option>
+              <option value="M-Pesa">M-Pesa</option>
+            </select>
+
+            {paiement === "Airtel Money" && (
+              <div className="bg-[#eefaf1] rounded-3xl p-5">
+                <p>Numéro Airtel Money :</p>
+                <p className="font-bold text-xl mt-2">{numeroAirtel}</p>
+              </div>
+            )}
+
+            {paiement === "M-Pesa" && (
+              <div className="bg-[#eefaf1] rounded-3xl p-5">
+                <p>Numéro M-Pesa :</p>
+                <p className="font-bold text-xl mt-2">{numeroMpesa}</p>
+              </div>
+            )}
+
+            <button
+              onClick={envoyerCommande}
+              className="w-full bg-[#0b4b2b] text-white py-4 rounded-2xl text-lg font-bold shadow-md"
+            >
+              Confirmer la commande sur WhatsApp
+            </button>
+          </section>
+        )}
+
+        {page === "paiement" && (
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold text-[#0b4b2b]">Paiement</h2>
+            <div className="bg-white rounded-3xl p-5 shadow border border-[#ead8aa]">
+              <p>Airtel Money :</p>
+              <p className="font-bold text-xl">{numeroAirtel}</p>
+            </div>
+            <div className="bg-white rounded-3xl p-5 shadow border border-[#ead8aa]">
+              <p>M-Pesa :</p>
+              <p className="font-bold text-xl">{numeroMpesa}</p>
+            </div>
+          </section>
+        )}
+
+        {page === "contact" && (
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold text-[#0b4b2b]">Contact</h2>
+            <p>WhatsApp : +243970226689</p>
+            <p>Airtel Money : {numeroAirtel}</p>
+            <p>M-Pesa : {numeroMpesa}</p>
+          </section>
+        )}
+      </main>
+
+      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#ead8aa] flex justify-around py-3">
+        <button onClick={() => setPage("accueil")} className="flex flex-col items-center text-xs">
+          <Home size={24} />
+          Accueil
         </button>
 
-        <p className="note">
-          Commande à confirmer par paiement à l’avance. Merci de commander 24h à l’avance.
-        </p>
-      </div>
+        <button onClick={() => setPage("produits")} className="flex flex-col items-center text-xs">
+          <Leaf size={24} />
+          Produits
+        </button>
+
+        <button
+          onClick={() => setPage("commander")}
+          className="flex flex-col items-center text-xs bg-[#0b4b2b] text-white px-5 py-2 rounded-2xl"
+        >
+          <ShoppingBag size={24} />
+          Commander
+        </button>
+
+        <button onClick={() => setPage("paiement")} className="flex flex-col items-center text-xs">
+          <CreditCard size={24} />
+          Paiement
+        </button>
+
+        <button onClick={() => setPage("contact")} className="flex flex-col items-center text-xs">
+          <Phone size={24} />
+          Contact
+        </button>
+      </nav>
     </div>
   );
 }
-
-export default App;
