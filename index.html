@@ -36,10 +36,10 @@
     }
 
     .hero {
-      min-height: 88vh;
+      min-height: 82vh;
       background:
         linear-gradient(rgba(23,63,42,0.82), rgba(23,63,42,0.82)),
-        url("/d755fcb6-0d87-4ce4-bc23-01f3565a4638.png?v=6");
+        url("/d755fcb6-0d87-4ce4-bc23-01f3565a4638.png?v=7");
       background-size: cover;
       background-position: center;
       color: white;
@@ -101,12 +101,47 @@
       margin-top: 18px;
     }
 
+    .menu-buttons {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    @media (min-width: 750px) {
+      .menu-buttons {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .toggle-btn {
+      width: 100%;
+      background: var(--green);
+      color: white;
+      border: none;
+      border-radius: 18px;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+
+    .toggle-btn:hover {
+      background: var(--green2);
+    }
+
     .section {
       background: white;
       border-radius: 28px;
       padding: 24px;
-      margin: 24px 0;
+      margin: 18px 0;
       box-shadow: var(--shadow);
+      display: none;
+    }
+
+    .section.active {
+      display: block;
     }
 
     .section h2 {
@@ -119,6 +154,10 @@
     .section p {
       line-height: 1.7;
       font-size: 16px;
+    }
+
+    .always-visible {
+      display: block;
     }
 
     .grid {
@@ -253,6 +292,14 @@
       margin-top: 14px;
     }
 
+    .testimonial-box {
+      background: #fffaf1;
+      border: 1px solid #ecd6b3;
+      border-radius: 18px;
+      padding: 14px;
+      margin-top: 12px;
+    }
+
     .error { color: #b00020; font-weight: bold; }
     .success { color: var(--green); font-weight: bold; }
 
@@ -269,12 +316,12 @@
 
   <section class="hero">
     <div class="hero-inner">
-      <img class="logo" src="/file_00000000cd1871f6911cfa823e76bd48.png?v=6" alt="Logo Saveurs de chez nous">
+      <img class="logo" src="/file_00000000cd1871f6911cfa823e76bd48.png?v=7" alt="Logo Saveurs de chez nous">
       <h1>SAVEURS DE CHEZ NOUS</h1>
       <p class="slogan">Le goût authentique de chez nous 🇨🇩🌿</p>
       <p class="hero-text">
-        Nous valorisons les produits locaux congolais à travers une transformation alimentaire
-        propre, moderne, pratique et authentique.
+        Des produits locaux congolais préparés avec soin pour vous faire gagner du temps,
+        de l’énergie et garder le goût authentique de chez nous.
       </p>
       <p class="faith">Avec Dieu, nous ferons des exploits !</p>
       <a href="#commande" class="btn-main">COMMANDER MAINTENANT</a>
@@ -283,27 +330,63 @@
 
   <main class="container">
 
-    <section class="section">
+    <div class="menu-buttons">
+      <button class="toggle-btn" onclick="toggleSection('presentation')">PRÉSENTATION</button>
+      <button class="toggle-btn" onclick="toggleSection('apropos')">À PROPOS DE NOUS</button>
+      <button class="toggle-btn" onclick="toggleSection('produits')">NOS PRODUITS</button>
+      <button class="toggle-btn" onclick="toggleSection('choisir')">POURQUOI NOUS CHOISIR ?</button>
+      <button class="toggle-btn" onclick="toggleSection('fondatrice')">À PROPOS DE LA FONDATRICE</button>
+      <button class="toggle-btn" onclick="toggleSection('temoignages')">TÉMOIGNAGES CLIENTS</button>
+      <button class="toggle-btn" onclick="toggleSection('faq')">FAQ</button>
+      <button class="toggle-btn" onclick="document.getElementById('commande').scrollIntoView({behavior:'smooth'})">PASSER UNE COMMANDE</button>
+    </div>
+
+    <section class="section" id="presentation">
       <h2>PRÉSENTATION</h2>
       <p>
         <strong>Saveurs de chez nous</strong> est un projet agroalimentaire congolais spécialisé
-        dans la valorisation des produits et saveurs locales. Nous proposons des produits naturels,
-        des légumes prêts à cuisiner, des feuilles de manioc préparées, des plats locaux,
-        des jus naturels et des produits faits maison inspirés de la cuisine congolaise.
+        dans la valorisation des produits et saveurs locales.
+      </p>
+      <p>
+        Nous proposons des produits naturels, des légumes prêts à cuisiner, des feuilles de manioc
+        préparées, des plats locaux, des jus naturels et des produits faits maison inspirés
+        de la cuisine congolaise.
       </p>
     </section>
 
-    <section class="section">
+    <section class="section" id="apropos">
       <h2>À PROPOS DE NOUS</h2>
       <p>
         Notre mission est d’aider les familles et les personnes occupées à gagner du temps
         et de l’énergie en cuisine, tout en conservant le goût authentique des recettes locales.
-        Nous croyons à la qualité, à l’hygiène, à la fraîcheur et à la valorisation des produits
-        locaux congolais.
+      </p>
+      <p>
+        Nos valeurs sont : qualité, hygiène, praticité, fraîcheur et valorisation des produits locaux congolais.
       </p>
     </section>
 
-    <section class="section">
+    <section class="section" id="produits">
+      <h2>NOS PRODUITS</h2>
+      <div class="grid grid-2">
+        <div class="card product-card">
+          <img src="/a23e0b08-f211-4c09-9396-c97e91b2da82.png?v=7" alt="Sombé ya Léo">
+          <div>
+            <h3>SOMBÉ YA LÉO</h3>
+            <p>Feuilles de manioc préparées, fraîches, propres et prêtes à cuisiner.</p>
+          </div>
+        </div>
+
+        <div class="card product-card">
+          <img src="/3ed1de554cf72410c73e9abc26d35138.jpg?v=7" alt="Riz pilaü">
+          <div>
+            <h3>RIZ PILAÜ</h3>
+            <p>Un plat local savoureux, préparé avec soin pour vos repas et commandes spéciales.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="choisir">
       <h2>POURQUOI NOUS CHOISIR ?</h2>
       <div class="grid grid-3">
         <div class="card"><h3>GAIN DE TEMPS</h3><p>Nos produits sont préparés pour faciliter la cuisine au quotidien.</p></div>
@@ -315,31 +398,10 @@
       </div>
     </section>
 
-    <section class="section">
-      <h2>NOS PRODUITS</h2>
-      <div class="grid grid-2">
-        <div class="card product-card">
-          <img src="/a23e0b08-f211-4c09-9396-c97e91b2da82.png?v=6" alt="Sombé ya Léo">
-          <div>
-            <h3>SOMBÉ YA LÉO</h3>
-            <p>Feuilles de manioc préparées, fraîches, propres et prêtes à cuisiner.</p>
-          </div>
-        </div>
-
-        <div class="card product-card">
-          <img src="/3ed1de554cf72410c73e9abc26d35138.jpg?v=6" alt="Riz pilaü">
-          <div>
-            <h3>RIZ PILAÜ</h3>
-            <p>Un plat local savoureux, préparé avec soin pour vos repas et commandes spéciales.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
+    <section class="section" id="fondatrice">
       <div class="grid grid-2">
         <div>
-          <img class="founder-img" src="/IMG-20260514-WA0029(1).jpg?v=6" alt="Fondatrice Saveurs de chez nous">
+          <img class="founder-img" src="/IMG-20260514-WA0029(1).jpg?v=7" alt="Fondatrice Saveurs de chez nous">
         </div>
         <div>
           <h2>À PROPOS DE LA FONDATRICE</h2>
@@ -357,48 +419,51 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="temoignages">
       <h2>TÉMOIGNAGES CLIENTS</h2>
-      <div class="grid grid-3">
-        <div class="card">
-          <h3>CLIENTE SATISFAITE</h3>
-          <p>“Le sombé est propre, frais et très bien préparé. Ça me fait gagner beaucoup de temps.”</p>
-        </div>
-        <div class="card">
-          <h3>CLIENT SATISFAIT</h3>
-          <p>“Le goût est vraiment authentique. On sent les saveurs de chez nous.”</p>
-        </div>
-        <div class="card">
-          <h3>CLIENTE SATISFAITE</h3>
-          <p>“Très pratique pour les familles occupées. Je recommande Saveurs de chez nous.”</p>
-        </div>
-      </div>
+      <p>
+        Vous avez déjà goûté nos produits ? Laissez votre témoignage ici.
+      </p>
+
+      <label>Votre nom</label>
+      <input type="text" id="testimonialName" placeholder="Ex : Grâce">
+
+      <label>Votre témoignage</label>
+      <textarea id="testimonialText" rows="4" placeholder="Écrivez votre expérience avec Saveurs de chez nous..."></textarea>
+
+      <button type="button" class="btn btn-add" onclick="addTestimonial()">PUBLIER MON TÉMOIGNAGE</button>
+
+      <div id="testimonialList"></div>
     </section>
 
-    <section class="section">
+    <section class="section" id="faq">
       <h2>FAQ</h2>
+
       <div class="card">
         <h3>COMMENT PASSER UNE COMMANDE ?</h3>
         <p>Vous remplissez le formulaire, choisissez vos produits, calculez la facture, puis envoyez la commande.</p>
       </div>
       <br>
+
       <div class="card">
         <h3>COMBIEN DE TEMPS À L’AVANCE FAUT-IL COMMANDER ?</h3>
         <p>Les commandes doivent être faites 24 heures à l’avance.</p>
       </div>
       <br>
+
       <div class="card">
         <h3>COMMENT CONFIRMER MA COMMANDE ?</h3>
         <p>La commande est confirmée après paiement via Airtel Money ou M-Pesa.</p>
       </div>
       <br>
+
       <div class="card">
         <h3>PUIS-JE COMMANDER PLUSIEURS QUANTITÉS ?</h3>
         <p>Oui. Vous pouvez choisir 250g, 500g, 1kg ou combiner plusieurs quantités.</p>
       </div>
     </section>
 
-    <section class="section" id="commande">
+    <section class="section always-visible" id="commande">
       <h2>PASSER UNE COMMANDE</h2>
 
       <div class="notice">
@@ -512,6 +577,34 @@
       sombe1000: 8500,
       rizPilau: 25000
     };
+
+    function toggleSection(id) {
+      const section = document.getElementById(id);
+      section.classList.toggle("active");
+      if (section.classList.contains("active")) {
+        section.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    function addTestimonial() {
+      const name = document.getElementById("testimonialName").value.trim();
+      const text = document.getElementById("testimonialText").value.trim();
+      const list = document.getElementById("testimonialList");
+
+      if (!name || !text) {
+        alert("Veuillez écrire votre nom et votre témoignage.");
+        return;
+      }
+
+      const box = document.createElement("div");
+      box.className = "testimonial-box";
+      box.innerHTML = `<strong>${name}</strong><p>${text}</p>`;
+
+      list.prepend(box);
+
+      document.getElementById("testimonialName").value = "";
+      document.getElementById("testimonialText").value = "";
+    }
 
     function setMinimumDate() {
       const dateInput = document.getElementById("orderDate");
