@@ -1,12 +1,264 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Saveurs de chez nous 🇨🇩🌿</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commande - Saveurs de chez nous</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f3e8;
+      margin: 0;
+      padding: 20px;
+      color: #2f3d25;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: #fffaf0;
+      padding: 25px;
+      border-radius: 18px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      border: 2px solid #c47a2c;
+    }
+
+    h1 {
+      text-align: center;
+      color: #1f4d2b;
+      margin-bottom: 5px;
+    }
+
+    .slogan {
+      text-align: center;
+      color: #8a4b20;
+      font-weight: bold;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border-radius: 10px;
+      border: 1px solid #b98b5a;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 25px;
+      background: #1f4d2b;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #16391f;
+    }
+
+    .info {
+      background: #fff1d6;
+      padding: 12px;
+      border-radius: 10px;
+      margin-top: 15px;
+      color: #5c3517;
+      font-size: 14px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Saveurs de chez nous</h1>
+    <div class="slogan">Le goût authentique de chez nous 🇨🇩🌿</div>
+
+    <form id="commandeForm">
+
+      <label for="nom">Nom complet *</label>
+      <input type="text" id="nom" required placeholder="Ex : Maman Grâce" />
+
+      <label for="telephone">Numéro de téléphone *</label>
+      <input type="tel" id="telephone" required placeholder="Ex : 0970000000" />
+
+      <label for="adresse">Adresse de livraison *</label>
+      <textarea id="adresse" required placeholder="Commune, quartier, avenue, référence..."></textarea>
+
+      <label for="produit">Produit *</label>
+      <select id="produit" required onchange="changerQuantites()">
+        <option value="">-- Choisir un produit --</option>
+        <option value="Sombé / Feuilles de manioc">Sombé / Feuilles de manioc</option>
+        <option value="Riz pilau">Riz pilau</option>
+      </select>
+
+      <label for="quantite">Quantité *</label>
+      <select id="quantite" required onchange="verifierQuantitePersonnalisee()">
+        <option value="">-- Choisir d’abord un produit --</option>
+      </select>
+
+      <div id="champQuantitePerso" class="hidden">
+        <label for="quantitePerso">Quantité personnalisée *</label>
+        <input type="text" id="quantitePerso" placeholder="Ex : 5 kg ou 12 plats" />
+      </div>
+
+      <label for="dateCommande">Date souhaitée *</label>
+      <input type="date" id="dateCommande" required />
+
+      <label for="paiement">Mode de paiement *</label>
+      <select id="paiement" required>
+        <option value="">-- Choisir le mode de paiement --</option>
+        <option value="Airtel Money">Airtel Money : +243991787177</option>
+        <option value="M-Pesa">M-Pesa : 0824809200</option>
+      </select>
+
+      <div class="info">
+        Les commandes doivent être faites 24h à l’avance.  
+        La commande est confirmée après paiement.
+      </div>
+
+      <label for="note">Note / précision</label>
+      <textarea id="note" placeholder="Ex : Sans piment, livraison avant midi..."></textarea>
+
+      <button type="submit">Envoyer la commande sur WhatsApp</button>
+
+    </form>
+  </div>
+
+  <script>
+    const numeroWhatsApp = "243970226689";
+
+    const dateInput = document.getElementById("dateCommande");
+    const demain = new Date();
+    demain.setDate(demain.getDate() + 1);
+    dateInput.min = demain.toISOString().split("T")[0];
+
+    function changerQuantites() {
+      const produit = document.getElementById("produit").value;
+      const quantite = document.getElementById("quantite");
+      const champPerso = document.getElementById("champQuantitePerso");
+      const quantitePerso = document.getElementById("quantitePerso");
+
+      quantite.innerHTML = "";
+      champPerso.classList.add("hidden");
+      quantitePerso.required = false;
+      quantitePerso.value = "";
+
+      let options = [];
+
+      if (produit === "Sombé / Feuilles de manioc") {
+        options = [
+          "",
+          "250 g",
+          "500 g",
+          "1 kg",
+          "2 kg",
+          "3 kg",
+          "Autre quantité"
+        ];
+      } 
+      else if (produit === "Riz pilau") {
+        options = [
+          "",
+          "1 plat",
+          "2 plats",
+          "3 plats",
+          "5 plats",
+          "10 plats",
+          "Autre nombre de plats"
+        ];
+      } 
+      else {
+        options = [""];
+      }
+
+      options.forEach(option => {
+        const opt = document.createElement("option");
+        opt.value = option;
+        opt.textContent = option === "" ? "-- Choisir une quantité --" : option;
+        quantite.appendChild(opt);
+      });
+    }
+
+    function verifierQuantitePersonnalisee() {
+      const quantite = document.getElementById("quantite").value;
+      const champPerso = document.getElementById("champQuantitePerso");
+      const quantitePerso = document.getElementById("quantitePerso");
+
+      if (quantite === "Autre quantité" || quantite === "Autre nombre de plats") {
+        champPerso.classList.remove("hidden");
+        quantitePerso.required = true;
+      } else {
+        champPerso.classList.add("hidden");
+        quantitePerso.required = false;
+        quantitePerso.value = "";
+      }
+    }
+
+    document.getElementById("commandeForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const nom = document.getElementById("nom").value.trim();
+      const telephone = document.getElementById("telephone").value.trim();
+      const adresse = document.getElementById("adresse").value.trim();
+      const produit = document.getElementById("produit").value;
+      let quantite = document.getElementById("quantite").value;
+      const quantitePerso = document.getElementById("quantitePerso").value.trim();
+      const dateCommande = document.getElementById("dateCommande").value;
+      const paiement = document.getElementById("paiement").value;
+      const note = document.getElementById("note").value.trim();
+
+      if (quantite === "Autre quantité" || quantite === "Autre nombre de plats") {
+        quantite = quantitePerso;
+      }
+
+      if (!nom || !telephone || !adresse || !produit || !quantite || !dateCommande || !paiement) {
+        alert("Veuillez remplir tous les champs obligatoires.");
+        return;
+      }
+
+      const message = 
+`Bonjour Saveurs de chez nous 🇨🇩🌿,
+
+Je souhaite passer une commande.
+
+Nom : ${nom}
+Téléphone : ${telephone}
+Adresse : ${adresse}
+
+Produit : ${produit}
+Quantité : ${quantite}
+Date souhaitée : ${dateCommande}
+
+Mode de paiement choisi : ${paiement}
+
+Note : ${note || "Aucune"}
+
+Merci.`;
+
+      const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank");
+    });
+  </script>
+
+</body>
 </html>
