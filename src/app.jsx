@@ -1,17 +1,7 @@
-import React, { useState } from "react";
-import { Home, Leaf, ShoppingBag, CreditCard, Phone } from "lucide-react";
+import React, { useMemo, useState } from "react";
+import { ShoppingBag, Plus, Trash2, Phone, CreditCard, Home } from "lucide-react";
 
 export default function App() {
-  const [page, setPage] = useState("commander");
-
-  const [nom, setNom] = useState("");
-  const [telephone, setTelephone] = useState("");
-  const [adresse, setAdresse] = useState("");
-  const [produit, setProduit] = useState("");
-  const [quantite, setQuantite] = useState("");
-  const [dateCommande, setDateCommande] = useState("");
-  const [paiement, setPaiement] = useState("");
-
   const numeroWhatsApp = "243970226689";
   const numeroAirtel = "+243991787177";
   const numeroMpesa = "0824809200";
@@ -19,31 +9,157 @@ export default function App() {
   const GOOGLE_SCRIPT_URL =
     "https://script.google.com/macros/s/AKfycbwFyjUpHDL4VnvW5CNH5oyXPwGGhE54zhLmllWuXaQzTs8HmwtINVZgxYtUzDfdAsA/exec";
 
-  const aujourdHui = new Date().toISOString().split("T")[0];
+  const produits = [
+    { id: "sombe250", nom: "Sombé ya Léo - 250 g", prix: 3000 },
+    { id: "sombe500", nom: "Sombé ya Léo - 500 g", prix: 4500 },
+    { id: "sombe1000", nom: "Sombé ya Léo - 1 kg", prix: 8500 },
+    { id: "rizpilau", nom: "Riz pilau - 1 plat", prix: 25000 },
+  ];
 
-  const envoyerCommande = async () => {
-    if (
-      !nom ||
-      !telephone ||
-      !adresse ||
-      !produit ||
-      !quantite ||
-      !dateCommande ||
-      !paiement
-    ) {
-      alert("Veuillez remplir tous les champs obligatoires avant de continuer.");
+  const demain = new Date();
+  demain.setDate(demain.getDate() + 1);
+  const dateMinimum = demain.toISOString().split("T")[0];
+
+  const [nom, setNom] = useState("");
+  const [telephone, setTelephone] = useState("");
+  const [adresse, setAdresse] = useState("");
+  const [dateCommande, setDateCommande] = useState("");
+  const [paiement, setPaiement] = useState("");
+  const [panier, setPanier] = useState([]);
+  const [produitChoisi, setProduitChoisi] = useState("");
+  const [quantiteChoisie, setQuantiteChoisie] = useState(1);
+  const [factureValidee, setFactureValidee] = useState(false);
+
+  const formatFC = (montant) => `${montant.toLocaleString("fr-FR")} FC`;
+
+  const total = useMemo(() => {
+    return panier.reduce((somme, item) => somme + item.prix * item.quantite, 0);
+  }, [panier]);
+
+  const telephoneValide = (numero) => {
+    const tel = numero.replace(/\s/g, "");
+    return /^(0)(8|9)[0-9]{8}$/.test(tel);
+  };
+
+  const ajouterAuPanier = () => {
+    if (!produitChoisi) {
+      alert("Veuillez choisir un produit.");
       return;
     }
+
+    if (!quantiteChoisie || quantiteChoisie < 1) {
+      alert("Veuillez entrer une quantité valide.");
+      return;
+    }
+
+    const produit = produits.find((p) => p.id === produitChoisi);
+
+    const existant = panier.find((item) => item.id === produit.id);
+
+    if (existant) {
+      setPanier(
+        panier.map((item) =>
+          item.id === produit.id
+            ? { ...item, quantite: item.quantite + Number(quantiteChoisie) }
+            : item
+        )
+      );
+    } else {
+      setPanier([
+        ...panier,
+        {
+          id: produit.id,
+          nom: produit.nom,
+          prix: produit.prix,
+          quantite: Number(quantiteChoisie),
+        },
+      ]);
+    }
+
+    setProduitChoisi("");
+    setQuantiteChoisie(1);
+    setFactureValidee(false);
+  };
+
+  const supprimerProduit = (id) => {
+    setPanier(panier.filter((item) => item.id !== id));
+    setFactureValidee(false);
+  };
+
+  const verifierFormulaire = () => {
+    if (!nom.trim()) {
+      alert("Le nom du client est obligatoire.");
+      return false;
+    }
+
+    if (!telephone.trim()) {
+      alert("Le numéro de téléphone est obligatoire.");
+      return false;
+    }
+
+    if (!telephoneValide(telephone)) {
+      alert("Le numéro doit être un numéro RDC valide de 10 chiffres. Exemple : 0970226689");
+      return false;
+    }
+
+    if (!adresse.trim()) {
+      alert("L’adresse de livraison est obligatoire.");
+      return false;
+    }
+
+    if (!dateCommande) {
+      alert("Veuillez choisir une date de livraison.");
+      return false;
+    }
+
+    if (dateCommande < dateMinimum) {
+      alert("La date autorisée commence à partir de demain. Commande 24h à l’avance obligatoire.");
+      return false;
+    }
+
+    if (!paiement) {
+      alert("Veuillez choisir le mode de paiement.");
+      return false;
+    }
+
+    if (panier.length === 0) {
+      alert("Veuillez ajouter au moins un produit à la facture.");
+      return false;
+    }
+
+    return true;
+  };
+
+  const validerFacture = () => {
+    if (!verifierFormulaire()) return;
+    setFactureValidee(true);
+    alert("Facture validée. Vous pouvez maintenant envoyer la commande sur WhatsApp.");
+  };
+
+  const envoyerCommande = async () => {
+    if (!verifierFormulaire()) return;
+
+    if (!factureValidee) {
+      alert("Veuillez d’abord valider la facture avant d’envoyer la commande.");
+      return;
+    }
+
+    const detailsProduits = panier
+      .map(
+        (item) =>
+          `- ${item.nom} x ${item.quantite} = ${formatFC(item.prix * item.quantite)}`
+      )
+      .join("\n");
 
     const commande = {
       nom,
       telephone,
       adresse,
-      produit,
-      quantite,
+      produit: panier.map((item) => `${item.nom} x ${item.quantite}`).join(" | "),
+      quantite: panier.map((item) => item.quantite).join(" | "),
       dateCommande,
       paiement,
-      observation: "",
+      observation: `Total : ${formatFC(total)} | Facture validée | Preuve de paiement demandée`,
     };
 
     try {
@@ -62,251 +178,199 @@ export default function App() {
     const message = `
 Bonjour Saveurs de chez nous,
 
-Je souhaite passer une commande :
+Je souhaite confirmer ma commande.
 
-Nom : ${nom}
-Téléphone : ${telephone}
-Adresse de livraison : ${adresse}
-Produit : ${produit}
-Quantité : ${quantite}
-Date souhaitée : ${dateCommande}
-Mode de paiement : ${paiement}
+NOM : ${nom}
+TÉLÉPHONE : ${telephone}
+ADRESSE DE LIVRAISON : ${adresse}
+DATE SOUHAITÉE : ${dateCommande}
+MODE DE PAIEMENT : ${paiement}
+
+FACTURE :
+${detailsProduits}
+
+TOTAL À PAYER : ${formatFC(total)}
+
+Je comprends que la commande est payable en francs congolais avant confirmation.
+Je vais envoyer la preuve de paiement.
+Je recevrai ma commande après 24h.
 
 Merci.
 `;
 
-    const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(
-      message
-    )}`;
-
+    const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
   };
 
   return (
-    <div className="min-h-screen bg-[#fffaf0] text-[#3b2f22] pb-24">
+    <div className="min-h-screen bg-[#fffaf0] text-[#3b2f22] pb-10">
       <header className="bg-[#0b4b2b] text-white text-center py-6 px-4 rounded-b-3xl shadow-md">
         <h1 className="text-2xl font-bold">Saveurs de chez nous</h1>
         <p className="text-sm mt-1">Le goût authentique de chez nous 🇨🇩🌿</p>
+        <p className="text-xs mt-2">Avec Dieu, nous ferons des exploits !</p>
       </header>
 
-      <main className="px-5 py-6">
-        {page === "accueil" && (
-          <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-[#0b4b2b]">Bienvenue</h2>
-            <p>
-              Saveurs de chez nous valorise les produits locaux congolais avec
-              fraîcheur, hygiène et authenticité.
-            </p>
-          </section>
-        )}
+      <main className="px-5 py-6 space-y-6">
+        <section className="bg-[#fff3dc] rounded-3xl p-5 text-sm">
+          <p className="font-semibold">Commande 24h à l’avance obligatoire.</p>
+          <p className="mt-2">
+            La commande est confirmée après paiement total. Le client doit envoyer la preuve de paiement.
+          </p>
+        </section>
 
-        {page === "produits" && (
-          <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-[#0b4b2b]">Nos produits</h2>
+        <section className="bg-white rounded-3xl p-5 shadow border border-[#ead8aa] space-y-4">
+          <h2 className="text-xl font-bold text-[#0b4b2b] flex items-center gap-2">
+            <Home size={22} /> Informations du client
+          </h2>
 
-            <div className="bg-white rounded-3xl p-5 shadow border border-[#ead8aa]">
-              <h3 className="font-bold text-lg">Sombé ya Léo</h3>
-              <p className="text-sm mt-2">
-                Sombé frais du jour, préparé avec soin.
-              </p>
-              <p className="text-sm mt-2 text-[#0b4b2b] font-semibold">
-                Vente en grammes et kilogrammes.
-              </p>
-            </div>
+          <input
+            type="text"
+            placeholder="Nom du client *"
+            value={nom}
+            onChange={(e) => setNom(e.target.value)}
+            className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 outline-none focus:border-[#0b4b2b]"
+          />
 
-            <div className="bg-white rounded-3xl p-5 shadow border border-[#ead8aa]">
-              <h3 className="font-bold text-lg">Riz pilau</h3>
-              <p className="text-sm mt-2">Riz pilau savoureux, fait maison.</p>
-              <p className="text-sm mt-2 text-[#0b4b2b] font-semibold">
-                Vente par plat.
-              </p>
-            </div>
-          </section>
-        )}
+          <input
+            type="tel"
+            placeholder="Téléphone RDC * Ex : 0970226689"
+            value={telephone}
+            onChange={(e) => setTelephone(e.target.value)}
+            maxLength={10}
+            className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 outline-none focus:border-[#0b4b2b]"
+          />
 
-        {page === "commander" && (
-          <section className="space-y-5">
-            <div className="bg-[#fff3dc] rounded-3xl p-5 text-sm">
-              <p>Commande 24h à l’avance obligatoire.</p>
-              <p className="font-semibold mt-2">
-                La commande est confirmée après paiement total.
-              </p>
-            </div>
+          <input
+            type="text"
+            placeholder="Adresse de livraison *"
+            value={adresse}
+            onChange={(e) => setAdresse(e.target.value)}
+            className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 outline-none focus:border-[#0b4b2b]"
+          />
 
-            <input
-              type="text"
-              placeholder="Votre nom *"
-              value={nom}
-              onChange={(e) => setNom(e.target.value)}
-              className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b]"
-            />
+          <input
+            type="date"
+            min={dateMinimum}
+            value={dateCommande}
+            onChange={(e) => setDateCommande(e.target.value)}
+            className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 outline-none focus:border-[#0b4b2b]"
+          />
+        </section>
 
-            <input
-              type="tel"
-              placeholder="Votre téléphone *"
-              value={telephone}
-              onChange={(e) => setTelephone(e.target.value)}
-              className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b]"
-            />
+        <section className="bg-white rounded-3xl p-5 shadow border border-[#ead8aa] space-y-4">
+          <h2 className="text-xl font-bold text-[#0b4b2b] flex items-center gap-2">
+            <ShoppingBag size={22} /> Produits
+          </h2>
 
-            <input
-              type="text"
-              placeholder="Adresse de livraison *"
-              value={adresse}
-              onChange={(e) => setAdresse(e.target.value)}
-              className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b]"
-            />
+          <select
+            value={produitChoisi}
+            onChange={(e) => setProduitChoisi(e.target.value)}
+            className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 bg-white outline-none focus:border-[#0b4b2b]"
+          >
+            <option value="">Choisir un produit</option>
+            {produits.map((p) => (
+              <option key={p.id} value={p.id}>
+                {p.nom} — {formatFC(p.prix)}
+              </option>
+            ))}
+          </select>
 
-            <select
-              value={produit}
-              onChange={(e) => {
-                setProduit(e.target.value);
-                setQuantite("");
-              }}
-              className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b] bg-white"
-            >
-              <option value="">Choisissez le produit *</option>
-              <option value="Sombé ya Léo">Sombé ya Léo</option>
-              <option value="Riz pilau">Riz pilau</option>
-            </select>
+          <input
+            type="number"
+            min="1"
+            value={quantiteChoisie}
+            onChange={(e) => setQuantiteChoisie(Number(e.target.value))}
+            placeholder="Quantité souhaitée"
+            className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 outline-none focus:border-[#0b4b2b]"
+          />
 
-            <select
-              value={quantite}
-              onChange={(e) => setQuantite(e.target.value)}
-              disabled={!produit}
-              className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b] bg-white"
-            >
-              <option value="">Choisissez la quantité *</option>
+          <button
+            onClick={ajouterAuPanier}
+            className="w-full bg-[#c46b2b] text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2"
+          >
+            <Plus size={20} /> Ajouter à la facture
+          </button>
+        </section>
 
-              {produit === "Sombé ya Léo" && (
-                <>
-                  <option value="500 g">500 g</option>
-                  <option value="1 kg">1 kg</option>
-                  <option value="1,5 kg">1,5 kg</option>
-                  <option value="2 kg">2 kg</option>
-                  <option value="3 kg">3 kg</option>
-                </>
-              )}
+        {panier.length > 0 && (
+          <section className="bg-white rounded-3xl p-5 shadow border border-[#ead8aa] space-y-4">
+            <h2 className="text-xl font-bold text-[#0b4b2b]">Facture</h2>
 
-              {produit === "Riz pilau" && (
-                <>
-                  <option value="1 plat">1 plat</option>
-                  <option value="2 plats">2 plats</option>
-                  <option value="3 plats">3 plats</option>
-                  <option value="4 plats">4 plats</option>
-                  <option value="5 plats">5 plats</option>
-                </>
-              )}
-            </select>
+            {panier.map((item) => (
+              <div
+                key={item.id}
+                className="border-b border-[#ead8aa] pb-3 flex justify-between gap-3"
+              >
+                <div>
+                  <p className="font-semibold">{item.nom}</p>
+                  <p className="text-sm">
+                    {item.quantite} x {formatFC(item.prix)}
+                  </p>
+                  <p className="font-bold text-[#0b4b2b]">
+                    {formatFC(item.prix * item.quantite)}
+                  </p>
+                </div>
 
-            <input
-              type="date"
-              min={aujourdHui}
-              value={dateCommande}
-              onChange={(e) => setDateCommande(e.target.value)}
-              className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b]"
-            />
-
-            <select
-              value={paiement}
-              onChange={(e) => setPaiement(e.target.value)}
-              className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 text-lg outline-none focus:border-[#0b4b2b] bg-white"
-            >
-              <option value="">Choisissez le paiement *</option>
-              <option value="Airtel Money">Airtel Money</option>
-              <option value="M-Pesa">M-Pesa</option>
-            </select>
-
-            {paiement === "Airtel Money" && (
-              <div className="bg-[#eefaf1] rounded-3xl p-5">
-                <p>Numéro Airtel Money :</p>
-                <p className="font-bold text-xl mt-2">{numeroAirtel}</p>
+                <button
+                  onClick={() => supprimerProduit(item.id)}
+                  className="text-red-600"
+                >
+                  <Trash2 size={22} />
+                </button>
               </div>
-            )}
+            ))}
 
-            {paiement === "M-Pesa" && (
-              <div className="bg-[#eefaf1] rounded-3xl p-5">
-                <p>Numéro M-Pesa :</p>
-                <p className="font-bold text-xl mt-2">{numeroMpesa}</p>
-              </div>
-            )}
-
-            <button
-              onClick={envoyerCommande}
-              className="w-full bg-[#0b4b2b] text-white py-4 rounded-2xl text-lg font-bold shadow-md"
-            >
-              Confirmer la commande sur WhatsApp
-            </button>
+            <div className="bg-[#eefaf1] rounded-2xl p-4">
+              <p className="text-sm">Total à payer</p>
+              <p className="text-2xl font-bold text-[#0b4b2b]">{formatFC(total)}</p>
+            </div>
           </section>
         )}
 
-        {page === "paiement" && (
-          <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-[#0b4b2b]">Paiement</h2>
+        <section className="bg-white rounded-3xl p-5 shadow border border-[#ead8aa] space-y-4">
+          <h2 className="text-xl font-bold text-[#0b4b2b] flex items-center gap-2">
+            <CreditCard size={22} /> Paiement
+          </h2>
 
-            <div className="bg-white rounded-3xl p-5 shadow border border-[#ead8aa]">
-              <p>Airtel Money :</p>
+          <select
+            value={paiement}
+            onChange={(e) => setPaiement(e.target.value)}
+            className="w-full rounded-2xl border border-[#d6c28f] px-4 py-4 bg-white outline-none focus:border-[#0b4b2b]"
+          >
+            <option value="">Choisir le mode de paiement *</option>
+            <option value="Airtel Money">Airtel Money</option>
+            <option value="M-Pesa">M-Pesa</option>
+          </select>
+
+          {paiement === "Airtel Money" && (
+            <div className="bg-[#eefaf1] rounded-2xl p-4">
+              <p>Numéro Airtel Money :</p>
               <p className="font-bold text-xl">{numeroAirtel}</p>
             </div>
+          )}
 
-            <div className="bg-white rounded-3xl p-5 shadow border border-[#ead8aa]">
-              <p>M-Pesa :</p>
+          {paiement === "M-Pesa" && (
+            <div className="bg-[#eefaf1] rounded-2xl p-4">
+              <p>Numéro M-Pesa :</p>
               <p className="font-bold text-xl">{numeroMpesa}</p>
             </div>
-          </section>
-        )}
+          )}
+        </section>
 
-        {page === "contact" && (
-          <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-[#0b4b2b]">Contact</h2>
-            <p>WhatsApp : +243970226689</p>
-            <p>Airtel Money : {numeroAirtel}</p>
-            <p>M-Pesa : {numeroMpesa}</p>
-          </section>
-        )}
+        <button
+          onClick={validerFacture}
+          className="w-full bg-[#c46b2b] text-white py-4 rounded-2xl text-lg font-bold"
+        >
+          Valider la facture
+        </button>
+
+        <button
+          onClick={envoyerCommande}
+          className="w-full bg-[#0b4b2b] text-white py-4 rounded-2xl text-lg font-bold flex items-center justify-center gap-2"
+        >
+          <Phone size={22} /> Envoyer la commande sur WhatsApp
+        </button>
       </main>
-
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#ead8aa] flex justify-around py-3">
-        <button
-          onClick={() => setPage("accueil")}
-          className="flex flex-col items-center text-xs"
-        >
-          <Home size={24} />
-          Accueil
-        </button>
-
-        <button
-          onClick={() => setPage("produits")}
-          className="flex flex-col items-center text-xs"
-        >
-          <Leaf size={24} />
-          Produits
-        </button>
-
-        <button
-          onClick={() => setPage("commander")}
-          className="flex flex-col items-center text-xs bg-[#0b4b2b] text-white px-5 py-2 rounded-2xl"
-        >
-          <ShoppingBag size={24} />
-          Commander
-        </button>
-
-        <button
-          onClick={() => setPage("paiement")}
-          className="flex flex-col items-center text-xs"
-        >
-          <CreditCard size={24} />
-          Paiement
-        </button>
-
-        <button
-          onClick={() => setPage("contact")}
-          className="flex flex-col items-center text-xs"
-        >
-          <Phone size={24} />
-          Contact
-        </button>
-      </nav>
     </div>
   );
 }
