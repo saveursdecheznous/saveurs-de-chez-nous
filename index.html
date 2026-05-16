@@ -38,7 +38,7 @@
       min-height:82vh;
       background:
         linear-gradient(rgba(23,63,42,.82),rgba(23,63,42,.82)),
-        url("/d755fcb6-0d87-4ce4-bc23-01f3565a4638.png?v=9");
+        url("/d755fcb6-0d87-4ce4-bc23-01f3565a4638.png?v=10");
       background-size:cover;
       background-position:center;
       color:white;
@@ -224,10 +224,21 @@
       margin:18px 0;
     }
 
-    .warning{
+    .steps{
       background:#fff3df;
       color:#5b3b22;
       border-left:6px solid var(--orange);
+      border-radius:18px;
+      padding:16px;
+      line-height:1.7;
+      margin:18px 0;
+      font-weight:bold;
+    }
+
+    .warning{
+      background:#ffe7e7;
+      color:#6b1111;
+      border-left:6px solid #b00020;
       border-radius:18px;
       padding:16px;
       line-height:1.6;
@@ -364,7 +375,7 @@
 
 <section class="hero">
   <div class="hero-inner">
-    <img class="logo" src="/file_00000000cd1871f6911cfa823e76bd48.png?v=9" alt="Logo Saveurs de chez nous">
+    <img class="logo" src="/file_00000000cd1871f6911cfa823e76bd48.png?v=10" alt="Logo Saveurs de chez nous">
     <h1>SAVEURS DE CHEZ NOUS</h1>
     <p class="slogan">Le goût authentique de chez nous 🇨🇩🌿</p>
     <p class="hero-text">
@@ -405,7 +416,7 @@
     <h2>🍲 NOS PRODUITS</h2>
     <div class="grid grid-2">
       <div class="card product-card">
-        <img src="/a23e0b08-f211-4c09-9396-c97e91b2da82.png?v=9" alt="Sombé ya Léo">
+        <img src="/a23e0b08-f211-4c09-9396-c97e91b2da82.png?v=10" alt="Sombé ya Léo">
         <div>
           <h3>SOMBÉ YA LÉO</h3>
           <p>Feuilles de manioc préparées, fraîches, propres et prêtes à cuisiner.</p>
@@ -413,7 +424,7 @@
       </div>
 
       <div class="card product-card">
-        <img src="/3ed1de554cf72410c73e9abc26d35138.jpg?v=9" alt="Riz pilaü">
+        <img src="/3ed1de554cf72410c73e9abc26d35138.jpg?v=10" alt="Riz pilaü">
         <div>
           <h3>RIZ PILAÜ</h3>
           <p>Un plat local savoureux, préparé avec soin pour vos repas et commandes spéciales.</p>
@@ -437,7 +448,7 @@
   <section class="section" id="fondatrice">
     <div class="grid grid-2">
       <div>
-        <img class="founder-img" src="/IMG-20260514-WA0029(1).jpg?v=9" alt="Fondatrice Saveurs de chez nous">
+        <img class="founder-img" src="/IMG-20260514-WA0029(1).jpg?v=10" alt="Fondatrice Saveurs de chez nous">
       </div>
       <div>
         <h2>👩🏾‍🍳 À PROPOS DE LA FONDATRICE</h2>
@@ -466,7 +477,7 @@
 
     <div class="card">
       <h3>COMMENT PASSER UNE COMMANDE ?</h3>
-      <p>Vous remplissez le formulaire, choisissez vos produits, calculez la facture, puis confirmez la commande sur WhatsApp.</p>
+      <p>Vous remplissez le formulaire, choisissez vos produits, calculez la facture, payez le montant total en FC, puis envoyez la commande et la preuve sur WhatsApp.</p>
     </div><br>
 
     <div class="card">
@@ -476,7 +487,7 @@
 
     <div class="card">
       <h3>COMMENT CONFIRMER MA COMMANDE ?</h3>
-      <p>La commande est confirmée après paiement en franc congolais et après réception de la capture d’écran du paiement Airtel Money ou M-Pesa sur WhatsApp.</p>
+      <p>La commande est confirmée uniquement après paiement en franc congolais et réception de la capture d’écran du paiement Airtel Money ou M-Pesa sur WhatsApp.</p>
     </div><br>
 
     <div class="card">
@@ -492,6 +503,14 @@
       <strong>Commande 24h à l’avance obligatoire.</strong><br>
       Le paiement se fait uniquement en <strong>franc congolais (FC)</strong>.<br>
       La commande est confirmée seulement après réception de la preuve de paiement sur WhatsApp.
+    </div>
+
+    <div class="steps">
+      Étape 1 : Remplissez vos informations obligatoires.<br>
+      Étape 2 : Choisissez vos produits et calculez votre facture.<br>
+      Étape 3 : Payez le montant total en FC via Airtel Money ou M-Pesa.<br>
+      Étape 4 : Cliquez sur le bouton WhatsApp uniquement après paiement.<br>
+      Étape 5 : Envoyez immédiatement la capture d’écran du paiement.
     </div>
 
     <form id="orderForm" onsubmit="return false;">
@@ -578,11 +597,11 @@
       <textarea id="clientNote" rows="3" placeholder="Ex : heure souhaitée, précision sur la livraison..."></textarea>
 
       <div class="warning">
-        ⚠️ IMPORTANT : Le paiement se fait uniquement en franc congolais (FC).  
-        Pour confirmer votre commande, vous devez envoyer impérativement la capture d’écran de votre paiement Airtel Money ou M-Pesa sur WhatsApp.
+        ⚠️ IMPORTANT : Ne cliquez sur le bouton WhatsApp que si vous avez déjà payé.  
+        Sans capture d’écran du paiement Airtel Money ou M-Pesa, la commande ne sera pas confirmée.
       </div>
 
-      <button type="button" class="btn btn-whatsapp" onclick="sendWhatsApp()">✅ CONFIRMER MA COMMANDE SUR WHATSAPP</button>
+      <button type="button" class="btn btn-whatsapp" onclick="sendWhatsApp()">✅ J’AI DÉJÀ PAYÉ — J’ENVOIE MA COMMANDE ET MA PREUVE SUR WHATSAPP</button>
       <button type="button" class="btn btn-clear" onclick="clearForm()">🧹 EFFACER</button>
 
       <p id="statusMessage"></p>
@@ -825,8 +844,22 @@
       return;
     }
 
+    const confirmationPaiement = confirm(
+      "Avez-vous déjà effectué le paiement en franc congolais (FC) ?\n\n" +
+      "IMPORTANT : si vous n’avez pas encore payé, ne continuez pas.\n\n" +
+      "Votre commande ne sera PAS confirmée sans capture d’écran du paiement Airtel Money ou M-Pesa envoyée sur WhatsApp.\n\n" +
+      "Cliquez sur OK uniquement si vous avez déjà payé et si vous êtes prêt(e) à envoyer la preuve maintenant."
+    );
+
+    if (!confirmationPaiement) {
+      playError();
+      status.className = "error";
+      status.textContent = "Veuillez d’abord effectuer le paiement, puis revenir envoyer la commande avec la capture d’écran sur WhatsApp.";
+      return;
+    }
+
     status.className = "success";
-    status.textContent = "Votre commande est prête. WhatsApp va s’ouvrir pour l’envoi.";
+    status.textContent = "WhatsApp va s’ouvrir. Envoyez immédiatement la capture d’écran du paiement dans la conversation.";
 
     playSuccess();
 
@@ -851,7 +884,10 @@ Devise : Franc congolais (FC)
 Note : ${data.note || "Aucune"}
 
 Je confirme que le paiement se fait uniquement en franc congolais (FC).
-Je vais envoyer impérativement la capture d’écran de la preuve de paiement Airtel Money ou M-Pesa pour confirmer ma commande.`;
+
+⚠️ Je comprends que ma commande ne sera PAS confirmée tant que je n’ai pas envoyé la capture d’écran du paiement Airtel Money ou M-Pesa.
+
+Je dois envoyer la capture d’écran maintenant dans cette conversation WhatsApp.`;
 
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank");
   }
