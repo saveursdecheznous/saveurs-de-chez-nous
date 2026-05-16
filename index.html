@@ -3,26 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Saveurs de chez nous</title>
 
   <style>
     :root {
-      --vert: #123f27;
-      --vert-fonce: #0b2d1b;
-      --orange: #c7792f;
-      --creme: #fff8ec;
-      --brun: #5a351d;
-      --texte: #2d2117;
+      --vert:#123f27; --vert-fonce:#0b2d1b; --orange:#c7792f;
+      --creme:#fff8ec; --brun:#5a351d; --texte:#2d2117;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
@@ -30,7 +20,7 @@
       color: var(--texte);
       background-color: #0b2d1b;
       background-image:
-        linear-gradient(rgba(11,45,27,0.58), rgba(11,45,27,0.82)),
+        linear-gradient(rgba(11,45,27,.58), rgba(11,45,27,.82)),
         url("/d755fcb6-0d87-4ce4-bc23-01f3565a4638.png");
       background-size: contain;
       background-position: top center;
@@ -39,12 +29,10 @@
     }
 
     .topbar {
-      position: relative;
-      z-index: 10;
-      background: rgba(11,45,27,0.97);
+      background: rgba(11,45,27,.97);
       color: white;
       padding: 10px 14px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      box-shadow: 0 6px 20px rgba(0,0,0,.25);
     }
 
     .topbar-content {
@@ -86,7 +74,7 @@
       font-size: 14px;
       padding: 8px 12px;
       border-radius: 20px;
-      background: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,.14);
     }
 
     .hero {
@@ -98,12 +86,11 @@
       text-align: center;
     }
 
-    .hero-card,
-    .card {
-      background: rgba(255,248,236,0.96);
+    .hero-card, .card {
+      background: rgba(255,248,236,.96);
       border-radius: 26px;
       padding: 26px;
-      box-shadow: 0 14px 36px rgba(0,0,0,0.25);
+      box-shadow: 0 14px 36px rgba(0,0,0,.25);
       max-width: 1100px;
       margin: auto;
     }
@@ -117,20 +104,9 @@
       padding: 6px;
     }
 
-    h1, h2, h3 {
-      color: var(--vert);
-    }
-
-    h1 {
-      font-size: 38px;
-      margin: 10px 0;
-    }
-
-    h2 {
-      text-align: center;
-      font-size: 30px;
-      margin-top: 0;
-    }
+    h1, h2, h3 { color: var(--vert); }
+    h1 { font-size: 38px; margin: 10px 0; }
+    h2 { text-align: center; font-size: 30px; margin-top: 0; }
 
     .slogan {
       color: var(--orange);
@@ -139,14 +115,8 @@
       margin-bottom: 15px;
     }
 
-    p {
-      line-height: 1.7;
-      font-size: 16px;
-    }
-
-    .section {
-      padding: 24px 18px;
-    }
+    p { line-height: 1.7; font-size: 16px; }
+    .section { padding: 24px 18px; }
 
     .btn {
       display: inline-block;
@@ -161,9 +131,7 @@
       cursor: pointer;
     }
 
-    .btn-green {
-      background: var(--vert);
-    }
+    .btn-green { background: var(--vert); }
 
     .grid {
       display: grid;
@@ -176,7 +144,7 @@
       background: white;
       border-radius: 18px;
       padding: 18px;
-      box-shadow: 0 8px 22px rgba(0,0,0,0.10);
+      box-shadow: 0 8px 22px rgba(0,0,0,.10);
     }
 
     .products {
@@ -190,7 +158,7 @@
       background: white;
       border-radius: 24px;
       overflow: hidden;
-      box-shadow: 0 10px 26px rgba(0,0,0,0.14);
+      box-shadow: 0 10px 26px rgba(0,0,0,.14);
     }
 
     .product-img {
@@ -202,9 +170,7 @@
       background: #f4f4f4;
     }
 
-    .product-body {
-      padding: 20px;
-    }
+    .product-body { padding: 20px; }
 
     .badge {
       display: inline-block;
@@ -251,8 +217,73 @@
       font-size: 15px;
     }
 
-    textarea {
-      min-height: 90px;
+    textarea { min-height: 90px; }
+
+    .choice-box {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .choice-box label {
+      background: white;
+      border: 1px solid #d8c7b3;
+      border-radius: 16px;
+      padding: 12px;
+      cursor: pointer;
+      color: var(--texte);
+      font-weight: normal;
+    }
+
+    .commande-bloc {
+      background: white;
+      border-radius: 20px;
+      padding: 18px;
+      border: 1px solid #ead7c2;
+      margin-top: 10px;
+    }
+
+    .total-box {
+      background: #fff;
+      border: 2px solid var(--orange);
+      border-radius: 18px;
+      padding: 16px;
+      font-weight: bold;
+      color: var(--vert);
+      font-size: 18px;
+      text-align: center;
+    }
+
+    .invoice {
+      display: none;
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      margin-top: 20px;
+      border: 2px solid var(--vert);
+    }
+
+    .invoice h3 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .invoice-line {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed #ddd;
+      padding: 9px 0;
+      gap: 10px;
+    }
+
+    .payment-note {
+      background: #fff3df;
+      border-radius: 16px;
+      padding: 14px;
+      color: var(--brun);
+      line-height: 1.6;
+      font-size: 14px;
     }
 
     .whatsapp-button {
@@ -264,6 +295,7 @@
       border-radius: 18px;
       font-size: 17px;
       font-weight: bold;
+      cursor: pointer;
     }
 
     footer {
@@ -272,12 +304,8 @@
       padding: 30px 18px;
     }
 
-    @media (max-width: 800px) {
-      .grid,
-      .products,
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
+    @media(max-width:800px) {
+      .grid, .products, .form-grid { grid-template-columns: 1fr; }
 
       .brand-mini {
         width: 100%;
@@ -295,23 +323,12 @@
         padding: 8px 10px;
       }
 
-      h1 {
-        font-size: 30px;
-      }
+      h1 { font-size: 30px; }
+      h2 { font-size: 25px; }
+      .product-img { height: 220px; }
 
-      h2 {
-        font-size: 25px;
-      }
-
-      .product-img {
-        height: 220px;
-      }
-
-      body {
-        background-size: contain;
-        background-position: top center;
-        background-repeat: no-repeat;
-        background-attachment: scroll;
+      .invoice-line {
+        flex-direction: column;
       }
     }
   </style>
@@ -319,312 +336,425 @@
 
 <body>
 
-  <header class="topbar">
-    <div class="topbar-content">
-      <div class="brand-mini">
-        <img src="/file_00000000cd1871f6911cfa823e76bd48.png" alt="Logo Saveurs de chez nous">
-        <span>Saveurs de chez nous</span>
+<header class="topbar">
+  <div class="topbar-content">
+    <div class="brand-mini">
+      <img src="/file_00000000cd1871f6911cfa823e76bd48.png" alt="Logo">
+      <span>Saveurs de chez nous</span>
+    </div>
+
+    <nav class="nav-buttons">
+      <a href="#presentation">Présentation</a>
+      <a href="#choisir">Pourquoi nous choisir</a>
+      <a href="#produits">Produits</a>
+      <a href="#commande">Commander</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-card">
+    <img class="hero-logo" src="/file_00000000cd1871f6911cfa823e76bd48.png" alt="Logo">
+
+    <h1>Saveurs de chez nous</h1>
+    <div class="slogan">Le goût authentique de chez nous 🇨🇩🌿</div>
+
+    <p>
+      Des produits locaux congolais, propres, pratiques et authentiques,
+      préparés pour vous aider à gagner du temps en cuisine.
+    </p>
+
+    <a class="btn" href="#commande">Commander maintenant</a>
+    <a class="btn btn-green" href="https://wa.me/243970226689" target="_blank">WhatsApp direct</a>
+  </div>
+</section>
+
+<section id="presentation" class="section">
+  <div class="card">
+    <h2>Présentation</h2>
+    <p>
+      <strong>Saveurs de chez nous</strong> est un projet agroalimentaire congolais
+      spécialisé dans la valorisation des produits et saveurs locales à travers
+      une transformation alimentaire moderne, propre et authentique.
+    </p>
+    <p>
+      Nous aidons les familles et les personnes occupées à gagner du temps et de l’énergie
+      en cuisine, sans perdre le goût authentique des recettes locales.
+    </p>
+  </div>
+</section>
+
+<section id="choisir" class="section">
+  <div class="card">
+    <h2>Pourquoi nous choisir ?</h2>
+
+    <div class="grid">
+      <div class="mini-card"><h3>🌿 Produits locaux</h3><p>Nous valorisons les saveurs congolaises.</p></div>
+      <div class="mini-card"><h3>⏱️ Gain de temps</h3><p>Nos produits facilitent la cuisine.</p></div>
+      <div class="mini-card"><h3>🧼 Hygiène</h3><p>Propreté, fraîcheur et qualité.</p></div>
+      <div class="mini-card"><h3>🍲 Goût authentique</h3><p>Le goût de chez nous.</p></div>
+      <div class="mini-card"><h3>💪 Moins de fatigue</h3><p>Cuisiner devient plus simple.</p></div>
+      <div class="mini-card"><h3>📲 Commande simple</h3><p>Commande rapide par WhatsApp.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="produits" class="section">
+  <div class="card">
+    <h2>Nos produits</h2>
+
+    <div class="products">
+      <div class="product-card">
+        <img class="product-img" src="/a23e0b08-f211-4c09-9396-c97e91b2da82.png" alt="Sombé">
+        <div class="product-body">
+          <span class="badge">Frais du jour</span>
+          <h3>Sombé ya Léo</h3>
+          <p>500g : 4 500 FC</p>
+          <p>1kg : 8 500 FC</p>
+        </div>
       </div>
 
-      <nav class="nav-buttons">
-        <a href="#presentation">Présentation</a>
-        <a href="#choisir">Pourquoi nous choisir</a>
-        <a href="#produits">Produits</a>
-        <a href="#commande">Commander</a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="hero">
-    <div class="hero-card">
-      <img class="hero-logo" src="/file_00000000cd1871f6911cfa823e76bd48.png" alt="Logo Saveurs de chez nous">
-
-      <h1>Saveurs de chez nous</h1>
-      <div class="slogan">Le goût authentique de chez nous 🇨🇩🌿</div>
-
-      <p>
-        Des produits locaux congolais, propres, pratiques et authentiques,
-        préparés pour vous aider à gagner du temps en cuisine tout en gardant
-        le vrai goût de chez nous.
-      </p>
-
-      <a class="btn" href="#commande">Commander maintenant</a>
-      <a class="btn btn-green" href="https://wa.me/243970226689" target="_blank">WhatsApp direct</a>
-    </div>
-  </section>
-
-  <section id="presentation" class="section">
-    <div class="card">
-      <h2>Présentation</h2>
-
-      <p>
-        <strong>Saveurs de chez nous</strong> est un projet agroalimentaire congolais
-        spécialisé dans la valorisation des produits et saveurs locales à travers
-        une transformation alimentaire moderne, propre et authentique.
-      </p>
-
-      <p>
-        Nous proposons des produits naturels, des légumes prêts à cuisiner,
-        des feuilles de manioc préparées, des plats locaux, des jus naturels
-        et des produits faits maison inspirés de la cuisine congolaise.
-      </p>
-
-      <p>
-        Notre mission est d’aider les familles et les personnes occupées à gagner
-        du temps et de l’énergie en cuisine, sans perdre le goût authentique des recettes locales.
-      </p>
-    </div>
-  </section>
-
-  <section id="choisir" class="section">
-    <div class="card">
-      <h2>Pourquoi nous choisir ?</h2>
-
-      <div class="grid">
-        <div class="mini-card">
-          <h3>🌿 Produits locaux</h3>
-          <p>Nous valorisons les produits de chez nous et les saveurs congolaises.</p>
-        </div>
-
-        <div class="mini-card">
-          <h3>⏱️ Gain de temps</h3>
-          <p>Nos produits sont préparés pour réduire le temps passé en cuisine.</p>
-        </div>
-
-        <div class="mini-card">
-          <h3>🧼 Hygiène</h3>
-          <p>Nous mettons l’accent sur la propreté, la fraîcheur et la qualité.</p>
-        </div>
-
-        <div class="mini-card">
-          <h3>🍲 Goût authentique</h3>
-          <p>Nous conservons le goût de la cuisine congolaise, comme à la maison.</p>
-        </div>
-
-        <div class="mini-card">
-          <h3>💪 Moins de fatigue</h3>
-          <p>Vous cuisinez plus facilement, avec moins d’effort.</p>
-        </div>
-
-        <div class="mini-card">
-          <h3>📲 Commande simple</h3>
-          <p>Vous commandez rapidement via WhatsApp.</p>
+      <div class="product-card">
+        <img class="product-img" src="/20240301122113_IMG_6858-1.jpg" alt="Riz pilau">
+        <div class="product-body">
+          <span class="badge">Plat local</span>
+          <h3>Riz pilau</h3>
+          <p>25 000 FC le plat.</p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="objectifs" class="section">
-    <div class="card">
-      <h2>Nos objectifs</h2>
+<section id="commande" class="section">
+  <div class="card">
+    <h2>Passer une commande</h2>
 
-      <div class="grid">
-        <div class="mini-card">
-          <h3>Valoriser</h3>
-          <p>Mettre en avant les produits locaux congolais.</p>
-        </div>
-
-        <div class="mini-card">
-          <h3>Faciliter</h3>
-          <p>Aider les familles à mieux s’organiser en cuisine.</p>
-        </div>
-
-        <div class="mini-card">
-          <h3>Moderniser</h3>
-          <p>Présenter la cuisine locale de manière propre et professionnelle.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="produits" class="section">
-    <div class="card">
-      <h2>Nos produits</h2>
-
-      <p style="text-align:center;">
-        Découvrez nos produits disponibles à la commande. Les commandes sont préparées avec soin
-        et doivent être passées à l’avance.
-      </p>
-
-      <div class="products">
-        <div class="product-card">
-          <img
-            class="product-img"
-            src="/a23e0b08-f211-4c09-9396-c97e91b2da82.png"
-            alt="Sombé ya Léo"
-          >
-
-          <div class="product-body">
-            <span class="badge">Frais du jour</span>
-            <h3>Sombé ya Léo</h3>
-            <p>
-              Feuilles de manioc préparées avec soin pour vous faire gagner du temps en cuisine.
-              Disponible selon la quantité souhaitée.
-            </p>
-            <p><strong>Unité :</strong> grammes ou kilogrammes.</p>
-            <p><strong>Commande :</strong> 24h à l’avance.</p>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <img
-            class="product-img"
-            src="/20240301122113_IMG_6858-1.jpg"
-            alt="Riz pilau"
-          >
-
-          <div class="product-body">
-            <span class="badge">Plat local</span>
-            <h3>Riz pilau</h3>
-            <p>
-              Un plat savoureux, préparé avec goût, idéal pour vos repas et commandes personnalisées.
-            </p>
-            <p><strong>Unité :</strong> nombre de plats.</p>
-            <p><strong>Option :</strong> commande personnalisée possible.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="renseignements" class="section">
-    <div class="card">
-      <h2>Renseignements</h2>
-
-      <div class="info-box">
-        <p><strong>Commande :</strong> 24h à l’avance.</p>
-        <p><strong>Paiement :</strong> paiement total pour confirmer la commande.</p>
-        <p><strong>Airtel Money :</strong> +243 991 787 177</p>
-        <p><strong>M-Pesa :</strong> 082 480 9200</p>
-        <p><strong>WhatsApp :</strong> +243 970 226 689</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="commande" class="section">
-    <div class="card">
-      <h2>Passer une commande</h2>
-
-      <form id="commandeForm">
-        <div class="form-grid">
-          <div>
-            <label>Nom complet *</label>
-            <input type="text" id="nom" required>
-          </div>
-
-          <div>
-            <label>Téléphone *</label>
-            <input type="tel" id="telephone" required>
-          </div>
+    <form id="commandeForm">
+      <div class="form-grid">
+        <div>
+          <label>Nom complet *</label>
+          <input type="text" id="nom" required>
         </div>
 
         <div>
-          <label>Adresse *</label>
-          <input type="text" id="adresse" required>
+          <label>Téléphone *</label>
+          <input type="tel" id="telephone" required placeholder="Ex : 0970226689">
+        </div>
+      </div>
+
+      <div>
+        <label>Adresse *</label>
+        <input type="text" id="adresse" required>
+      </div>
+
+      <div>
+        <label>Date souhaitée *</label>
+        <input type="date" id="date" required>
+      </div>
+
+      <div>
+        <label>Que voulez-vous commander ? *</label>
+        <div class="choice-box">
+          <label>
+            <input type="checkbox" id="checkSombe" onchange="afficherOptions(); calculerTotal();">
+            Sombé ya Léo
+          </label>
+
+          <label>
+            <input type="checkbox" id="checkRiz" onchange="afficherOptions(); calculerTotal();">
+            Riz pilau
+          </label>
+        </div>
+      </div>
+
+      <div id="blocSombe" class="commande-bloc" style="display:none;">
+        <h3>Sombé ya Léo</h3>
+
+        <label>Choisir le format du sombé *</label>
+        <div class="choice-box">
+          <label>
+            <input type="radio" name="formatSombe" value="500g" onchange="calculerTotal()">
+            500g — 4 500 FC
+          </label>
+
+          <label>
+            <input type="radio" name="formatSombe" value="kg" onchange="calculerTotal()">
+            Quantité en kg
+          </label>
         </div>
 
-        <div class="form-grid">
-          <div>
-            <label>Produit *</label>
-            <select id="produit" required onchange="adapterUnite()">
-              <option value="">Choisir</option>
-              <option value="Sombé ya Léo">Sombé ya Léo</option>
-              <option value="Riz pilau">Riz pilau</option>
-            </select>
-          </div>
-
-          <div>
-            <label>Quantité *</label>
-            <input type="text" id="quantite" required placeholder="Ex : 1kg, 500g, 3 plats">
-          </div>
+        <div id="kgBox" style="display:none;margin-top:10px;">
+          <label>Nombre de kg *</label>
+          <input type="number" id="quantiteKg" min="1" step="1" placeholder="Ex : 5" oninput="calculerTotal()">
+          <small>Unité : kilogramme(s) — 8 500 FC/kg</small>
         </div>
+      </div>
 
-        <div class="form-grid">
-          <div>
-            <label>Date souhaitée *</label>
-            <input type="date" id="date" required>
-          </div>
+      <div id="blocRiz" class="commande-bloc" style="display:none;">
+        <h3>Riz pilau</h3>
 
-          <div>
-            <label>Paiement *</label>
-            <select id="paiement" required>
-              <option value="">Choisir</option>
-              <option value="Airtel Money">Airtel Money</option>
-              <option value="M-Pesa">M-Pesa</option>
-            </select>
-          </div>
-        </div>
+        <label>Nombre de plats *</label>
+        <input type="number" id="quantitePlats" min="1" step="1" placeholder="Ex : 3" oninput="calculerTotal()">
+        <small>Unité : plat(s) — 25 000 FC/plat</small>
+      </div>
 
-        <div>
-          <label>Précision</label>
-          <textarea id="message" placeholder="Ex : livraison, heure souhaitée, commande personnalisée..."></textarea>
-        </div>
+      <div>
+        <label>Paiement *</label>
+        <select id="paiement" required onchange="calculerTotal()">
+          <option value="">Choisir le mode de paiement</option>
+          <option value="🔴 Airtel Money : +243991787177">🔴 Airtel Money : +243 991 787 177</option>
+          <option value="🟢 M-Pesa : +243824809200">🟢 M-Pesa : +243 824 809 200</option>
+        </select>
+      </div>
 
-        <button class="whatsapp-button" type="submit">
-          Envoyer la commande sur WhatsApp
-        </button>
-      </form>
+      <div class="payment-note">
+        Les paiements se font en francs congolais (FC). Après paiement, veuillez envoyer la preuve
+        de paiement sur WhatsApp. Votre commande sera confirmée après vérification du paiement.
+      </div>
+
+      <div>
+        <label>Précision</label>
+        <textarea id="message" placeholder="Facultatif : heure souhaitée, livraison, autre précision..."></textarea>
+      </div>
+
+      <div class="total-box" id="totalBox">
+        Total à payer : 0 FC
+      </div>
+
+      <button type="button" class="btn" onclick="genererFacture()">
+        Générer ma facture
+      </button>
+    </form>
+
+    <div class="invoice" id="facture">
+      <h3>Facture de commande</h3>
+      <div id="factureDetails"></div>
+      <br>
+      <button class="whatsapp-button" onclick="envoyerWhatsApp()">
+        Valider la facture et envoyer sur WhatsApp
+      </button>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>
-    <strong>Saveurs de chez nous</strong><br>
-    Le goût authentique de chez nous 🇨🇩🌿<br>
-    WhatsApp : +243 970 226 689
-  </footer>
+<footer>
+  <strong>Saveurs de chez nous</strong><br>
+  Le goût authentique de chez nous 🇨🇩🌿<br>
+  WhatsApp : +243 970 226 689
+</footer>
 
-  <script>
-    const numeroWhatsApp = "243970226689";
+<script>
+  const numeroWhatsApp = "243970226689";
 
-    function adapterUnite() {
-      const produit = document.getElementById("produit").value;
-      const quantite = document.getElementById("quantite");
+  let total = 0;
+  let factureTexte = "";
+  let detailsCommande = [];
 
-      if (produit === "Sombé ya Léo") {
-        quantite.placeholder = "Ex : 500g, 1kg, 2kg";
-      } else if (produit === "Riz pilau") {
-        quantite.placeholder = "Ex : 1 plat, 2 plats, 5 plats";
-      } else {
-        quantite.placeholder = "Ex : 1kg, 500g, 3 plats";
+  const dateInput = document.getElementById("date");
+  const demain = new Date();
+  demain.setDate(demain.getDate() + 1);
+  dateInput.min = demain.toISOString().split("T")[0];
+
+  function afficherOptions() {
+    const checkSombe = document.getElementById("checkSombe").checked;
+    const checkRiz = document.getElementById("checkRiz").checked;
+
+    document.getElementById("blocSombe").style.display = checkSombe ? "block" : "none";
+    document.getElementById("blocRiz").style.display = checkRiz ? "block" : "none";
+
+    if (!checkSombe) {
+      document.querySelectorAll('input[name="formatSombe"]').forEach(r => r.checked = false);
+      document.getElementById("quantiteKg").value = "";
+      document.getElementById("kgBox").style.display = "none";
+    }
+
+    if (!checkRiz) {
+      document.getElementById("quantitePlats").value = "";
+    }
+
+    document.getElementById("facture").style.display = "none";
+  }
+
+  function calculerTotal() {
+    total = 0;
+    detailsCommande = [];
+
+    const checkSombe = document.getElementById("checkSombe").checked;
+    const checkRiz = document.getElementById("checkRiz").checked;
+
+    if (checkSombe) {
+      const formatSombe = document.querySelector('input[name="formatSombe"]:checked')?.value;
+      document.getElementById("kgBox").style.display = formatSombe === "kg" ? "block" : "none";
+
+      if (formatSombe === "500g") {
+        total += 4500;
+        detailsCommande.push({
+          produit: "Sombé ya Léo",
+          quantite: "500g",
+          prix: 4500,
+          sousTotal: 4500
+        });
+      }
+
+      if (formatSombe === "kg") {
+        const kg = Number(document.getElementById("quantiteKg").value);
+
+        if (kg > 0) {
+          const sousTotal = kg * 8500;
+          total += sousTotal;
+          detailsCommande.push({
+            produit: "Sombé ya Léo",
+            quantite: kg + " kg",
+            prix: 8500,
+            sousTotal: sousTotal
+          });
+        }
       }
     }
 
-    const dateInput = document.getElementById("date");
-    const demain = new Date();
-    demain.setDate(demain.getDate() + 1);
-    dateInput.min = demain.toISOString().split("T")[0];
+    if (checkRiz) {
+      const plats = Number(document.getElementById("quantitePlats").value);
 
-    document.getElementById("commandeForm").addEventListener("submit", function(e) {
-      e.preventDefault();
+      if (plats > 0) {
+        const sousTotal = plats * 25000;
+        total += sousTotal;
+        detailsCommande.push({
+          produit: "Riz pilau",
+          quantite: plats + " plat(s)",
+          prix: 25000,
+          sousTotal: sousTotal
+        });
+      }
+    }
 
-      const nom = document.getElementById("nom").value.trim();
-      const telephone = document.getElementById("telephone").value.trim();
-      const adresse = document.getElementById("adresse").value.trim();
-      const produit = document.getElementById("produit").value;
-      const quantite = document.getElementById("quantite").value.trim();
-      const date = document.getElementById("date").value;
-      const paiement = document.getElementById("paiement").value;
-      const message = document.getElementById("message").value.trim();
+    document.getElementById("totalBox").innerText =
+      "Total à payer : " + total.toLocaleString("fr-FR") + " FC";
+  }
 
-      let texte = `Bonjour Saveurs de chez nous,%0A%0A`;
-      texte += `Je souhaite passer une commande.%0A%0A`;
-      texte += `Nom : ${nom}%0A`;
-      texte += `Téléphone : ${telephone}%0A`;
-      texte += `Adresse : ${adresse}%0A`;
-      texte += `Produit : ${produit}%0A`;
-      texte += `Quantité : ${quantite}%0A`;
-      texte += `Date souhaitée : ${date}%0A`;
-      texte += `Paiement : ${paiement}%0A`;
+  function validerTelephone(tel) {
+    const propre = tel.replace(/\s/g, "");
+    return /^(\+243|0)[0-9]{9}$/.test(propre);
+  }
 
-      if (message) {
-        texte += `Précision : ${message}%0A`;
+  function genererFacture() {
+    calculerTotal();
+
+    const nom = document.getElementById("nom").value.trim();
+    const telephone = document.getElementById("telephone").value.trim();
+    const adresse = document.getElementById("adresse").value.trim();
+    const date = document.getElementById("date").value;
+    const paiement = document.getElementById("paiement").value;
+    const message = document.getElementById("message").value.trim();
+
+    const checkSombe = document.getElementById("checkSombe").checked;
+    const checkRiz = document.getElementById("checkRiz").checked;
+
+    if (!nom || !telephone || !adresse || !date || !paiement) {
+      alert("Veuillez remplir tous les champs obligatoires.");
+      return;
+    }
+
+    if (!validerTelephone(telephone)) {
+      alert("Veuillez entrer un numéro valide. Exemple : 0970226689 ou +243970226689");
+      return;
+    }
+
+    if (!checkSombe && !checkRiz) {
+      alert("Veuillez choisir au moins un produit.");
+      return;
+    }
+
+    if (checkSombe) {
+      const formatSombe = document.querySelector('input[name="formatSombe"]:checked')?.value;
+
+      if (!formatSombe) {
+        alert("Veuillez choisir le format du sombé.");
+        return;
       }
 
-      texte += `%0AJe comprends que la commande est confirmée après paiement total.`;
+      if (formatSombe === "kg") {
+        const kg = Number(document.getElementById("quantiteKg").value);
+        if (!kg || kg <= 0) {
+          alert("Veuillez entrer le nombre de kg de sombé.");
+          return;
+        }
+      }
+    }
 
-      window.open(`https://wa.me/${numeroWhatsApp}?text=${texte}`, "_blank");
+    if (checkRiz) {
+      const plats = Number(document.getElementById("quantitePlats").value);
+      if (!plats || plats <= 0) {
+        alert("Veuillez entrer le nombre de plats de riz pilau.");
+        return;
+      }
+    }
+
+    if (total <= 0 || detailsCommande.length === 0) {
+      alert("Veuillez vérifier les quantités.");
+      return;
+    }
+
+    let lignesFacture = "";
+
+    detailsCommande.forEach(item => {
+      lignesFacture += `
+        <div class="invoice-line">
+          <strong>${item.produit}</strong>
+          <span>${item.quantite} x ${item.prix.toLocaleString("fr-FR")} FC = ${item.sousTotal.toLocaleString("fr-FR")} FC</span>
+        </div>
+      `;
     });
-  </script>
+
+    document.getElementById("factureDetails").innerHTML = `
+      <div class="invoice-line"><strong>Nom</strong><span>${nom}</span></div>
+      <div class="invoice-line"><strong>Téléphone</strong><span>${telephone}</span></div>
+      <div class="invoice-line"><strong>Adresse</strong><span>${adresse}</span></div>
+      <div class="invoice-line"><strong>Date souhaitée</strong><span>${date}</span></div>
+      ${lignesFacture}
+      <div class="invoice-line"><strong>Paiement</strong><span>${paiement}</span></div>
+      <div class="invoice-line"><strong>Devise</strong><span>Franc congolais (FC)</span></div>
+      <div class="invoice-line"><strong>Total à payer</strong><span>${total.toLocaleString("fr-FR")} FC</span></div>
+      <br>
+      <div class="payment-note">
+        Après paiement, veuillez envoyer la preuve de paiement sur WhatsApp.
+        La commande sera confirmée après vérification du paiement.
+      </div>
+    `;
+
+    let produitsTexte = "";
+    detailsCommande.forEach(item => {
+      produitsTexte += `- ${item.produit} : ${item.quantite} x ${item.prix.toLocaleString("fr-FR")} FC = ${item.sousTotal.toLocaleString("fr-FR")} FC%0A`;
+    });
+
+    factureTexte =
+      `Bonjour Saveurs de chez nous,%0A%0A` +
+      `Je valide ma facture de commande :%0A%0A` +
+      `Nom : ${nom}%0A` +
+      `Téléphone : ${telephone}%0A` +
+      `Adresse : ${adresse}%0A` +
+      `Date souhaitée : ${date}%0A%0A` +
+      `Produit(s) commandé(s) :%0A${produitsTexte}%0A` +
+      `Total à payer : ${total.toLocaleString("fr-FR")} FC%0A` +
+      `Devise : Franc congolais (FC)%0A` +
+      `Paiement choisi : ${paiement}%0A` +
+      (message ? `Précision : ${message}%0A` : "") +
+      `%0AJe vais effectuer le paiement en FC et envoyer la preuve de paiement sur WhatsApp.%0A` +
+      `Je comprends que ma commande sera confirmée après vérification du paiement.`;
+
+    document.getElementById("facture").style.display = "block";
+    document.getElementById("facture").scrollIntoView({ behavior: "smooth" });
+  }
+
+  function envoyerWhatsApp() {
+    if (!factureTexte) {
+      alert("Veuillez d'abord générer votre facture.");
+      return;
+    }
+
+    window.open(`https://wa.me/${numeroWhatsApp}?text=${factureTexte}`, "_blank");
+  }
+</script>
 
 </body>
 </html>
