@@ -19,13 +19,17 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       color: var(--texte);
       background:
-        linear-gradient(rgba(11,45,27,0.72), rgba(11,45,27,0.86)),
-        url("fond.jpg");
+        linear-gradient(rgba(11,45,27,0.72), rgba(11,45,27,0.88)),
+        url("https://raw.githubusercontent.com/saveursdecheznous/saveurs-de-chez-nous/main/fond.jpg");
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -34,7 +38,7 @@
     .topbar {
       position: relative;
       z-index: 10;
-      background: rgba(11,45,27,0.96);
+      background: rgba(11,45,27,0.97);
       color: white;
       padding: 10px 14px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.25);
@@ -59,8 +63,8 @@
     }
 
     .brand-mini img {
-      width: 70px;
-      height: 70px;
+      width: 68px;
+      height: 68px;
       object-fit: contain;
       background: var(--creme);
       border-radius: 50%;
@@ -106,6 +110,8 @@
       max-width: 45%;
       border-radius: 18px;
       margin-bottom: 12px;
+      background: white;
+      padding: 6px;
     }
 
     h1, h2, h3 {
@@ -186,11 +192,11 @@
 
     .product-img {
       width: 100%;
-      height: 230px;
+      height: 260px;
       object-fit: cover;
       object-position: center;
       display: block;
-      background: #eee;
+      background: #f4f4f4;
     }
 
     .product-body {
@@ -295,7 +301,7 @@
       }
 
       .product-img {
-        height: 195px;
+        height: 220px;
       }
 
       body {
@@ -310,7 +316,7 @@
   <header class="topbar">
     <div class="topbar-content">
       <div class="brand-mini">
-        <img src="logo.png" alt="Logo">
+        <img src="https://raw.githubusercontent.com/saveursdecheznous/saveurs-de-chez-nous/main/logo.png" alt="Logo Saveurs de chez nous">
         <span>Saveurs de chez nous</span>
       </div>
 
@@ -325,7 +331,8 @@
 
   <section class="hero">
     <div class="hero-card">
-      <img class="hero-logo" src="logo.png" alt="Saveurs de chez nous">
+      <img class="hero-logo" src="https://raw.githubusercontent.com/saveursdecheznous/saveurs-de-chez-nous/main/logo.png" alt="Logo Saveurs de chez nous">
+
       <h1>Saveurs de chez nous</h1>
       <div class="slogan">Le goût authentique de chez nous 🇨🇩🌿</div>
 
@@ -348,11 +355,13 @@
         spécialisé dans la valorisation des produits et saveurs locales à travers
         une transformation alimentaire moderne, propre et authentique.
       </p>
+
       <p>
         Nous proposons des produits naturels, des légumes prêts à cuisiner,
         des feuilles de manioc préparées, des plats locaux, des jus naturels
         et des produits faits maison inspirés de la cuisine congolaise.
       </p>
+
       <p>
         Notre mission est d’aider les familles et les personnes occupées à gagner
         du temps et de l’énergie en cuisine, sans perdre le goût authentique des recettes locales.
@@ -431,22 +440,37 @@
 
       <div class="products">
         <div class="product-card">
-          <img class="product-img" src="sombe.jpg" alt="Sombé ya Léo">
+          <img
+            class="product-img"
+            src="https://raw.githubusercontent.com/saveursdecheznous/saveurs-de-chez-nous/main/sombe.jpg"
+            alt="Sombé ya Léo"
+          >
+
           <div class="product-body">
             <span class="badge">Frais du jour</span>
             <h3>Sombé ya Léo</h3>
-            <p>Feuilles de manioc préparées avec soin pour vous faire gagner du temps en cuisine.</p>
+            <p>
+              Feuilles de manioc préparées avec soin pour vous faire gagner du temps en cuisine.
+              Disponible selon la quantité souhaitée.
+            </p>
             <p><strong>Unité :</strong> grammes ou kilogrammes.</p>
             <p><strong>Commande :</strong> 24h à l’avance.</p>
           </div>
         </div>
 
         <div class="product-card">
-          <img class="product-img" src="riz-pilau.jpg" alt="Riz pilau">
+          <img
+            class="product-img"
+            src="https://raw.githubusercontent.com/saveursdecheznous/saveurs-de-chez-nous/main/riz-pilau.jpg"
+            alt="Riz pilau"
+          >
+
           <div class="product-body">
             <span class="badge">Plat local</span>
             <h3>Riz pilau</h3>
-            <p>Un plat savoureux, préparé avec goût, idéal pour vos repas et commandes personnalisées.</p>
+            <p>
+              Un plat savoureux, préparé avec goût, idéal pour vos repas et commandes personnalisées.
+            </p>
             <p><strong>Unité :</strong> nombre de plats.</p>
             <p><strong>Option :</strong> commande personnalisée possible.</p>
           </div>
@@ -528,7 +552,9 @@
           <textarea id="message" placeholder="Ex : livraison, heure souhaitée, commande personnalisée..."></textarea>
         </div>
 
-        <button class="whatsapp-button" type="submit">Envoyer la commande sur WhatsApp</button>
+        <button class="whatsapp-button" type="submit">
+          Envoyer la commande sur WhatsApp
+        </button>
       </form>
     </div>
   </section>
