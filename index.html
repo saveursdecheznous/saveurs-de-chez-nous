@@ -28,12 +28,14 @@
       margin: 0;
       font-family: Arial, sans-serif;
       color: var(--texte);
-      background:
-        linear-gradient(rgba(11,45,27,0.72), rgba(11,45,27,0.88)),
+      background-color: #0b2d1b;
+      background-image:
+        linear-gradient(rgba(11,45,27,0.58), rgba(11,45,27,0.82)),
         url("/d755fcb6-0d87-4ce4-bc23-01f3565a4638.png");
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+      background-size: contain;
+      background-position: top center;
+      background-repeat: no-repeat;
+      background-attachment: scroll;
     }
 
     .topbar {
@@ -306,6 +308,9 @@
       }
 
       body {
+        background-size: contain;
+        background-position: top center;
+        background-repeat: no-repeat;
         background-attachment: scroll;
       }
     }
